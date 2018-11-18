@@ -1,0 +1,9 @@
+@CHARSET "ISO-8859-1";
+
+
+/* panel colors  */
+
+.mdb-skin .card-header, .mdb-skin .form-header {
+    background-color: #243a51;
+    color: white;
+}

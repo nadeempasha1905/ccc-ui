@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en" ng-app='CCCapp'>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+<title>Material Design Bootstrap</title>
+<!-- Font Awesome -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Bootstrap core CSS -->
+<link href="materialmdbnew/bootstrap.min.css" rel="stylesheet">
+<!-- Material Design Bootstrap -->
+<link href="materialmdbnew/mdb.min.css" rel="stylesheet">
+<!-- Your custom styles (optional) -->
+<!-- <link href="css/style.min.css" rel="stylesheet"> -->
+<link href="materialbootstrap/css/style.css" rel="stylesheet">
+
+ <link rel="stylesheet" href="angle/css/custom.css">
+
+</head>
+
+<body class="grey lighten-3"  ng-cloak ng-controller="appCtrl">
+
+			<div class="loader" data-loading>
+					<img src="images/loading.gif" style="width: 32px; height: auto;" />
+			</div>
+			<div id="loading" >
+				<div class="loader">Loading...</div>
+			</div>
+			
+	<!--Main Navigation-->
+	<header class="primary-color-dark darken-2 mt-4 wow fadeIn" ng-controller="navCtrl">
+
+		<!-- Navbar -->
+
+		<nav
+			class="navbar fixed-top navbar-expand-sm navbar-light white double-nav scrolling-navbar"
+			style="">
+			<div class="breadcrumb-dn mr-auto white-text text-primary">
+				<h4>
+					<a>Project Title</a>
+				</h4>
+			</div>
+
+			<!--Navigation icons-->
+			<ul class="nav navbar-nav nav-flex-icons ml-auto">
+
+				<!-- Support -->
+				<li id="navbar-static-support" class="nav-item "><a
+					href="/support/" class="nav-link waves-effect"> <i
+						class="fa fa-comments-o d-inline-block d-sm-none"></i><span
+						class="clearfix d-none d-sm-inline-block">
+						Call Center
+						<br>
+						<span class="text-danger">1800-000-000</span>
+						</span>
+				</a></li>
+
+				<!-- Login / register -->
+				<!-- <li><a id="navbar-static-login"
+					class="btn btn-info btn-rounded btn-sm waves-effect waves-light"
+					data-toggle="modal" data-target="#navbarLogin">Log In <i
+						class="fa fa-sign-in ml-2"></i>
+				</a></li> -->
+
+				<li ng-show="!IsLogin">
+					<div class="dropdown dropleft">
+						<a
+							class="btn btn-info btn-rounded btn-sm waves-effect waves-light dropdown-toggle"
+							href="#" role="button" id="dropdownMenuLink"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Sign In <i class="fa fa-sign-in ml-2"></i>
+						</a>
+
+						<div class="dropdown-menu">
+							<form class="px-4 py-3">
+								<h3 class="h3-responsive">Sign In</h3>
+								<div class="dropdown-divider"></div>
+								<div class="form-group">
+									<label for="exampleDropdownFormEmail1">Username</label> <input
+										type="text" class="form-control"
+										id="username" placeholder="Type Username" ng-model="user.username">
+								</div>
+								<div class="form-group">
+									<label for="exampleDropdownFormPassword1">Password</label> <input
+										type="password" class="form-control"
+										id="password" placeholder="Type Password" ng-model="user.password">
+								</div>
+								<!-- <div class="form-check">
+									<input type="checkbox" class="form-check-input"
+										id="dropdownCheck"> <label class="form-check-label"
+										for="dropdownCheck"> Remember me </label>
+								</div> -->
+								<button type="submit" class="btn btn-primary" ng-click="login()">Sign in</button>
+							</form>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="#">New around here? Sign up</a> <a
+								class="dropdown-item" href="#">Forgot password?</a>
+						</div>
+					</div>
+				</li>
+				
+				<li ng-show="IsLogin"><a id="navbar-static-login"
+					class="btn btn-info btn-rounded btn-sm waves-effect waves-light"
+					ng-click="logout()">Sign Out<i class="fa fa-sign-out ml-2"></i>
+				</a></li>
+			</ul>
+		</nav>
+		<!-- Navbar -->
+
+	</header>
+	<!--Main Navigation-->
+	<!--Main layout-->
+	<main class="pt-5 mx-lg-5">
+		<div class="container-fluid mt-5">
+	 		
+	        <div ui-view>
+				<!--  Page Content is loaded here-->         		
+	        </div>
+         </div>
+	</main>
+	<!--Main layout-->
+
+	<!--Footer-->
+	<footer ng-show="!IsLogin"  
+		class="page-footer text-center font-small primary-color-dark darken-2 mt-4 wow fadeIn">
+
+		<!--Call to action-->
+		<div class="pt-4">
+			<a class="btn btn-outline-white"
+				href="https://mdbootstrap.com/getting-started/" target="_blank"
+				role="button">Download MDB <i class="fa fa-download ml-2"></i>
+			</a> <a class="btn btn-outline-white"
+				href="https://mdbootstrap.com/education/bootstrap/" target="_blank"
+				role="button">Start free tutorial <i
+				class="fa fa-graduation-cap ml-2"></i>
+			</a>
+		</div>
+		<!--/.Call to action-->
+
+		<hr class="my-4">
+
+		<!-- Social icons -->
+		<div class="pb-4">
+			<a href="https://www.facebook.com/mdbootstrap" target="_blank"> <i
+				class="fa fa-facebook mr-3"></i>
+			</a> <a href="https://twitter.com/MDBootstrap" target="_blank"> <i
+				class="fa fa-twitter mr-3"></i>
+			</a> <a href="https://www.youtube.com/watch?v=7MUISDJ5ZZ4"
+				target="_blank"> <i class="fa fa-youtube mr-3"></i>
+			</a> <a href="https://plus.google.com/u/0/b/107863090883699620484"
+				target="_blank"> <i class="fa fa-google-plus mr-3"></i>
+			</a> <a href="https://dribbble.com/mdbootstrap" target="_blank"> <i
+				class="fa fa-dribbble mr-3"></i>
+			</a> <a href="https://pinterest.com/mdbootstrap" target="_blank"> <i
+				class="fa fa-pinterest mr-3"></i>
+			</a> <a href="https://github.com/mdbootstrap/bootstrap-material-design"
+				target="_blank"> <i class="fa fa-github mr-3"></i>
+			</a> <a href="http://codepen.io/mdbootstrap/" target="_blank"> <i
+				class="fa fa-codepen mr-3"></i>
+			</a>
+		</div>
+		<!-- Social icons -->
+
+		<!--Copyright-->
+		<div class="footer-copyright py-3">
+			© 2018 Copyright: <a
+				href="https://mdbootstrap.com/education/bootstrap/" target="_blank">
+				MDBootstrap.com </a>
+		</div>
+		<!--/.Copyright-->
+
+	</footer>
+	<!--/.Footer-->
+
+	<!-- SCRIPTS -->
+	<!-- JQuery -->
+	<script type="text/javascript" src="materialmdbnew/jquery-3.3.1.min.js"></script>
+	<!-- Bootstrap tooltips -->
+	<script type="text/javascript" src="materialmdbnew/popper.min.js"></script>
+	<!-- Bootstrap core JavaScript -->
+	<script type="text/javascript" src="materialmdbnew/bootstrap.min.js"></script>
+	<!-- MDB core JavaScript -->
+	<script type="text/javascript" src="materialmdbnew/mdb.min.js"></script>
+		<!--Google Maps-->
+	<script src="https://maps.google.com/maps/api/js"></script>
+	
+	<!-- Initializations -->
+	
+		<!-- <script src="js/jquery-3.2.1.min.js"></script> -->
+	<script src="js/jquery-ui.js"></script>
+	<!-- <script src="js/popper.min.js"></script> -->
+	<!-- <script src="js/bootstrap.min.js"></script> -->
+	<script src="js/multiple-select.js"></script>
+	<!-- <script src="js/d3.v3.min.js"></script>
+	<script src="js/c3.min.js"></script> -->
+	<script src="components/util.js"></script>
+	<script src="js/angularjs/angular.min.js"></script>
+	<script src="js/angularjs/angular-animate.min.js"></script>
+	<script src="js/angularjs/angular-aria.min.js"></script>
+	<script src="js/angularjs/angular-cookies.min.js"></script>
+	<script src="js/angularjs/angular-sanitize.min.js"></script>
+	<script src="js/angularjs/angular-touch.min.js"></script>
+	<script src="js/ocLazyLoad.min.js"></script>
+	<script src="js/angular-jwt.js"></script>
+	<script src="js/angularjs/angular-resource.min.js"></script>
+	<script src="js/appcache.min.js"></script>
+	<script src="js/angularjs/angular-route.min.js"></script>
+	<script src="js/ngToast.min.js"></script>
+	<script src="js/angular-storage.min.js"></script>
+	<script src="js/angular-ui-router.min.js"></script>	
+	<script src="js/moment.min.js"></script>
+	<script src="js/bootstrap-datetimepicker.min.js"></script>
+	<script src="js/ng-table-to-csv.min.js"></script>
+	<script src="js/ng-csv.min.js"></script>
+	<script src="js/json2csv.js"></script>
+	<script src="js/sol.js"></script>
+	<script src="js/es6-promise.min.js"></script>
+	<script src="js/dom-to-image.min.js"></script>
+	<script src="js/pdfmake.min.js"></script>
+	<script src="js/ng-dom-to-pdf.min.js"></script>
+	<script src="js/angular-ui/ui-bootstrap-tpls-0.14.3.min.js"></script>
+	<script src="js/randomColor.js"></script>
+	<script src="js/autocomplete.min.js"></script>
+	<script src="js/http-auth-interceptor.js"></script>
+	<script src="js/jquery.sparkline.min.js"></script>
+	<script src="js/angucomplete-alt.js"></script>
+	<script src="js/underscore-min.js"></script>
+	<script src="js/calendar.js"></script>
+	<script src="components/platforminfo.js"></script>
+	<script src="components/services.js?v=1.8"></script>
+	<script src="js/vfs_fonts.js"></script>
+	<script type="text/javascript" src="js/jspdf.min.js"></script>
+	<script type="text/javascript" src="js/ng-c3-export.js"></script>
+	<script type="text/javascript" src="js/rgbcolor.js"></script>
+	<script type="text/javascript" src="js/StackBlur.js"></script>
+	<script type="text/javascript" src="js/canvg.js"></script>
+	<script type="text/javascript" src="js/saveSvgAsPng.js"></script>
+	<script type="text/javascript">
+        // Animations initialization
+        new WOW().init();
+    </script>
+	<!-- <script type="text/javascript" src="https://mdbootstrap.com/wp-content/themes/mdbootstrap4/js/4.5.13/compiled.min.js?ver=4.5.13"></script>
+
+ -->
+
+
+</body>
+
+</html>

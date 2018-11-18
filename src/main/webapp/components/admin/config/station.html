@@ -1,0 +1,38 @@
+<style type="text/css">
+
+.jumbotron {
+    padding: 1rem;
+}
+
+.container {
+    padding-right: 5px;
+    padding-left: 5px;
+    margin-right: 15px;
+    margin-left: 15px;
+    width: 100%;
+}
+</style>
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <div class="table-responsive"  style="height: 500px;overflow: scroll;">
+		<table class="table table-sm table-striped table-condensed" >
+		<thead class="black white-text">
+			<tr>
+				<th>Designation</th>
+				<th>Cadre Name</th>
+				<th>Created By</th>
+				<th>Created On</th>
+			</tr>
+		</thead>
+		<tr ng-repeat="d in DesignationList | orderBy:'dsgName'">
+			<td><span> <b><u><a href="" ng-click="editDesignation(d);" class="text-primary">{{d.dsgName}}</u></a></b>
+			</span></td>
+			<td>{{d.dsgCadreName}}</td>
+			<td>{{d.dsgCreatedBy}}</td>
+			<td>{{d.dsgCreatedOn}}</td>
+		</tr>
+	</table>
+</div>
+  </div>
+</div>

@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en" ng-app='CCCapp'>
+
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+   <meta name="description" content="Bootstrap Admin App + jQuery">
+   <meta name="keywords" content="app, responsive, jquery, bootstrap, dashboard, admin">
+   <!-- <link rel="icon" type="image/x-icon" href="favicon.ico"> -->
+   <title>Mescom - Customer Care Center</title>
+   <!-- =============== VENDOR STYLES ===============-->
+   <!-- FONT AWESOME-->
+   
+   <link rel="stylesheet" href="angle/vendor/webfonts/fa-brands.css">
+   <link rel="stylesheet" href="angle/vendor/webfonts/fa-regular.css">
+   <link rel="stylesheet" href="angle/vendor/webfonts/fa-solid.css">
+   <link rel="stylesheet" href="angle/vendor/webfonts/fontawesome.css">
+   
+   <!-- SIMPLE LINE ICONS-->
+   <link rel="stylesheet" href="angle/vendor/simple-line-icons/simple-line-icons.css">
+   <!-- ANIMATE.CSS-->
+   <link rel="stylesheet" href="angle/vendor/animate.css/animate.css">
+   <!-- WHIRL (spinners)-->
+   <link rel="stylesheet" href="angle/vendor/whirl/whirl.css">
+   <!-- =============== PAGE VENDOR STYLES ===============-->
+   
+     <!-- WEATHER ICONS-->
+   <link rel="stylesheet" href="angle/vendor/weather/weather-icons.css">
+   
+   <!-- =============== BOOTSTRAP STYLES ===============-->
+   <link rel="stylesheet" href="angle/css/bootstrap.css" id="bscss">
+   <!-- =============== APP STYLES ===============-->
+   <link rel="stylesheet" href="angle/css/app.css" id="maincss">
+   
+   <link rel="stylesheet" href="angle/css/custom.css">
+   
+   
+</head>
+
+<body  ng-cloak ng-controller="appCtrl">
+
+		<div id="notification" class="alert" role="alert">
+			<strong>Well done!</strong> You successfully read this important alert message. 
+		</div>
+	
+   <div class="wrapper">
+      <!-- top navbar-->
+      <header class="topnavbar-wrapper">
+         <!-- START Top Navbar-->
+         <nav class="navbar topnavbar">
+            <!-- START navbar header-->
+            <div class="navbar-header">
+               <a class="navbar-brand" href="\#">
+                  <div class="brand-logo">
+                     <img class="img-fluid" src="img/logo.png" alt="App Logo">
+                  </div>
+                  <div class="brand-logo-collapsed">
+                     <img class="img-fluid" src="img/logo-single.png" alt="App Logo">
+                  </div>
+               </a>
+            </div>
+            <!-- END navbar header-->
+            <!-- START Left navbar-->
+            <ul class="navbar-nav mr-auto flex-row">
+               <li class="nav-item"  ng-show="IsLogin">
+                  <!-- Button used to collapse the left sidebar. Only visible on tablet and desktops-->
+                  <a class="nav-link d-none d-md-block d-lg-block d-xl-block" href="" data-trigger-resize="" data-toggle-state="aside-collapsed">
+                     <em class="fas fa-bars"></em>
+                  </a>
+                  <!-- Button to show/hide the sidebar on mobile. Visible on mobile only.-->
+                  <a class="nav-link sidebar-toggle d-md-none" href="" data-toggle-state="aside-toggled" data-no-persist="true">
+                     <em class="fas fa-bars"></em>
+                  </a>
+               </li>
+               <!-- START User avatar toggle-->
+               <li class="nav-item d-none d-md-block"  ng-show="IsLogin" >
+                  <!-- Button used to collapse the left sidebar. Only visible on tablet and desktops-->
+                  <a class="nav-link" id="user-block-toggle" href="\#user-block" data-toggle="collapse">
+                     <em class="icon-user"></em>
+                  </a>
+               </li>
+               <!-- END User avatar toggle-->
+               <!-- START lock screen-->
+               <!-- <li class="nav-item d-none d-md-block">
+                  <a class="nav-link" href="lock.html" title="Lock screen">
+                     <em class="icon-lock"></em>
+                  </a>
+               </li> -->
+               
+               <!-- END lock screen-->
+            </ul>
+            <!-- END Left navbar-->
+            
+         <!--    <ul class="navbar-nav mr-auto flex-row">
+            	<li class="nav-item nav-link">
+            		<h2>Customer Call Center</h2>
+            	</li>
+            </ul> -->
+            
+            <!-- START Right Navbar-->
+            <ul class="navbar-nav flex-row">
+                              <!-- Login Control Start    -->
+               
+               <li class="nav-item dropdown dropdown-list" ng-show="!IsLogin">
+                  <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" data-toggle="dropdown">
+                     <em class="icon-login"></em>
+                     <!-- <span class="badge badge-danger">11</span> -->
+                  </a>
+                  <!-- START Dropdown menu-->
+                  <div class="dropdown-menu dropdown-menu-right animated flipInX">
+                     <div class="dropdown-item">
+                        <!-- START list group-->
+                        <div class="list-group">
+                           <!-- list item-->
+                           <div class="list-group-item list-group-item-action">
+                              <div class="media">
+                                 <div class="align-self-start mr-2">
+                                    <em class="fas fa-user fa-2x text-info"></em>
+                                 </div>
+                                 <div class="media-body form-group">
+                                    <p class="m-0">Username</p>
+                                    <!-- <p class="m-0 text-muted text-sm">1 new follower</p> -->
+                                    <input type="text" class="form-control" ng-model="user.username">
+                                 </div>
+                              </div>
+                           </div>
+                           <!-- list item-->
+                           <div class="list-group-item list-group-item-action">
+                              <div class="media">
+                                 <div class="align-self-start mr-2">
+                                    <em class="fas fa-user fa-2x text-warning"></em>
+                                 </div>
+                                 <div class="media-body form-group">
+                                    <p class="m-0">Password</p>
+                                   <!--  <p class="m-0 text-muted text-sm">You have 10 new emails</p> -->
+                                    <input type="password" class="form-control" ng-model="user.password">
+                                   
+                                 </div>
+                              </div>
+                           </div>
+                           <!-- list item-->
+                           <div class="list-group-item list-group-item-action">
+                              <div class="media">
+                                 <div class="media-body">
+                                    <!-- <p class="m-0">Pending Tasks</p>
+                                    <p class="m-0 text-muted text-sm">11 pending task</p> -->
+                                    <button type="button" class="btn btn-block btn-primary" ng-click="login()">Sign In</button>
+                                 </div>
+                              </div>
+                           </div>
+                           <!-- last list item-->
+                          <!--  <div class="list-group-item list-group-item-action">
+                              <span class="d-flex align-items-center">
+                                 <span class="text-sm">More notifications</span>
+                                 <span class="badge badge-danger ml-auto">14</span>
+                              </span>
+                           </div> -->
+                        </div>
+                        <!-- END list group-->
+                     </div>
+                  </div>
+                  <!-- END Dropdown menu-->
+               </li>
+               <!-- Login End  -->
+               <!-- END Alert menu-->
+               
+                <!-- START Offsidebar button-->
+               <li class="nav-item"  ng-show="IsLogin">
+                  <a class="nav-link" href="" data-no-persist="true" ng-click="logout()">
+                     <em class="icon-logout"></em>
+                  </a>
+               </li>
+               <!-- END Offsidebar menu-->
+               
+               <!-- Search icon-->
+               <li class="nav-item">
+                  <a class="nav-link" href="" data-search-open="">
+                     <em class="icon-magnifier"></em>
+                  </a>
+               </li>
+               <!-- Fullscreen (only desktops)-->
+               <li class="nav-item d-none d-md-block" >
+                  <a class="nav-link" href="" data-toggle-fullscreen="">
+                     <em class="fas fa-expand"></em>
+                  </a>
+               </li>
+               <!-- START Alert menu-->
+               
+               <!-- START Offsidebar button-->
+               <li class="nav-item"  ng-show="IsLogin">
+                  <a class="nav-link" href="" data-toggle-state="offsidebar-open" data-no-persist="true">
+                     <em class="icon-notebook"></em>
+                  </a>
+               </li>
+               <!-- END Offsidebar menu-->
+            </ul>
+            <!-- END Right Navbar-->
+            <!-- START Search form-->
+            <form class="navbar-form" role="search" action="search.html">
+               <div class="form-group">
+                  <input class="form-control" type="text" placeholder="Type and hit enter ...">
+                  <div class="fas fa-times navbar-form-close" data-search-dismiss=""></div>
+               </div>
+               <button class="d-none" type="submit">Submit</button>
+            </form>
+            <!-- END Search form-->
+         </nav>
+         <!-- END Top Navbar-->
+      </header>
+      <!-- sidebar-->
+      <aside class="aside-container"  ng-show="IsLogin">
+         <!-- START Sidebar (left)-->
+         <div class="aside-inner">
+            <nav class="sidebar" data-sidebar-anyclick-close="">
+               <!-- START sidebar nav-->
+               <ul class="sidebar-nav">
+                  <!-- START user info-->
+                  <li class="has-user-block">
+                     <div class="collapse" id="user-block">
+                        <div class="item user-block">
+                           <!-- User picture-->
+                           <div class="user-block-picture">
+                              <div class="user-block-status">
+                                 <img class="img-thumbnail rounded-circle" src="img/user/02.jpg" alt="Avatar" width="60" height="60">
+                                 <div class="circle bg-success circle-lg"></div>
+                              </div>
+                           </div>
+                           <!-- Name and Job-->
+                           <div class="user-block-info">
+                              <span class="user-block-name">Hello, Mike</span>
+                              <span class="user-block-role">Designer</span>
+                           </div>
+                        </div>
+                     </div>
+                  </li>
+                  <!-- END user info-->
+                  <!-- Iterates over all sidebar items-->
+                  <li class="nav-heading ">
+                     <span data-localize="sidebar.heading.HEADER">Main Navigation</span>
+                  </li>
+                  <li class=" ">
+                     <a href="\#dashboard1" title="Dashboard" data-toggle="collapse">
+                        <div class="float-right badge badge-success">3</div>
+                        <em class="icon-speedometer"></em>
+                        <span data-localize="sidebar.nav.DASHBOARD">Dashboard</span>
+                     </a>
+                     <ul class="sidebar-nav sidebar-subnav collapse" id="dashboard1">
+                        <li class="sidebar-subnav-header">Dashboard</li>
+                        <li class=" ">
+                           <a href="dashboard.html" title="Dashboard v1">
+                              <span>Dashboard v1</span>
+                           </a>
+                        </li>
+                        <li class=" ">
+                           <a href="dashboard_v2.html" title="Dashboard v2">
+                              <span>Dashboard v2</span>
+                           </a>
+                        </li>
+                        <li class=" ">
+                           <a href="dashboard_v3.html" title="Dashboard v3">
+                              <span>Dashboard v3</span>
+                           </a>
+                        </li>
+                     </ul>
+                  </li>
+               </ul>
+               <!-- END sidebar nav-->
+            </nav>
+         </div>
+         <!-- END Sidebar (left)-->
+      </aside>
+      <!-- offsidebar-->
+      <aside class="offsidebar d-none"  ng-show="IsLogin">
+         <!-- START Off Sidebar (right)-->
+         <nav>
+            <div role="tabpanel">
+               <!-- Nav tabs-->
+               <ul class="nav nav-tabs nav-justified" role="tablist">
+                  <li class="nav-item" role="presentation">
+                     <a class="nav-link active" href="\#app-settings" aria-controls="app-settings" role="tab" data-toggle="tab">
+                        <em class="icon-equalizer fa-lg"></em>
+                     </a>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                     <a class="nav-link" href="\#app-chat" aria-controls="app-chat" role="tab" data-toggle="tab">
+                        <em class="icon-user fa-lg"></em>
+                     </a>
+                  </li>
+               </ul>
+               <!-- Tab panes-->
+               <div class="tab-content">
+                  <div class="tab-pane fade active show" id="app-settings" role="tabpanel">
+                     <h3 class="text-center text-thin mt-4">Settings</h3>
+                     <div class="p-2">
+                        <h4 class="text-muted text-thin">Themes</h4>
+                        <div class="row row-flush mb-2">
+                           <div class="col mb-2">
+                              <div class="setting-color">
+                                 <label data-load-css="css/theme-a.css">
+                                    <input type="radio" name="setting-theme" checked="checked">
+                                    <span class="icon-check"></span>
+                                    <span class="split">
+                                       <span class="color bg-info"></span>
+                                       <span class="color bg-info-light"></span>
+                                    </span>
+                                    <span class="color bg-white"></span>
+                                 </label>
+                              </div>
+                           </div>
+                           <div class="col mb-2">
+                              <div class="setting-color">
+                                 <label data-load-css="css/theme-b.css">
+                                    <input type="radio" name="setting-theme">
+                                    <span class="icon-check"></span>
+                                    <span class="split">
+                                       <span class="color bg-green"></span>
+                                       <span class="color bg-green-light"></span>
+                                    </span>
+                                    <span class="color bg-white"></span>
+                                 </label>
+                              </div>
+                           </div>
+                           <div class="col mb-2">
+                              <div class="setting-color">
+                                 <label data-load-css="css/theme-c.css">
+                                    <input type="radio" name="setting-theme">
+                                    <span class="icon-check"></span>
+                                    <span class="split">
+                                       <span class="color bg-purple"></span>
+                                       <span class="color bg-purple-light"></span>
+                                    </span>
+                                    <span class="color bg-white"></span>
+                                 </label>
+                              </div>
+                           </div>
+                           <div class="col mb-2">
+                              <div class="setting-color">
+                                 <label data-load-css="css/theme-d.css">
+                                    <input type="radio" name="setting-theme">
+                                    <span class="icon-check"></span>
+                                    <span class="split">
+                                       <span class="color bg-danger"></span>
+                                       <span class="color bg-danger-light"></span>
+                                    </span>
+                                    <span class="color bg-white"></span>
+                                 </label>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="row row-flush mb-2">
+                           <div class="col mb-2">
+                              <div class="setting-color">
+                                 <label data-load-css="css/theme-e.css">
+                                    <input type="radio" name="setting-theme">
+                                    <span class="icon-check"></span>
+                                    <span class="split">
+                                       <span class="color bg-info-dark"></span>
+                                       <span class="color bg-info"></span>
+                                    </span>
+                                    <span class="color bg-gray-dark"></span>
+                                 </label>
+                              </div>
+                           </div>
+                           <div class="col mb-2">
+                              <div class="setting-color">
+                                 <label data-load-css="css/theme-f.css">
+                                    <input type="radio" name="setting-theme">
+                                    <span class="icon-check"></span>
+                                    <span class="split">
+                                       <span class="color bg-green-dark"></span>
+                                       <span class="color bg-green"></span>
+                                    </span>
+                                    <span class="color bg-gray-dark"></span>
+                                 </label>
+                              </div>
+                           </div>
+                           <div class="col mb-2">
+                              <div class="setting-color">
+                                 <label data-load-css="css/theme-g.css">
+                                    <input type="radio" name="setting-theme">
+                                    <span class="icon-check"></span>
+                                    <span class="split">
+                                       <span class="color bg-purple-dark"></span>
+                                       <span class="color bg-purple"></span>
+                                    </span>
+                                    <span class="color bg-gray-dark"></span>
+                                 </label>
+                              </div>
+                           </div>
+                           <div class="col mb-2">
+                              <div class="setting-color">
+                                 <label data-load-css="css/theme-h.css">
+                                    <input type="radio" name="setting-theme">
+                                    <span class="icon-check"></span>
+                                    <span class="split">
+                                       <span class="color bg-danger-dark"></span>
+                                       <span class="color bg-danger"></span>
+                                    </span>
+                                    <span class="color bg-gray-dark"></span>
+                                 </label>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="p-2">
+                        <h4 class="text-muted text-thin">Layout</h4>
+                        <div class="clearfix">
+                           <p class="float-left">Fixed</p>
+                           <div class="float-right">
+                              <label class="switch">
+                                 <input id="chk-fixed" type="checkbox" data-toggle-state="layout-fixed">
+                                 <span></span>
+                              </label>
+                           </div>
+                        </div>
+                        <div class="clearfix">
+                           <p class="float-left">Boxed</p>
+                           <div class="float-right">
+                              <label class="switch">
+                                 <input id="chk-boxed" type="checkbox" data-toggle-state="layout-boxed">
+                                 <span></span>
+                              </label>
+                           </div>
+                        </div>
+                        <div class="clearfix">
+                           <p class="float-left">RTL</p>
+                           <div class="float-right">
+                              <label class="switch">
+                                 <input id="chk-rtl" type="checkbox">
+                                 <span></span>
+                              </label>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="p-2">
+                        <h4 class="text-muted text-thin">Aside</h4>
+                        <div class="clearfix">
+                           <p class="float-left">Collapsed</p>
+                           <div class="float-right">
+                              <label class="switch">
+                                 <input id="chk-collapsed" type="checkbox" data-toggle-state="aside-collapsed">
+                                 <span></span>
+                              </label>
+                           </div>
+                        </div>
+                        <div class="clearfix">
+                           <p class="float-left">Collapsed Text</p>
+                           <div class="float-right">
+                              <label class="switch">
+                                 <input id="chk-collapsed-text" type="checkbox" data-toggle-state="aside-collapsed-text">
+                                 <span></span>
+                              </label>
+                           </div>
+                        </div>
+                        <div class="clearfix">
+                           <p class="float-left">Float</p>
+                           <div class="float-right">
+                              <label class="switch">
+                                 <input id="chk-float" type="checkbox" data-toggle-state="aside-float">
+                                 <span></span>
+                              </label>
+                           </div>
+                        </div>
+                        <div class="clearfix">
+                           <p class="float-left">Hover</p>
+                           <div class="float-right">
+                              <label class="switch">
+                                 <input id="chk-hover" type="checkbox" data-toggle-state="aside-hover">
+                                 <span></span>
+                              </label>
+                           </div>
+                        </div>
+                        <div class="clearfix">
+                           <p class="float-left">Show Scrollbar</p>
+                           <div class="float-right">
+                              <label class="switch">
+                                 <input id="chk-scroll" type="checkbox" data-toggle-state="show-scrollbar" data-target=".sidebar">
+                                 <span></span>
+                              </label>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="tab-pane fade" id="app-chat" role="tabpanel">
+                     <h3 class="text-center text-thin mt-4">Connections</h3>
+                     <div class="list-group">
+                        <!-- START list title-->
+                        <div class="list-group-item border-0">
+                           <small class="text-muted">ONLINE</small>
+                        </div>
+                        <!-- END list title-->
+                        <div class="list-group-item list-group-item-action border-0">
+                           <div class="media">
+                              <img class="align-self-center mr-3 rounded-circle thumb48" src="img/user/05.jpg" alt="Image">
+                              <div class="media-body text-truncate">
+                                 <a href="#">
+                                    <strong>Juan Sims</strong>
+                                 </a>
+                                 <br>
+                                 <small class="text-muted">Designeer</small>
+                              </div>
+                              <div class="ml-auto">
+                                 <span class="circle bg-success circle-lg"></span>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="list-group-item list-group-item-action border-0">
+                           <div class="media">
+                              <img class="align-self-center mr-3 rounded-circle thumb48" src="img/user/06.jpg" alt="Image">
+                              <div class="media-body text-truncate">
+                                 <a href="#">
+                                    <strong>Maureen Jenkins</strong>
+                                 </a>
+                                 <br>
+                                 <small class="text-muted">Designeer</small>
+                              </div>
+                              <div class="ml-auto">
+                                 <span class="circle bg-success circle-lg"></span>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="list-group-item list-group-item-action border-0">
+                           <div class="media">
+                              <img class="align-self-center mr-3 rounded-circle thumb48" src="img/user/07.jpg" alt="Image">
+                              <div class="media-body text-truncate">
+                                 <a href="#">
+                                    <strong>Billie Dunn</strong>
+                                 </a>
+                                 <br>
+                                 <small class="text-muted">Designeer</small>
+                              </div>
+                              <div class="ml-auto">
+                                 <span class="circle bg-danger circle-lg"></span>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="list-group-item list-group-item-action border-0">
+                           <div class="media">
+                              <img class="align-self-center mr-3 rounded-circle thumb48" src="img/user/08.jpg" alt="Image">
+                              <div class="media-body text-truncate">
+                                 <a href="#">
+                                    <strong>Tomothy Roberts</strong>
+                                 </a>
+                                 <br>
+                                 <small class="text-muted">Designeer</small>
+                              </div>
+                              <div class="ml-auto">
+                                 <span class="circle bg-warning circle-lg"></span>
+                              </div>
+                           </div>
+                        </div>
+                        <!-- START list title-->
+                        <div class="list-group-item border-0">
+                           <small class="text-muted">OFFLINE</small>
+                        </div>
+                        <!-- END list title-->
+                        <div class="list-group-item list-group-item-action border-0">
+                           <div class="media">
+                              <img class="align-self-center mr-3 rounded-circle thumb48" src="img/user/09.jpg" alt="Image">
+                              <div class="media-body text-truncate">
+                                 <a href="#">
+                                    <strong>Lawrence Robinson</strong>
+                                 </a>
+                                 <br>
+                                 <small class="text-muted">Designeer</small>
+                              </div>
+                              <div class="ml-auto">
+                                 <span class="circle bg-warning circle-lg"></span>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="list-group-item list-group-item-action border-0">
+                           <div class="media">
+                              <img class="align-self-center mr-3 rounded-circle thumb48" src="img/user/10.jpg" alt="Image">
+                              <div class="media-body text-truncate">
+                                 <a href="#">
+                                    <strong>Tyrone Owens</strong>
+                                 </a>
+                                 <br>
+                                 <small class="text-muted">Designeer</small>
+                              </div>
+                              <div class="ml-auto">
+                                 <span class="circle bg-warning circle-lg"></span>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="px-3 py-4 text-center">
+                        <!-- Optional link to list more users-->
+                        <a class="btn btn-purple btn-sm" href="#" title="See more contacts">
+                           <strong>Load more..</strong>
+                        </a>
+                     </div>
+                     <!-- Extra items-->
+                     <div class="px-3 py-2">
+                        <p>
+                           <small class="text-muted">Tasks completion</small>
+                        </p>
+                        <div class="progress progress-xs m-0">
+                           <div class="progress-bar bg-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                              <span class="sr-only">80% Complete</span>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="px-3 py-2">
+                        <p>
+                           <small class="text-muted">Upload quota</small>
+                        </p>
+                        <div class="progress progress-xs m-0">
+                           <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                              <span class="sr-only">40% Complete</span>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </nav>
+         <!-- END Off Sidebar (right)-->
+      </aside>
+      <!-- Main section-->
+      <section class="section-container">
+         <!-- Page content-->
+         
+         <div class="loader" data-loading>
+				<img src="images/loading.gif" style="width: 32px; height: auto;" />
+		</div>
+	
+		<div id="loading" >
+			<div class="loader">Loading...</div>
+		</div>
+	         
+	         <div ui-view>
+					<!--  Page Content is loaded here-->         		
+	         </div>
+       </section>
+      <!-- Page footer-->
+      <footer class="footer-container">
+         <span>&copy; 2018 - Angle</span>
+      </footer>
+   </div>
+   <!-- =============== VENDOR SCRIPTS ===============-->
+   <!-- MODERNIZR-->
+   <script src="angle/vendor/modernizr/modernizr.custom.js"></script>
+   <!-- JQUERY-->
+   <script src="angle/vendor/jquery/dist/jquery.js"></script>
+   <!-- BOOTSTRAP-->
+   <script src="angle/vendor/popper/popper.js"></script>
+   <script src="angle/vendor/bootstrap/dist/js/bootstrap.js"></script>
+   <!-- STORAGE API-->
+   <script src="angle/vendor/js-storage/jquery.js"></script>
+   <!-- JQUERY EASING-->
+   <script src="angle/vendor/jquery-easing/jquery.easing.js"></script>
+   <!-- ANIMO-->
+   <script src="angle/vendor/animo/animo.js"></script>
+   <!-- SCREENFULL-->
+   <script src="angle/vendor/screenfull/screenfull.js"></script>
+   <!-- LOCALIZE-->
+   <script src="angle/vendor/jquery-localize/dist/jquery.localize.js"></script>
+   <!-- =============== PAGE VENDOR SCRIPTS ===============-->
+   <!-- SPARKLINE-->
+   <script src="angle/vendor/jquery-sparkline/jquery.sparkline.js"></script>
+
+   <!-- FLOT CHART-->
+   <script src="angle/vendor/flot/jquery.flot.js"></script>
+   <script src="angle/vendor/flot/jquery.flot.tooltip.js"></script>
+   <script src="angle/vendor/flot/jquery.flot.resize.js"></script>
+   <script src="angle/vendor/flot/jquery.flot.pie.js"></script>
+   <script src="angle/vendor/flot/jquery.flot.time.js"></script>
+   <script src="angle/vendor/flot/jquery.flot.categories.js"></script>
+   <script src="angle/vendor/flot/jquery.flot.spline.js"></script>
+   <!-- EASY PIE CHART-->
+   <script src="angle/vendor/chart/jquery.easypiechart.js"></script>
+   <!-- MOMENT JS-->
+   <script src="angle/vendor/moment/moment-with-locales.js"></script>
+   
+   <!-- GOOGLE MAPS-->
+   <!-- <script src="//maps.google.com/maps/api/js"></script>
+   <script src="vendor/jquery.gmap/jquery.gmap.js"></script> -->
+   <!-- =============== APP SCRIPTS ===============-->
+   <script src="angle/js/style_app.js"></script>
+   
+   
+   
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/jquery-ui.js"></script>
+	<script src="js/popper.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/multiple-select.js"></script>
+	<!-- <script src="js/d3.v3.min.js"></script>
+	<script src="js/c3.min.js"></script> -->
+	<script src="components/util.js"></script>
+	<script src="js/angularjs/angular.min.js"></script>
+	<script src="js/angularjs/angular-animate.min.js"></script>
+	<script src="js/angularjs/angular-aria.min.js"></script>
+	<script src="js/angularjs/angular-cookies.min.js"></script>
+	<script src="js/angularjs/angular-sanitize.min.js"></script>
+	<script src="js/angularjs/angular-touch.min.js"></script>
+	<script src="js/ocLazyLoad.min.js"></script>
+	<script src="js/angular-jwt.js"></script>
+	<script src="js/angularjs/angular-resource.min.js"></script>
+	<script src="js/appcache.min.js"></script>
+	<script src="js/angularjs/angular-route.min.js"></script>
+	<script src="js/ngToast.min.js"></script>
+	<script src="js/angular-storage.min.js"></script>
+	<script src="js/angular-ui-router.min.js"></script>	
+	<script src="js/moment.min.js"></script>
+	<script src="js/bootstrap-datetimepicker.min.js"></script>
+	<script src="js/ng-table-to-csv.min.js"></script>
+	<script src="js/ng-csv.min.js"></script>
+	<script src="js/json2csv.js"></script>
+	<script src="js/sol.js"></script>
+	<script src="js/es6-promise.min.js"></script>
+	<script src="js/dom-to-image.min.js"></script>
+	<script src="js/pdfmake.min.js"></script>
+	<script src="js/ng-dom-to-pdf.min.js"></script>
+	<script src="js/angular-ui/ui-bootstrap-tpls-0.14.3.min.js"></script>
+	<script src="js/randomColor.js"></script>
+	<script src="js/autocomplete.min.js"></script>
+	<script src="js/http-auth-interceptor.js"></script>
+	<script src="js/jquery.sparkline.min.js"></script>
+	<script src="js/angucomplete-alt.js"></script>
+	<script src="js/underscore-min.js"></script>
+	<script src="js/calendar.js"></script>
+	<script src="components/platforminfo.js"></script>
+	<script src="components/services.js?v=1.8"></script>
+	<script src="components/app.js?v=1.8"></script>
+	<script src="js/vfs_fonts.js"></script>
+	<script type="text/javascript" src="js/jspdf.min.js"></script>
+	<script type="text/javascript" src="js/ng-c3-export.js"></script>
+	<script type="text/javascript" src="js/rgbcolor.js"></script>
+	<script type="text/javascript" src="js/StackBlur.js"></script>
+	<script type="text/javascript" src="js/canvg.js"></script>
+	<script type="text/javascript" src="js/saveSvgAsPng.js"></script>
+</body>
+
+</html>

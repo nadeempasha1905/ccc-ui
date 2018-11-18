@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" ng-app='CCCapp'>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/angular.min.js"></script>
+</head>
+<body ng-controller="appCtrl">
+<h1>{{greeting}}</h1>
+</body>
+
+<script type="text/javascript">
+
+angular.module('CCCapp', [])
+.controller('appCtrl', function($scope,$rootScope, $http,$httpParamSerializer,$timeout) {
+    $scope.greeting = "Hello World";
+    
+    
+    
+    $scope.user = {
+            username: 'admin',
+            password: 'test'
+        };
+
+        $scope.login = function () {
+
+            $scope.loginError = false;
+            $scope.loginData = {
+                grant_type: "password",
+                username: $scope.user.username,
+                password: $scope.user.password
+            }
+            $rootScope.obtainAccessToken($scope.loginData);
+        }
+
+        $rootScope.obtainAccessToken=function(params) {
+            var req = {
+                method: 'POST',
+                url: "oauth/token",
+                headers: {
+                    "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
+                },
+                data: $httpParamSerializer(params)
+            }
+            
+            $http(req)
+                    .then(
+                            function (data) {                                          
+                            	 $scope.loginError = false;
+                                 $http.defaults.headers.common.Authorization = 'Bearer ' + data.data.access_token;
+                                 var expireDate = new Date(new Date().getTime() + (1000 * data.data.expires_in));
+                                 $cookies.put("access_token", data.data.access_token, {'expires': expireDate});
+                                 $rootScope.username = $scope.user.username;
+                                 $cookies.put("user", $scope.user.username);
+
+                               
+                            },
+                            function (error) {
+                                $scope.error = true;
+                                $timeout(function () {
+                                    $scope.error = false;
+                                }, 2000);
+                                
+                            }
+                            
+            );           
+     }
+$scope.login();
+});
+
+
+</script>
+</html>

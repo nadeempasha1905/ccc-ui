@@ -1,0 +1,290 @@
+<!-- <style type="text/css">
+    html,
+    body,
+    header,
+    .view {
+      height: 100%;
+    }
+
+    @media (max-width: 740px) {
+      html,
+      body,
+      header,
+      .view {
+        height: 1000px;
+      }
+    }
+
+    @media (min-width: 800px) and (max-width: 850px) {
+      html,
+      body,
+      header,
+      .view {
+        height: 650px;
+      }
+    }
+    @media (min-width: 800px) and (max-width: 850px) {
+              .navbar:not(.top-nav-collapse) {
+                  background: #1C2331!important;
+              }
+          }
+  </style> -->
+  
+  <script  type="text/javascript">
+	$(document).ready(function() {
+	$(".scroll").click(function(event) {
+	$('html,body').animate({ scrollTop: $(this.hash).offset().top + 50 }, 500);
+	});
+	});
+</script>
+  
+  <!-- Full Page Intro -->
+  <!-- <div class="full-page-intro" style="background-image: url('https://mdbootstrap.com/img/Photos/Others/images/78.jpg'); background-repeat: no-repeat; background-size: cover;"> -->
+  <div class="full-page-intro" style="background-image: url('images/1.jpg'); background-repeat: no-repeat; background-size: cover;">
+    <!-- Mask & flexbox options-->
+    <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+      <!-- Content -->
+      <!-- <div class="container"> -->
+
+        <!--Grid row-->
+        <div class="row wow fadeIn" style="padding: 5%;">
+
+          <!--Grid column-->
+          <div class="col-md-6 mb-4 white-text text-center text-md-left">
+
+            <h1 class="display-4 font-weight-bold">MESCOM <br>
+             Customer Care Center</h1>
+
+            <hr class="hr-light">
+
+            <!-- <p>
+              <strong>Best & free guide of responsive web design</strong>
+            </p> -->
+
+            <p class="mb-4 d-none d-md-block">
+              <strong>MESCOM has introduced 24 x 7 helpline number for speedy redressal of Consumer Complaints. Kindly contact 
+			</strong>
+            </p>
+            
+            <h2 class="display-4 font-weight-bold"><i class="fa fa-headphones prefix grey-text"></i>1912/18004251917</h2>
+
+           <!--  <a target="_blank" href="https://mdbootstrap.com/education/bootstrap/" class="btn btn-indigo btn-lg">Start free tutorial
+              <i class="fa fa-graduation-cap ml-2"></i>
+            </a> -->
+
+          </div>
+          <!--Grid column-->
+
+          <!--Grid column-->
+          <div class="col-md-6 col-xl-5 mb-4">
+
+            <!--Card-->
+            <div class="card">
+
+              <!--Card content-->
+              <div class="card-body">
+
+                <!-- Form -->
+                
+                  <!-- Heading -->
+                  
+                  <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+					  <li class="nav-item btn-blk">
+					    <a class="nav-link active" id="quick-complaint-tab" data-toggle="pill" href="#quick-complaint" role="tab"
+					      aria-controls="quick-complaint" aria-selected="true"><i class="fa fa-question"></i>&nbsp;&nbsp;Quick Complaint </a>
+					  </li>
+					   <li class="nav-item btn-blk">
+					    <a class="nav-link" id="quick-complaint-tab" data-toggle="pill" href="#track-complaint" role="tab"
+					      aria-controls="track-complaint" aria-selected="true"><i class="fa fa-share-square"></i>&nbsp;&nbsp;Track Complaint </a>
+					  </li>
+					  <li class="nav-item btn-blk">
+					    <a class="nav-link" id="sign-in-tab" data-toggle="pill" href="#sign-in" role="tab"
+					      aria-controls="sign-in" aria-selected="false"><i class="fa fa-id-badge"></i>&nbsp;&nbsp;Sign-In </a>
+  					  </li>
+					</ul>
+					 <hr>
+					 <div class="tab-content pt-2 pl-1" id="pills-tabContent">
+					 <div class="tab-pane fade show active" id="quick-complaint" role="tabpanel" aria-labelledby="quick-complaint-tab">
+					 <div class="alert alert-success waves-effect waves-light text-center" role="alert" ng-show="message.length > 0 && !error">
+							  {{message}}
+						</div>
+						<div class="alert alert-danger waves-effect waves-light text-center" role="alert" ng-show="message.length > 0 && error">
+							  {{message}}
+						</div>
+					 <form role="form" name="quickcomplaintform"  class="was-validated">
+					 
+					 	<h3 class="dark-grey-text text-center">
+	                   		 <strong>Quick Complaint</strong>
+	                  	</h3>
+						<div class="md-form">
+							<i class="fa fa-mobile prefix grey-text"></i> <input type="text"
+								id="qucik_mobile_no" class="form-control" ng-model="quick.mobileno" maxlength="10" required> 
+								<label for="qucik_mobile_no">Your
+								Mobile No</label>
+						</div>
+						<div class="md-form">
+							<i class="fa fa-user-secret prefix grey-text"></i> <input
+								type="text" id="quick_account_no" class="form-control" ng-model="quick.accountno" required> <label
+								for="quick_account_no">Your Account No</label>
+						</div>
+						<div class="md-form">
+							<i class="fa fa-comments prefix grey-text"></i>
+							<textarea type="text" id="quick_complaint_description" class="md-textarea"  
+							ng-model="quick.description"></textarea>
+							<label for="quick_complaint_description">Your Complaint Description</label>
+						</div>
+						<div class="md-form">
+								<select class="custom-select browser-default"  id="quick_category"
+					      				ng-options="c.categoryname for c in CATEGORYLIST | orderBy:'categoryid'" 
+					      				ng-change="loadsubcategory()" 
+					      				ng-model="quick.selectedcategory" required>
+						      			<option value="">Select Category</option>
+						    	</select>
+						</div>
+						<div class="md-form">
+								<select class="custom-select browser-default"  id="quick_subcategory"
+					      				ng-options="c.subcategoryname for c in SUBCATEGORYLIST "
+					      				ng-model="quick.selectedsubcategory" required>
+						      			<option value="">Select Sub-Category</option>
+						    	</select>
+						</div>
+	
+						<div class="text-center">
+							<button class="btn btn-indigo" ng-click="registerquickcomplaint()" ng-disabled="quickcomplaintform.$invalid">
+							Register Complaint</button>
+						</div>
+						<div class="text-left">
+							<a href="#consumerselfregisterpanel" class="scroll"><strong class="text-primary">Click here to register yourself.</strong></a>
+							<!-- <hr>
+							<fieldset class="form-check">
+								<input type="checkbox" class="form-check-input"
+									id="checkbox1"> <label for="checkbox1"
+									class="form-check-label dark-grey-text">Subscribe me
+									to the newsletter</label>
+							</fieldset> -->
+						</div>
+						</form>
+					</div>
+					
+					
+					
+					
+					
+					
+					
+				<div class="tab-pane fade show" id="track-complaint" role="tabpanel" aria-labelledby="sign-in-tab">
+					<form role="form" name="trackcomplaintform" class="was-validated">
+						<h3 class="dark-grey-text text-center">
+		                   		 <strong>Track Complaint</strong>
+		                  	</h3>
+		                  <hr>
+						<div class="md-form">
+							<i class="fa fa-user prefix grey-text"></i> 
+							<input type="text" id="trackcomplaintdocketno" class="form-control" ng-model="track.docketnumber" required>
+							<label for="trackcomplaintdocketno">Your Docket Number</label>
+						</div>
+						<div class="text-center">
+							<button class="btn btn-indigo btn-blk" ng-click="" ng-disabled="trackcomplaintform.$invalid">Search</button>
+						</div>
+						</form>
+					</div>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					<div class="tab-pane fade show" id="sign-in" role="tabpanel" aria-labelledby="sign-in-tab">
+					
+					<form role="form" name="signinform" class="was-validated">
+					
+						<h3 class="dark-grey-text text-center">
+		                   		 <strong>Sign In</strong>
+		                  	</h3>
+		                  <hr>
+						<div class="md-form">
+							<i class="fa fa-user prefix grey-text"></i> 
+							<input type="text" id="signinusername" class="form-control" ng-model="user.username" required> 
+							<label for="signinusername">Your	Username</label>
+						</div>
+						<div class="md-form">
+							<i class="fa fa-lock prefix grey-text"></i> 
+							<input type="password" id="signinpassword" class="form-control" ng-model="user.password" required> 
+							<label for="signinpassword">Your Password</label>
+						</div>
+						<div class="text-center">
+							<button class="btn btn-indigo btn-blk" ng-click="login()" ng-disabled="signinform.$invalid">Login</button>
+							<hr>
+							<!-- <fieldset class="form-check">
+								<input type="checkbox" class="form-check-input"
+									id="checkbox1"> <label for="checkbox1"
+									class="form-check-label dark-grey-text">Subscribe me
+									to the newsletter</label>
+							</fieldset> -->
+							<a href=""><strong class="text-primary">Forgot Password ?</strong></a>
+						</div>
+						
+						</form>
+					</div>
+					</div>
+                
+                <!-- Form -->
+
+              </div>
+
+            </div>
+            <!--/.Card-->
+
+          </div>
+          <!--Grid column-->
+
+        </div>
+        <!--Grid row-->
+
+     <!--  </div> -->
+      <!-- Content -->
+
+    </div>
+    <!-- Mask & flexbox options-->
+
+  </div>
+  <!-- Full Page Intro -->
+
+<div class="card text-center" style="margin-top: 20px;" id="consumerselfregisterpanel">
+  <div class="card-header">
+    <h5 class="display-6 font-weight-bold">Consumer Self Registration</h5>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Special title treatment</h5>
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    <a href="#!" class="btn btn-primary">Go somewhere</a>
+  </div>
+ <!--  <div class="card-footer text-muted">
+    2 days ago
+  </div> -->
+</div>
+
+<!-- <div>
+	<p>
+		<a  href="#middle" class="scroll">Middle</a> <a href="#bottom"
+			class="scroll">Bottom</a>
+	</p>
+	<div id="top" style="background-color: #c00; width: 50%; height: 1500px;">Top</div>
+
+	<p>
+		<a href="#top" class="scroll">Top</a> <a href="#bottom" class="scroll">Bottom</a>
+	</p>
+	<div id="middle" style="background-color: #2d80e8; width: 50%; height: 1500px;">Middle</div>
+
+	<p>
+		<a href="#top" class="scroll">Top</a> <a href="#middle" class="scroll">Middle</a>
+	<div id="bottom" style="background-color: #21b81e; width: 50%; height: 1500px;">Bottom</div>
+</div> -->
