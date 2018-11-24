@@ -9,6 +9,8 @@ angular
                 	console.log("Dashboard MDB Page initiated !!!");
                 	$scope.heading = "Dashboard MDB Page";
                 	
+                	console.log($('#pills-tab'));
+                	
                 	$('#dashboardlink').addClass('active');
                 	
                 	if($cookies.get("access_token")) {

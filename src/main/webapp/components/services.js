@@ -41,6 +41,13 @@ factory('CADRE',['$resource','RSURL',function($resource,RSURL) {
        }        
 	 });	 
 }])
+.factory('SUBCATEGORY',['$resource','RSURL',function($resource,RSURL) {
+	 return $resource(RSURL+'/subcategories/:id',{id:'@_id'},{
+	     update: {
+        method: 'PUT' // this method issues a PUT request
+       }        
+	 });	 
+}])
 .factory('COMPLAINTMODE',['$resource','RSURL',function($resource,RSURL) {
 	 return $resource(RSURL+'/complaintmodes/:id',{id:'@_id'},{
 	     update: {

@@ -42,6 +42,10 @@ angular.module('CCCapp',['ngRoute','ngResource','ui.router','ngCookies','angular
             files: ['components/admin/quickcomplaint.js'+'?v='+CACHEBUST_VERSION]    
         },
         {
+            name : 'registercomplaint', 
+            files: ['components/admin/registercomplaint.js'+'?v='+CACHEBUST_VERSION]    
+        },
+        {
             name : 'designation', 
             files: ['components/admin/config/designation.js'+'?v='+CACHEBUST_VERSION]
         },       
@@ -168,7 +172,7 @@ angular.module('CCCapp',['ngRoute','ngResource','ui.router','ngCookies','angular
               } 
                                 
         })
-.state('admin.quickcomplaint', {
+        .state('admin.quickcomplaint', {
             url: '/quickcomplaint',
             views:{
           	  "admin": {  
@@ -183,7 +187,27 @@ angular.module('CCCapp',['ngRoute','ngResource','ui.router','ngCookies','angular
               } 
                                 
         })
-        
+        .state('admin.registercomplaint', {
+           /* url: '/registercomplaint/:mobileno/:accountid/:quickstatus',*/
+        	 url: '/registercomplaint',
+            params:{
+            	mobileno : null,
+            	accountid : null,
+            	quickstatus : null
+            },
+            views:{
+          	  "admin": {  
+          		 controller:'registercomplaintCtrl',  
+	    		 templateUrl: 'components/admin/registercomplaint.html'		    		 
+	           }		           
+              },
+              resolve: {
+                  loadMyCtrl: ['$ocLazyLoad','$cookies','$state', function($ocLazyLoad,$cookies,$state) {                  
+                      return $ocLazyLoad.load('registercomplaint'); // Resolve promise and load before view 
+                  }]
+              } 
+                                
+        })
         .state('config', {
             url: '/config',
             templateUrl: 'components/admin/config/config.html'   

@@ -1,0 +1,338 @@
+
+
+
+
+
+
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="card mb-4">
+		<!-- Card header -->
+		<div class="card-header h5">Consumer Registration</div>
+		<!--Card content-->
+				<div class="card-body">
+
+				<form role="form" name="quickcomplaint_consumerinfo"
+					class="validated">
+					<div class="form-row">
+						<div class="col-md-12 mb-2" ng-show="warning != null">
+							<div class="alert alert-warning alert-dismissible fade show" role="alert" ng-show="warning">
+								<a href="#" class="alert-link">{{message}}</a>
+								 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								    <span aria-hidden="true">&times;</span>
+								  </button>
+							</div>
+							<div class="alert alert-success alert-dismissible fade show" role="alert" ng-show="!warning">
+								<a href="#" class="alert-link">{{message}}</a>
+								 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								    <span aria-hidden="true">&times;</span>
+								  </button>
+							</div>
+							<!-- <a class="btn btn-info btn-lg" id="alert-target" >Click me!</a> -->
+						</div>
+					</div>	
+					
+					<div class="form-row">
+						<div class="col-md-4 mb-2">
+							<div class="card border-light mb-3">
+							  <div class="card-header">Consumer Details</div>
+								  <div class="card-body">
+										<div class="col-md-12 mb-2"><small><strong>
+											<label for="mobilenumber">Mobile Number</label></strong> <input
+												type="text" class="form-control" id="mobilenumber"
+												placeholder="" value=""
+												ng-model="consumerinfo.mobilenumber"
+												ng-disabled="quick.quickstatus" 
+												 required></small>
+										</div>
+										<div class="col-md-12 mb-2"><small><strong>
+											<label for="accountnumber">Account Number</label></strong> <input
+												type="text" class="form-control" id="accountnumber"
+												placeholder="" value=""
+												ng-model="consumerinfo.accountnumber" 
+												ng-disabled="quick.quickstatus" 
+												required></small>
+										</div>
+										<div class="col-md-12 mb-2"><small><strong>
+											<label for="rrnumber">RR Number</label> </strong><input type="text"
+												class="form-control" id="rrnumber" placeholder=""
+												value="" ng-model="consumerinfo.rrnumber" required></small>
+										</div>
+										<div class="col-md-12 mb-2"><small><strong>
+											<label for="consumername">Consumer Name</label> </strong><input
+												type="text" class="form-control" id="consumername"
+												placeholder="" value=""
+												ng-model="consumerinfo.consumername" required></small>
+										</div>
+										<div class="col-md-12 mb-2"><small><strong>
+											<label for="consumeraddress">Consumer Address</label></strong>
+											<textarea type="text" class="form-control" id="consumeraddress"
+												placeholder="" value=""
+												ng-model="consumerinfo.consumeraddress" rows="3" required> </textarea></small>
+										</div>
+										<div class="col-md-12 mb-2"><small><strong>
+											<label for="emailid">E-mail ID</label> </strong>
+											<input
+												type="text" class="form-control" id="emailid"
+												placeholder="" value=""
+												ng-model="consumerinfo.emailid"></small>
+										</div>
+								  </div>
+							</div>
+						</div>
+						
+						<div class="col-md-4 mb-2">
+							<div class="card border-light mb-3">
+							  <div class="card-header">Complaint Details</div>
+								  <div class="card-body">
+								  	<div class="col-md-12 mb-3"><small><strong>
+										<label for="comaplintcategory">Complaint Category</label></strong>
+										 <select
+											id="comaplintcategory" class="custom-select browser-default"
+											ng-options="c.categoryname for c in CATEGORYLIST | orderBy:'categoryid'" 
+								      		ng-change="loadsubcategory(0)" 
+											ng-model="consumerinfo.selected_comaplintcategory" required>
+											<option value="">--------Select--------- </option>
+										</select></small>
+									</div>
+									<div class="col-md-12 mb-3"><small><strong>
+										<label for="complaintsubcategory">Complaint Sub-Category</label></strong>
+										<select id="complaintsubcategory"
+											class="custom-select browser-default" 
+											ng-options="c.subcategoryname for c in SUBCATEGORYLIST " 
+											ng-model="consumerinfo.selected_complaintsubcategory" required>
+											<option value="">--------Select--------- </option>
+										</select></small>
+									</div>
+									<div class="col-md-12 mb-2"><small><strong>
+										<label for="consumerdescription">Complaint Description</label></strong>
+										<textarea type="text" class="form-control"
+											id="consumerdescription" placeholder=""
+											value="" ng-model="consumerinfo.consumerdescription" rows="3" required> </textarea></small>
+									</div>
+									<div class="col-md-12 mb-3"><small><strong>
+										<label for="complaintpriority">Complaint Priority</label></strong>
+										 <select id="complaintpriority" class="custom-select browser-default" 
+										    ng-options="c.priorityname for c in COMPLAINTPRIORITYLIST " 
+											ng-model="consumerinfo.selected_complaintpriority" required>
+											<option value="">-------Select--------</option>
+										</select></small>
+									</div>
+									<div class="col-md-12 mb-3"><small><strong>
+										<label for="complaintstatus">Complaint Status</label></strong>
+										 <select id="complaintstatus" class="custom-select browser-default" 
+										    ng-options="c.statusname for c in COMPLAINTSTATUSLIST " 
+											ng-model="consumerinfo.selected_complaintstatus" ng-disabled="true" required>
+											<option value="">--------Select--------- </option>
+										</select></small>
+									</div>
+								  </div>
+							</div>
+						</div>
+						
+						<div class="col-md-4 mb-2">
+							<div class="card border-light mb-3">
+							  <div class="card-header">Office Details</div>
+								  <div class="card-body">
+									  <div class="col-md-12 mb-3"><small><strong>
+										<label for="subdivision">Sub Division</label></strong> <select
+											id="subdivision" class="custom-select browser-default"
+											ng-options="c.ld_name for c in SUBDIVISIONLIST | orderBy:'ld_name'" 
+											ng-change="getomsectionlist(0);getofficersdetails()" 
+											ng-model="consumerinfo.selected_subdivision" required>
+											<option value="">--------Select--------- </option>
+										</select></small>
+									</div>
+									<div class="col-md-12 mb-3"><small><strong>
+										<label for="omsection">O&M Section</label></strong> <select id="omsection"
+											class="custom-select browser-default" 
+											ng-options="c.ld_name for c in OMSECTIONLIST | orderBy:'ld_name'"     
+											 ng-model="consumerinfo.selected_omsection" required>
+											<option value="">--------Select--------- </option>
+										</select></small>
+									</div>
+									<div class="col-md-12 mb-3"><small><strong>
+										<label for="assignedto">Assigned To</label></strong>
+										 <select id="assignedto" class="custom-select browser-default" 
+										    ng-options="c.od_address for c in OFFICERDETAILLIST " 
+											ng-model="consumerinfo.selected_assignedto" required>
+											<option value="">--------Select--------- </option>
+										</select></small>
+									</div>
+									<div class="col-md-12 mb-3"><small><strong>
+										<label for="complaintmode">Complaint Mode</label></strong>
+										 <select id="complaintmode" class="custom-select browser-default" 
+										    ng-options="c.modename for c in COMPLAINTMODELIST " 
+											ng-model="consumerinfo.selected_complaintmode" required>
+											<option value="">--------Select--------- </option>
+										</select></small>
+									</div>
+								  </div>
+							</div>
+						</div>
+						
+						
+					</div>	
+					
+					
+					
+					
+					<!-- <div class="form-row">
+						<div class="col-md-4 mb-2">
+							<label for="mobilenumber">Mobile Number</label> <input
+								type="text" class="form-control" id="mobilenumber"
+								placeholder="Mobile Number" value=""
+								ng-model="consumerinfo.mobilenumber"
+								ng-disabled="quick.quickstatus" 
+								 required>
+						</div>
+						<div class="col-md-4 mb-2">
+							<label for="accountnumber">Account Number</label> <input
+								type="text" class="form-control" id="accountnumber"
+								placeholder="Mobile Number" value=""
+								ng-model="consumerinfo.accountnumber" 
+								ng-disabled="quick.quickstatus" 
+								required>
+						</div>
+						<div class="col-md-4 mb-2">
+							<label for="rrnumber">RR Number</label> <input type="text"
+								class="form-control" id="rrnumber" placeholder="RR Number"
+								value="" ng-model="consumerinfo.rrnumber" required>
+						</div>
+					</div> -->
+					
+					<!-- <div class="form-row">
+						<div class="col-md-8 mb-2">
+							<label for="consumername">Consumer Name</label> <input
+								type="text" class="form-control" id="consumername"
+								placeholder="Type Consumer Name" value=""
+								ng-model="consumerinfo.consumername" required>
+						</div>
+						<div class="col-md-4 mb-2">
+							<label for="emailid">E-mail ID</label> <input
+								type="text" class="form-control" id="emailid"
+								placeholder="Type Email" value=""
+								ng-model="consumerinfo.emailid">
+						</div>
+					</div> -->
+						
+					<!-- <div class="form-row">
+						<div class="col-md-4 mb-2">
+							<label for="consumeraddress">Consumer Address</label>
+							<textarea type="text" class="form-control" id="consumeraddress"
+								placeholder="Consumer Address" value=""
+								ng-model="consumerinfo.consumeraddress" rows="3" required> </textarea>
+						</div>
+						<div class="col-md-4 mb-3">
+							<label for="subdivision">Sub Division</label> <select
+								id="subdivision" class="custom-select browser-default"
+								ng-options="c.ld_name for c in SUBDIVISIONLIST | orderBy:'ld_name'" 
+								ng-change="getomsectionlist(0);getofficersdetails()" 
+								ng-model="consumerinfo.selected_subdivision" required>
+								<option value="">Select Sub-Division</option>
+							</select>
+						</div>
+						<div class="col-md-4 mb-3">
+							<label for="omsection">O&M Section</label> <select id="omsection"
+								class="custom-select browser-default" 
+								ng-options="c.ld_name for c in OMSECTIONLIST | orderBy:'ld_name'"     
+								 ng-model="consumerinfo.selected_omsection" required>
+								<option value="">Select O&M Section</option>
+							</select>
+						</div>
+					</div> -->
+
+					<!-- <div class="form-row">
+						<div class="col-md-4 mb-2">
+							<label for="consumerdescription">Consumer Description</label>
+							<textarea type="text" class="form-control"
+								id="consumerdescription" placeholder="Consumer Description"
+								value="" ng-model="consumerinfo.consumerdescription" rows="3" required> </textarea>
+						</div>
+						<div class="col-md-4 mb-3">
+							<label for="comaplintcategory">Complaint Category</label> <select
+								id="comaplintcategory" class="custom-select browser-default"
+								ng-options="c.categoryname for c in CATEGORYLIST | orderBy:'categoryid'" 
+					      		ng-change="loadsubcategory(0)" 
+								ng-model="consumerinfo.selected_comaplintcategory" required>
+								<option value="">Select Complaint Category</option>
+							</select>
+						</div>
+						<div class="col-md-4 mb-3">
+							<label for="complaintsubcategory">Complaint Sub-Category</label>
+							<select id="complaintsubcategory"
+								class="custom-select browser-default" 
+								ng-options="c.subcategoryname for c in SUBCATEGORYLIST " 
+								ng-model="consumerinfo.selected_complaintsubcategory" required>
+								<option value="">Select Sub Category</option>
+							</select>
+						</div>
+					</div> -->
+					
+					<!-- <div class="form-row">
+						<div class="col-md-4 mb-3">
+							<label for="assignedto">Assigned To</label>
+							 <select id="assignedto" class="custom-select browser-default" 
+							    ng-options="c.od_address for c in OFFICERDETAILLIST " 
+								ng-model="consumerinfo.selected_assignedto" required>
+								<option value="">Select Assigned To</option>
+							</select>
+						</div>
+						
+						<div class="col-md-4 mb-3">
+							<label for="complaintmode">Complaint Mode</label>
+							 <select id="complaintmode" class="custom-select browser-default" 
+							    ng-options="c.modename for c in COMPLAINTMODELIST " 
+								ng-model="consumerinfo.selected_complaintmode" required>
+								<option value="">Select Complaint Mode</option>
+							</select>
+						</div>
+						
+						<div class="col-md-4 mb-3">
+							<label for="complaintstatus">Complaint Status</label>
+							 <select id="complaintstatus" class="custom-select browser-default" 
+							    ng-options="c.statusname for c in COMPLAINTSTATUSLIST " 
+								ng-model="consumerinfo.selected_complaintstatus" required>
+								<option value="">Select Complaint Status</option>
+							</select>
+						</div>
+					</div> -->
+
+					<!-- <div class="form-row">
+						<div class="col-md-4 mb-3">
+							<label for="complaintpriority">Complaint Priority</label>
+							 <select id="complaintpriority" class="custom-select browser-default" 
+							    ng-options="c.priorityname for c in COMPLAINTPRIORITYLIST " 
+								ng-model="consumerinfo.selected_complaintpriority" required>
+								<option value="">Select complaint priority</option>
+							</select>
+						</div>
+						<div class="col-md-4 mb-2">
+							<label for="latitude">Latitude</label> <input
+								type="text" class="form-control" id="latitude"
+								placeholder="Type Latitude" value=""
+								ng-model="consumerinfo.latitude">
+						</div>
+						<div class="col-md-4 mb-2">
+							<label for="longitude">Longitude</label> <input type="text"
+								class="form-control" id="longitude" placeholder="Type longitude"
+								value="" ng-model="consumerinfo.longitude">
+						</div>
+					</div> -->
+					
+					
+
+					<button class="btn btn-md btn-indigo" type="submit" ng-click="save()"
+						ng-disabled="frm.$invalid">Register</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+  <script>
+
+  $("#alert-target").click(function () {
+      toastr["success"]("I was launched via jQuery!")
+  });
+  </script>

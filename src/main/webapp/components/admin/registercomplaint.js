@@ -1,23 +1,35 @@
 angular
         .module('CCCapp.Controllers', [])
         .controller(
-                "quickcomplaintCtrl",
-                function ($scope, $rootScope, $http, $filter, $compile, $state,           
+                "registercomplaintCtrl",
+                function ($scope, $rootScope, $http, $filter, $compile, $state, $stateParams,           
                 $cookies, $httpParamSerializer, jwtHelper, $window,
                         RSURL,$controller, $timeout, $window,store,ngToast,authService,$q,REQUEST) {
                 	
-                	console.log("quickcomplaintCtrl initiated !!!");
-                	$scope.heading = "quickcomplaintCtrl Page";
-                	
-                	$('#quickcmplaintlink').addClass('active');
+                	console.log("registercomplaintCtrl initiated !!!");
                 	
                 	console.log($('#pills-tab'));
                 	
-                	 $(this).closest("ul").find(".active").removeClass("active"); 
-                     // add active to the clicked
-                     $(this).addClass("active");
-                     // add active to the clicked's parent LI 
-                     $(this).parent().addClass("active");
+                	console.log($stateParams);
+                	$scope.quick = {}; 
+                	
+                	if($stateParams != null){
+                		if($stateParams.quickstatus != null){
+                			$scope.quick.quickstatus = $stateParams.quickstatus;
+                		}else{
+                			$scope.quick.quickstatus = false;
+                		}
+	                	if($stateParams.accountid != null){
+	                		$scope.quick.accountid = $stateParams.accountid;
+	                	}
+	                	if($stateParams.mobileno != null){
+	                		$scope.quick.mobileno = $stateParams.mobileno;
+	                	}
+                	}
+                	
+                	$scope.heading = "quickcomplaintCtrl Page";
+                	
+                	$('#registercomplaintlink').addClass('active');
                 	
                 	$scope.consumerinfo = {}; 
                 	
@@ -34,7 +46,7 @@ angular
 						   $state.go('login');
 					   }
                 	
-/*                	
+                	
                 	$scope.getsubdivisionlist = function(){
                 		$scope.SUBDIVISIONLIST = [];
 	                   	 $http.get(RSURL+"/query/getsubdivisionlist")
@@ -92,7 +104,7 @@ angular
                      	}
                      }
                      
-                 	$scope.getofficersdetails = function(){
+                 	$scope.getofficersdetails = function(value){
                 		$scope.OFFICERDETAILLIST = [];
                 		var locationcode = "";
                 		//console.log("Hi",$scope.consumerinfo.selected_subdivision);
@@ -105,6 +117,11 @@ angular
 				  		.then(function (data){
 				    		  console.log(data);	
 				    		  $scope.OFFICERDETAILLIST = data.data;
+				    		  
+				    		  if(value != 0){
+				    			  $scope.consumerinfo.selected_assignedto = $filter('filter')($scope.OFFICERDETAILLIST,{od_locatoin_code:value},true)[0];
+	     			    		  }
+				    		  
 				    	   },function (data){
 				    	   });
                 	};
@@ -142,6 +159,17 @@ angular
 				    	   });
                 }
                      
+                     $rootScope.getquickcomplaints = function(){
+                 		
+                 		$rootScope.QUICKCOMPLAINTS = [];
+ 	                   	 $http.get(RSURL+"/query/getquickcomplaints")
+ 				  		.then(function (data){
+ 				    		  console.log(data);	
+ 				    		  $rootScope.QUICKCOMPLAINTS = data.data;
+ 				    	   },function (data){
+ 				    	   });
+                 	};
+                 	
                 	$rootScope.getquickcomplaints();
                 	$scope.getsubdivisionlist();
                 	$scope.loadcategory();
@@ -168,6 +196,7 @@ angular
  			    		  
  			    		  $scope.current_record = data.data[0];
  			    		  
+ 			    		  $scope.consumerinfo.qc_pkid						= $scope.current_record.qc_pkid;
  			    		  $scope.consumerinfo.mobilenumber  				= $scope.current_record.qc_mobile_number;
  			    		  $scope.consumerinfo.accountnumber 				= $scope.current_record.qc_account_id;
  			    		  $scope.consumerinfo.rrnumber      				= $scope.current_record.cm_rr_number;
@@ -177,17 +206,17 @@ angular
  			    		  $scope.consumerinfo.consumerdescription 			= $scope.current_record.qc_complaint_description;
  			    		  $scope.consumerinfo.selected_subdivision 			= $filter('filter')($scope.SUBDIVISIONLIST,{ld_code:$scope.current_record.cm_location_code},true)[0];
  			    		  $scope.consumerinfo.selected_comaplintcategory 	= $filter('filter')($scope.CATEGORYLIST,{categoryid:$scope.current_record.qc_complaint_category},true)[0];
- 			    		  
- 			    		  $scope.getofficersdetails();
+
+ 			    		  $scope.getofficersdetails($scope.current_record.cm_section_code);
  			    		  $scope.getomsectionlist($scope.current_record.cm_section_code);
  			    		  $scope.loadsubcategory($scope.current_record.qc_complaint_subcategory);
  			    		 
- 			    		  $scope.consumerinfo.selected_assignedto 			= undefined;
+ 			    		  //$scope.consumerinfo.selected_assignedto 			= undefined;
  			    		  $scope.consumerinfo.selected_complaintmode 		= $filter('filter')($scope.COMPLAINTMODELIST,{modeid:1},true)[0];
  			    		  $scope.consumerinfo.selected_complaintstatus 		= $filter('filter')($scope.COMPLAINTSTATUSLIST,{statusid:1},true)[0];
  			    		  $scope.consumerinfo.selected_complaintpriority    = $filter('filter')($scope.COMPLAINTPRIORITYLIST,{priorityid:1},true)[0];
  			    		  
- 			    		  $scope.consumerinfo.latitude  						= $scope.current_record.cm_lattitude;
+ 			    		  $scope.consumerinfo.latitude  					= $scope.current_record.cm_lattitude;
  			    		  $scope.consumerinfo.longitude  					= $scope.current_record.cm_longitude;
  			    		  if($scope.current_record.recsts === true){
  			    			  $scope.message = "Consumer Details Found !!!" ;
@@ -202,24 +231,73 @@ angular
                 	
                 	$scope.save = function(){
                 		
-                		$scope.save_record = new REQUEST();
+                		//$scope.save_record = new REQUEST();
                 		
-                	};*/
-                	
-                	 $rootScope.getquickcomplaints = function(){
-                  		
-                  		$rootScope.QUICKCOMPLAINTS = [];
-  	                   	 $http.get(RSURL+"/query/getquickcomplaints")
-  				  		.then(function (data){
-  				    		  console.log(data);	
-  				    		  $rootScope.QUICKCOMPLAINTS = data.data;
-  				    	   },function (data){
-  				    	   });
-                  	};
-                	
-                	$scope.gotoregistercomplaint = function(mobileno,accountid,quickstatus){
-                		$state.go('admin.registercomplaint',{mobileno:mobileno,accountid:accountid,quickstatus:quickstatus});
+                		  var qc_pkid						= $scope.consumerinfo.qc_pkid;
+                		  var mobilenumber 					= $scope.consumerinfo.mobilenumber;
+	               		  var accountnumber 				= $scope.consumerinfo.accountnumber;
+	               		  var rrnumber 						= $scope.consumerinfo.rrnumber;
+	               		  var consumername 					= $scope.consumerinfo.consumername;
+	               		  var emailid 						= $scope.consumerinfo.emailid;	
+	               		  var consumeraddress 				= $scope.consumerinfo.consumeraddress;
+	               		  var consumerdescription 			= $scope.consumerinfo.consumerdescription;
+	               		  var selected_subdivision 			= $scope.consumerinfo.selected_subdivision.ld_code;
+	               		  var selected_comaplintcategory	= $scope.consumerinfo.selected_comaplintcategory.categoryid;
+	               		  var selected_omsection 			= $scope.consumerinfo.selected_omsection.ld_code;
+	               		  var selected_complaintsubcategory = $scope.consumerinfo.selected_complaintsubcategory.subcategoryid;
+			    		  var selected_assignedto 			= $scope.consumerinfo.selected_assignedto.od_emp_id;
+			    		  var selected_complaintmode 		= $scope.consumerinfo.selected_complaintmode.modeid;
+			    		  var selected_complaintstatus 		= $scope.consumerinfo.selected_complaintstatus.statusid;
+			    		  var selected_complaintpriority 	= $scope.consumerinfo.selected_complaintpriority.priorityid;
+			    		  var latitude 						= $scope.consumerinfo.latitude === null ? 0.0 : $scope.consumerinfo.latitude ;
+			    		  var longitude 					= $scope.consumerinfo.longitude === null ? 0.0 : $scope.consumerinfo.longitude; 
+			    		  var recsts						= $scope.current_record.recsts;
+			    		  var userid						= $rootScope.username;
+			    		  
+			    		  $http.get(RSURL+"/query/registercomplaint?" +
+			    		  		"mobilenumber="+mobilenumber+
+			    		  		"&accountnumber="+accountnumber+
+			    		  		"&rrnumber="+rrnumber+
+			    		  		"&consumername="+consumername+
+			    		  		"&emailid="+emailid+
+			    		  		"&consumeraddress="+consumeraddress+
+			    		  		"&consumerdescription="+consumerdescription+
+			    		  		"&subdivision="+selected_subdivision+
+			    		  		"&comaplintcategory="+selected_comaplintcategory+
+			    		  		"&omsection="+selected_omsection+
+			    		  		"&complaintsubcategory="+selected_complaintsubcategory+
+			    		  		"&assignedto="+selected_assignedto+
+			    		  		"&complaintmode="+selected_complaintmode+
+			    		  		"&complaintstatus="+selected_complaintstatus+
+			    		  		"&complaintpriority="+selected_complaintpriority+
+			    		  		"&latitude="+latitude+
+			    		  		"&longitude="+longitude+
+			    		  		"&recsts="+recsts+
+			    		  		"&qc_pkid="+qc_pkid+
+			    		  		"&userid="+userid
+			    		  	)
+	  				  		.then(function (data){
+	  				  			
+	  				  			console.log(data.data);
+	  				  			
+	  				  			if(data.data[0].sts === "success"){
+	  				  			  $scope.message = "Complaint Registered Successfully. \n Docket No : "+data.data[0].docketno ;
+	 			    			  $scope.warning = false;
+	  				  			}else{
+	   			    			  $scope.message = "Error occured while saving a complaint !!!";
+	 			    			  $scope.warning = true;
+	 			    		  }
+	  				  			
+	  				  		},function (data){
+	 				    	   
+	  				  		});
+			    		  
+                		
                 	};
                 	
-                	$rootScope.getquickcomplaints();
+                	if($scope.quick.quickstatus){
+                		$scope.getComplaintDetails($scope.quick.mobileno,$scope.quick.accountid);
+                	}else{
+                		
+                	}
                 });

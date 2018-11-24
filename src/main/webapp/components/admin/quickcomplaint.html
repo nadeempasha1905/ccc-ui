@@ -1,12 +1,53 @@
 
-
-
 <div class="row">
+<div class="col-md-12">
+	<div class="card mb-2 wow fadeIn">
+		<!--Card content-->
+		<div class="card-body d-sm-flex justify-content-between">
+					<table class="table table-sm table-bordered">
+					  <thead>
+					    <tr>
+					      <th scope="col">#</th>
+					      <th>Action</th>
+					      <th scope="col">Account Id</th>
+					      <th scope="col">Mobile No</th>
+					      <th scope="col">Category</th>
+					      <th scope="col">Sub-Category</th>
+					     <!--  <th scope="col">Assigned Status</th> -->
+					      <th scope="col">Date & Time</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <tr ng-repeat="q in QUICKCOMPLAINTS">
+					    	<td>{{$index+1}}</td>
+					    	<td><a class="btn-floating btn-sm blue-gradient" 
+					    			ng-click="gotoregistercomplaint(q.qc_mobile_number,q.qc_account_id,true)"
+					    		   >
+					    			<i class="fa fa-bolt"></i>
+					    		</a>
+					    	</td>
+					    	<td>
+					    		{{q.qc_account_id}}
+					    	</td>
+					    	<td>{{q.qc_mobile_number}}</td>
+					    	<td>{{q.categoryname}}</td>
+					    	<td>{{q.subcategoryname}}</td>
+					    	<!-- <td>{{q.qc_assigned_status}}</td> -->
+					    	<td>{{q.qc_requested_date}}</td>
+					    </tr>
+					  </tbody>
+					 </table>   
+			</div>
+		</div>
+		</div>
+</div>
+
+<!-- <div class="row">
 	<div class="col-md-3">
 		<div class="card mb-4">
-		<!-- Card header -->
+		Card header
 		<div class="card-header text-center h6">Quick Complaints</div>
-		<!--Card content-->
+		Card content
 			<div class="card-body" style="padding: .25rem;">
 				<div class="list-group">
 					<a target="" href=""  ng-click="getComplaintDetails(q.qc_mobile_number,q.qc_account_id)" 
@@ -26,9 +67,9 @@
 	
 	<div class="col-md-9">
 		<div class="card mb-4">
-		<!-- Card header -->
+		Card header
 		<div class="card-header h5">Consumer Registration</div>
-		<!--Card content-->
+		Card content
 				<div class="card-body">
 
 				<form role="form" name="quickcomplaint_consumerinfo"
@@ -47,7 +88,7 @@
 								    <span aria-hidden="true">&times;</span>
 								  </button>
 							</div>
-							<!-- <a class="btn btn-info btn-lg" id="alert-target" >Click me!</a> -->
+							<a class="btn btn-info btn-lg" id="alert-target" >Click me!</a>
 						</div>
 					</div>	
 					<div class="form-row">
@@ -203,4 +244,4 @@
   $("#alert-target").click(function () {
       toastr["success"]("I was launched via jQuery!")
   });
-  </script>
+  </script> -->
