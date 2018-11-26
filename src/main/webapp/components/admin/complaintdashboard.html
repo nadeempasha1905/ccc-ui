@@ -1,0 +1,120 @@
+<style>
+<!--
+
+table thead {
+	background-color: #d0d0d0;
+}
+table thead tr th {
+    font-size: 1.1 rem;
+    /* font-weight: 400; */
+    text-align: center;
+}
+
+table tbody tr td {
+    font-size: 1.1 rem;
+    /* font-weight: 400; */
+    text-align: center;
+}
+
+
+-->
+</style>
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="card mb-4">
+		<!-- Card header -->
+		<!-- <div class="card-header h5">Consumer Registration</div> -->
+		<!--Card content-->
+				<div class="card-body">
+					
+					<!-- <div class="row">
+						<div class="col-md-12">
+							<div style="text-align: center;">
+								<h2>Complaint Summary</h2>
+							</div>
+						</div>
+					</div> -->
+					
+					<div style="text-align: center;">
+								<h2>Complaint Summary</h2>
+							</div>
+					<hr>
+					
+					<div class="row">
+						<div class="col-md-3 mb-3"><small><strong>
+							<label for="complaintmode">Complaint Mode</label></strong>
+							 <select id="complaintmode" class="custom-select browser-default" 
+							    ng-options="c.modename for c in COMPLAINTMODELIST " 
+								ng-model="complaintdashboard.selected_complaintmode" 
+								required>
+								<option value="">--------Select--------- </option>
+							</select></small>
+						</div>
+						
+						<div class="col-md-3 mb-3">
+							<small>
+								<strong>
+									<label for="date-picker-example">From Date</label>
+								</strong>
+						  		<input placeholder="Selected from date" type="text" id="fromdate" class="form-control datepicker">
+						  	</small>
+						</div>
+						
+						<div class="col-md-3 mb-3">
+							<small>
+								<strong>
+									<label for="date-picker-example">To Date</label>
+								</strong>
+						  		<input placeholder="Selected to date" type="text" id="todate" class="form-control datepicker">
+						  	</small>
+						</div>
+						
+					</div>
+					<div class="col-md-12">
+						<div style="text-align: left;">
+							<a href="" ng-click="gotocomplaint()">Pending Complaints</a>
+							<table class="table table-bordered table-sm ">
+									  <thead>
+									    <tr>
+									      <th scope="col">Category</th>
+									      <th scope="col">Total Complaints</th>
+									      <th scope="col">Open</th>
+									      <th scope="col">Assigned</th>
+									      <th scope="col">In Progress</th>
+									      <th scope="col">Resolved</th>
+									      <th scope="col">Rejected</th>
+									      <th scope="col">Closed</th>
+									      <th scope="col">Re-Opened</th>
+									      <th scope="col">Escalated</th>
+									    </tr>
+									  </thead>
+									  <tbody>
+									  		<tr ng-repeat="s in COMPLAINTSUMMARYLIST">
+									  			<td>{{s.categoryname}}</td>
+									  			<td>{{s.total}}</td>
+									  			<td><a href="" ng-click="gotosummarylist('Open',s.categoryid,s.receivedstatus_id,0)">{{s.receivedcount}}</a></td>
+									  			<td><a href="" ng-click="gotosummarylist('Assigned',s.categoryid,s.assignedstatus_id,0)">{{s.assignedcount}}</a></td>
+									  			<td><a href="" ng-click="gotosummarylist('In Progress',s.categoryid,s.inprogressstatus_id,0)">{{s.inprogresscount}}</a></td>
+									  			<td><a href="" ng-click="gotosummarylist('Resolved',s.categoryid,s.resolvedstatus_id,0)">{{s.resolvedcount}}</a></td>
+									  			<td><a href="" ng-click="gotosummarylist('Rejected',s.categoryid,s.rejectedstatus_id,0)">{{s.rejectedcount}}</a></td>
+									  			<td><a href="" ng-click="gotosummarylist('Closed',s.categoryid,s.closedstatus_id,0)">{{s.closedcount}}</a></td>
+									  			<td><a href="" ng-click="gotosummarylist('Re-Open',s.categoryid,s.reopenedstatus_id,0)">{{s.reopenedcount}}</a></td>
+									  			<td><a href="" ng-click="gotosummarylist('Escalated',s.categoryid,s.escalatedstatus_id,0)">{{s.escalatedcount}}</a></td>
+									  		</tr>
+									  </tbody>
+								</table>
+						</div>
+					</div>
+			</div>
+		</div>
+</div>
+</div>
+
+
+<script type="text/javascript">
+//Data Picker Initialization
+$('.datepicker').pickadate({
+	formatSubmit: 'dd/mm/yyyy'
+});
+</script>

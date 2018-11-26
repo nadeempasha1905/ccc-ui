@@ -46,6 +46,18 @@ angular.module('CCCapp',['ngRoute','ngResource','ui.router','ngCookies','angular
             files: ['components/admin/registercomplaint.js'+'?v='+CACHEBUST_VERSION]    
         },
         {
+            name : 'updatedocket', 
+            files: ['components/admin/updatedocket.js'+'?v='+CACHEBUST_VERSION]    
+        },
+        {
+            name : 'summarylist', 
+            files: ['components/admin/summarylist.js'+'?v='+CACHEBUST_VERSION]    
+        },
+        {
+            name : 'complaintdashboard', 
+            files: ['components/admin/complaintdashboard.js'+'?v='+CACHEBUST_VERSION]    
+        },
+        {
             name : 'designation', 
             files: ['components/admin/config/designation.js'+'?v='+CACHEBUST_VERSION]
         },       
@@ -204,6 +216,65 @@ angular.module('CCCapp',['ngRoute','ngResource','ui.router','ngCookies','angular
               resolve: {
                   loadMyCtrl: ['$ocLazyLoad','$cookies','$state', function($ocLazyLoad,$cookies,$state) {                  
                       return $ocLazyLoad.load('registercomplaint'); // Resolve promise and load before view 
+                  }]
+              } 
+                                
+        })
+        .state('admin.updatedocket', {
+            url: '/updatedocket',
+            params:{
+            	location_code:null,
+            	docketno:null,
+            	docketdate:null,
+            	subcategoryid:null,
+            	statusname:null
+            },
+            views:{
+          	  "admin": {  
+          		 controller:'updatedocketCtrl',  
+	    		 templateUrl: 'components/admin/updatedocket.html'		    		 
+	           }		           
+              },
+              resolve: {
+                  loadMyCtrl: ['$ocLazyLoad','$cookies','$state', function($ocLazyLoad,$cookies,$state) {                  
+                      return $ocLazyLoad.load('updatedocket'); // Resolve promise and load before view 
+                  }]
+              } 
+                                
+        })
+        .state('admin.summarylist', {
+            url: '/summarylist',
+            params:{
+            	location : null,
+            	categoryid:null,
+            	statusid:null,
+            	modeid:null,
+            	statusname:null
+            },
+            views:{
+          	  "admin": {  
+          		 controller:'summarylistCtrl',  
+	    		 templateUrl: 'components/admin/summarylist.html'		    		 
+	           }		           
+              },
+              resolve: {
+                  loadMyCtrl: ['$ocLazyLoad','$cookies','$state', function($ocLazyLoad,$cookies,$state) {                  
+                      return $ocLazyLoad.load('summarylist'); // Resolve promise and load before view 
+                  }]
+              } 
+                                
+        })
+         .state('admin.complaintdashboard', {
+            url: '/complaintdashboard',
+            views:{
+          	  "admin": {  
+          		 controller:'complaintdashboardCtrl',  
+	    		 templateUrl: 'components/admin/complaintdashboard.html'		    		 
+	           }		           
+              },
+              resolve: {
+                  loadMyCtrl: ['$ocLazyLoad','$cookies','$state', function($ocLazyLoad,$cookies,$state) {                  
+                      return $ocLazyLoad.load('complaintdashboard'); // Resolve promise and load before view 
                   }]
               } 
                                 

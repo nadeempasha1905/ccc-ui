@@ -1,0 +1,398 @@
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="card mb-4">
+		<!-- Card header -->
+		<!-- <div class="card-header h5">Update Docket :- 1234567890</div> -->
+		<!--Card content-->
+				<div class="card-body">
+				
+				<!-- <div style="text-align: center;">
+								<h2>Update Docket :- 1234567890</h2>
+							</div>
+					<hr> -->
+					
+				<div class="row">
+					<div class="col-md-6">
+						<h4>Update Docket : {{updatedocket.docketno}}</h4>
+						<h6>Current Status :{{updatedocket.statusname}}</h6>
+						<h6>Last updated :{{updatedocket.docketdate}}</h6>
+						<hr/>
+						
+						<!-- <div class="col-md-12 mb-3"><small><strong>
+							<label for="complaintsubcategory">Sub-Category<span style="color: red;">*</span></label></strong>
+							<select id="complaintsubcategory"
+								class="custom-select browser-default" 
+								ng-options="c.subcategoryname for c in SUBCATEGORYLIST " 
+								ng-model="updatedocket.selected_complaintsubcategory" 
+								required>
+								<option value="">--------Select--------- </option>
+							</select></small>
+						</div> -->
+						<div class="col-md-12 mb-3"><small><strong>
+							<label for="complaintupdates">Updates<span style="color: red;">*</span></label></strong>
+							<select id="complaintupdates"
+								class="custom-select browser-default" 
+								ng-options="c.cu_name for c in UPDATESLIST " 
+								ng-model="updatedocket.selected_complaintupdates" 
+								required>
+								<option value="">--------Select--------- </option>
+							</select></small>
+						</div>
+						<div class="col-md-12 mb-3"><small><strong>
+							<label for="complaintstatus">Status<span style="color: red;">*</span></label></strong>
+							 <select id="complaintstatus" class="custom-select browser-default" 
+							    ng-options="c.statusname for c in COMPLAINTSTATUSLIST " 
+							    ng-model="updatedocket.selected_complaintstatus" 
+								required>
+								<option value="">--------Select--------- </option>
+							</select></small>
+						</div>
+						<div class="col-md-12 mb-2"><small><strong>
+							<label for="consumerdescription">Comments<span style="color: red;">*</span></label></strong>
+							<textarea type="text" class="form-control"
+								id="consumerdescription" placeholder=""
+								value="" ng-model="updatedocket.consumerdescription" rows="3" 
+								required> </textarea></small>
+						</div>
+						
+						<table>
+							<tr>
+								<td>Current status:</td><td></td>
+								
+							</tr>
+						</table>
+					
+				</div>
+				
+				<div class="col-md-6">
+				
+					<!-- Section: Social newsfeed v.2 -->
+<!-- <section class="my-5"> -->
+
+  <!-- Grid row -->
+  <div class="row">
+
+    <!-- Grid column -->
+    <div class="col-lg-12">
+
+		<h5>Recent comments:</h5>
+		<hr>
+
+      <!-- Newsfeed -->
+      <div class="mdb-feed">
+
+        <!-- First news -->
+        <div class="news">
+
+          <!-- Label -->
+          <div class="label">
+            <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-1-mini.jpg" class="rounded-circle z-depth-1-half">
+          </div>
+
+          <!-- Excerpt -->
+          <div class="excerpt">
+
+            <!-- Brief -->
+            <div class="brief">
+              <a class="name">John Doe</a> added you as a friend
+              <div class="date">1 hour ago</div>
+            </div>
+
+            <!-- Feed footer -->
+            <div class="feed-footer">
+              <a class="comment" data-toggle="collapse" href="#collapseExample-1" aria-expanded="false"
+                aria-controls="collapseExample-1">Comment</a> &middot;
+              <span>
+                <a>7</a>
+              </span>
+              <a class="thumbs" data-toggle="tooltip" data-placement="top" title="I like it">
+                <i class="fa fa-thumbs-up"></i>
+              </a>
+              <a class="thumbs" data-toggle="tooltip" data-placement="top" title="I don't like it">
+                <i class="fa fa-thumbs-down"></i>
+              </a>
+              <div class="collapse" id="collapseExample-1">
+                <div class="card card-body mt-1">
+
+                  <!-- Add comment -->
+                  <div class="md-form mt-1 mb-1">
+                    <textarea type="text" id="form7" class="form-control md-textarea" rows="3"></textarea>
+                    <label for="form7">Add comment</label>
+                  </div>
+                  <div class="d-flex justify-content-end">
+                    <button type="button" class="btn btn-flat waves-effect" data-toggle="collapse" data-target="#collapseExample-1"
+                      aria-expanded="false" aria-controls="collapseExample-1">Cancel</button>
+                    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#collapseExample-1"
+                      aria-expanded="false" aria-controls="collapseExample-1">Reply</button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <!-- Feed footer -->
+
+          </div>
+          <!-- Excerpt -->
+
+        </div>
+        <!-- First news -->
+
+        <!-- Second news -->
+        <div class="news">
+
+          <!-- Label -->
+          <div class="label">
+            <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(17)-mini.jpg" class="rounded-circle z-depth-1-half">
+          </div>
+
+          <!-- Excerpt -->
+          <div class="excerpt">
+
+            <!-- Brief -->
+            <div class="brief">
+              <a class="name">Anna Smith</a> added
+              <a> 2 new illustrations</a>
+              <div class="date">4 hours ago</div>
+            </div>
+
+            <!-- Added images -->
+            <div class="added-images">
+              <img src="https://mdbootstrap.com/img/Photos/Others/images/50.jpg" class="z-depth-1 rounded mb-md-0 mb-2">
+              <img src="https://mdbootstrap.com/img/Photos/Others/images/52.jpg" class="z-depth-1 rounded">
+            </div>
+
+            <!-- Feed footer -->
+            <div class="feed-footer">
+              <a class="comment" data-toggle="collapse" href="#collapseExample-2" aria-expanded="false"
+                aria-controls="collapseExample-2">Comment</a> &middot;
+              <span>
+                <a>31</a>
+              </span>
+              <a class="thumbs" data-toggle="tooltip" data-placement="top" title="I like it">
+                <i class="fa fa-thumbs-up"></i>
+              </a>
+              <a class="thumbs" data-toggle="tooltip" data-placement="top" title="I don't like it">
+                <i class="fa fa-thumbs-down"></i>
+              </a>
+              <div class="collapse" id="collapseExample-2">
+                <div class="card card-body mt-1">
+
+                  <!-- Add comment -->
+                  <div class="md-form mt-1 mb-1">
+                    <textarea type="text" id="form7" class="form-control md-textarea" rows="3"></textarea>
+                    <label for="form7">Add comment</label>
+                  </div>
+                  <div class="d-flex justify-content-end">
+                    <button type="button" class="btn btn-flat waves-effect" data-toggle="collapse" data-target="#collapseExample-2"
+                      aria-expanded="false" aria-controls="collapseExample-2">Cancel</button>
+                    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#collapseExample-2"
+                      aria-expanded="false" aria-controls="collapseExample-2">Reply</button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <!-- Feed footer -->
+
+          </div>
+          <!-- Excerpt -->
+
+        </div>
+        <!-- Second news -->
+
+        <!-- Third news -->
+        <div class="news">
+
+          <!-- Label -->
+          <div class="label">
+            <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(9)-mini.jpg" class="rounded-circle z-depth-1-half">
+          </div>
+
+          <!-- Excerpt -->
+          <div class="excerpt">
+
+            <!-- Brief -->
+            <div class="brief">
+              <a class="name">Danny Moore</a> added you as a friend
+              <div class="date">7 hours ago</div>
+            </div>
+
+            <!-- Feed footer -->
+            <div class="feed-footer">
+              <a class="comment" data-toggle="collapse" href="#collapseExample-3" aria-expanded="false"
+                aria-controls="collapseExample-3">Comment</a> &middot;
+              <span>
+                <a>12</a>
+              </span>
+              <a class="thumbs" data-toggle="tooltip" data-placement="top" title="I like it">
+                <i class="fa fa-thumbs-up"></i>
+              </a>
+              <a class="thumbs" data-toggle="tooltip" data-placement="top" title="I don't like it">
+                <i class="fa fa-thumbs-down"></i>
+              </a>
+              <div class="collapse" id="collapseExample-3">
+                <div class="card card-body mt-1">
+
+                  <!-- Add comment -->
+                  <div class="md-form mt-1 mb-1">
+                    <textarea type="text" id="form7" class="form-control md-textarea" rows="3"></textarea>
+                    <label for="form7">Add comment</label>
+                  </div>
+                  <div class="d-flex justify-content-end">
+                    <button type="button" class="btn btn-flat waves-effect" data-toggle="collapse" data-target="#collapseExample-3"
+                      aria-expanded="false" aria-controls="collapseExample-3">Cancel</button>
+                    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#collapseExample-3"
+                      aria-expanded="false" aria-controls="collapseExample-3">Reply</button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <!-- Feed footer -->
+
+          </div>
+
+        </div>
+        <!-- Third news -->
+
+        <!-- Fourth news -->
+        <div class="news">
+
+          <!-- Label -->
+          <div class="label">
+            <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(18)-mini.jpg" class="rounded-circle z-depth-1-half">
+          </div>
+
+          <!-- Excerpt -->
+          <div class="excerpt">
+            <!-- Brief -->
+            <div class="brief">
+              <a class="name">Lili Rose</a> posted on his page
+              <div class="date">2 days ago</div>
+            </div>
+            <!-- Added text -->
+            <div class="added-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero inventore,
+              iste quas libero eius? Vitae sint neque animi alias sunt dolor, accusantium ducimus, non placeat
+              voluptate.</div>
+            <!-- Feed footer -->
+            <div class="feed-footer">
+              <a class="comment" data-toggle="collapse" href="#collapseExample-4" aria-expanded="false"
+                aria-controls="collapseExample-4">Comment</a> &middot;
+              <span>
+                <a>25</a>
+              </span>
+              <a class="thumbs" data-toggle="tooltip" data-placement="top" title="I like it">
+                <i class="fa fa-thumbs-up"></i>
+              </a>
+              <a class="thumbs" data-toggle="tooltip" data-placement="top" title="I don't like it">
+                <i class="fa fa-thumbs-down"></i>
+              </a>
+              <div class="collapse" id="collapseExample-4">
+                <div class="card card-body mt-1">
+                  <!-- Add comment -->
+                  <div class="md-form mt-1 mb-1">
+                    <textarea type="text" id="form7" class="form-control md-textarea" rows="3"></textarea>
+                    <label for="form7">Add comment</label>
+                  </div>
+                  <div class="d-flex justify-content-end">
+                    <button type="button" class="btn btn-flat waves-effect" data-toggle="collapse" data-target="#collapseExample-4"
+                      aria-expanded="false" aria-controls="collapseExample-4">Cancel</button>
+                    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#collapseExample-4"
+                      aria-expanded="false" aria-controls="collapseExample-4">Reply</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- Fourth news -->
+
+        <!-- Fifth news -->
+        <div class="news">
+
+          <!-- Label -->
+          <div class="label">
+            <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(20)-mini.jpg" class="rounded-circle z-depth-1-half">
+          </div>
+
+          <!-- Excerpt -->
+          <div class="excerpt mb-0">
+
+            <!-- Brief -->
+            <div class="brief">
+              <a class="name">Kate Harrison</a> added
+              <a> 2 new photos</a> of you
+              <div class="date">3 days ago</div>
+            </div>
+
+            <!-- Added images -->
+            <div class="added-images">
+              <img src="https://mdbootstrap.com/img/Photos/Others/images/81.jpg" class="z-depth-1 rounded mb-md-0 mb-2">
+              <img src="https://mdbootstrap.com/img/Photos/Others/images/86.jpg" class="z-depth-1 rounded">
+            </div>
+
+            <!-- Feed footer -->
+            <div class="feed-footer">
+              <a class="comment" data-toggle="collapse" href="#collapseExample-5" aria-expanded="false"
+                aria-controls="collapseExample-5">Comment</a> &middot;
+              <span>
+                <a>47</a>
+              </span>
+              <a class="thumbs" data-toggle="tooltip" data-placement="top" title="I like it">
+                <i class="fa fa-thumbs-up"></i>
+              </a>
+              <a class="thumbs" data-toggle="tooltip" data-placement="top" title="I don't like it">
+                <i class="fa fa-thumbs-down"></i>
+              </a>
+              <div class="collapse" id="collapseExample-5">
+                <div class="card card-body mt-1">
+
+                  <!-- Add comment -->
+                  <div class="md-form mt-1 mb-1">
+                    <textarea type="text" id="form7" class="form-control md-textarea" rows="3"></textarea>
+                    <label for="form7">Add comment</label>
+                  </div>
+                  <div class="d-flex justify-content-end">
+                    <button type="button" class="btn btn-flat waves-effect" data-toggle="collapse" data-target="#collapseExample-5"
+                      aria-expanded="false" aria-controls="collapseExample-5">Cancel</button>
+                    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#collapseExample-5"
+                      aria-expanded="false" aria-controls="collapseExample-5">Reply</button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <!-- Feed footer -->
+
+          </div>
+          <!-- Excerpt -->
+
+        </div>
+        <!-- Fifth news -->
+
+      </div>
+      <!-- Newsfeed -->
+
+    </div>
+    <!-- Grid column -->
+
+  </div>
+  <!-- Grid row -->
+
+<!-- </section> -->
+<!-- Section: Social newsfeed v.2 -->
+					
+					
+				</div>
+				</div>	
+				
+				
+				
+
+
+</div>
+</div>
+</div>
+</div>

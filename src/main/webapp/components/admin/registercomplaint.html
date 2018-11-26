@@ -1,7 +1,23 @@
 
 
+<style type="text/css">
+	.modal-lg {
+		max-width: 90%;
+	}
+<!--
+
+table thead {
+	background-color: #d0d0d0;
+}
+table thead tr th {
+    font-size: 1.1 rem;
+    /* font-weight: 400; */
+    text-align: center;
+}
 
 
+-->
+</style>
 
 
 
@@ -9,14 +25,34 @@
 	<div class="col-md-12">
 		<div class="card mb-4">
 		<!-- Card header -->
-		<div class="card-header h5">Consumer Registration</div>
+		<!-- <div class="card-header h5">Consumer Registration</div> -->
 		<!--Card content-->
 				<div class="card-body">
+				
+				<div style="text-align: center;">
+								<h2>Docket Registration</h2>
+							</div>
+					<hr>
 
-				<form role="form" name="quickcomplaint_consumerinfo"
-					class="validated">
+				<!-- <form role="form" name="quickcomplaint_consumerinfo"
+					class="validated"> -->
+				<form role="form" class="was-validated" name="quickcomplaint_consumerinfo">
 					<div class="form-row">
-						<div class="col-md-12 mb-2" ng-show="warning != null">
+						<div class="col-md-6 mb-2">
+							<div class="form-row" style="border: 1px;border-color: gray;border-radius:2px;">
+								<div class="col-md-1">
+									<span class="small"><u><strong>Note:</strong></u></span>
+								</div>
+								<div class="col-md-10">
+								
+									<ul>
+										<li><span class="small" style="color: red;">*</span>&nbsp;<span>Marked fields are mandatory.</span></li>
+										<li>You can search consumer deatils by mobile number or account id</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6 mb-2" ng-show="warning != null">
 							<div class="alert alert-warning alert-dismissible fade show" role="alert" ng-show="warning">
 								<a href="#" class="alert-link">{{message}}</a>
 								 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -39,43 +75,52 @@
 							  <div class="card-header">Consumer Details</div>
 								  <div class="card-body">
 										<div class="col-md-12 mb-2"><small><strong>
-											<label for="mobilenumber">Mobile Number</label></strong> <input
+											<label for="mobilenumber">Mobile Number<span style="color: red;">*</span></label></strong> <input
 												type="text" class="form-control" id="mobilenumber"
-												placeholder="" value=""
+												placeholder="Type & press enter" value=""
 												ng-model="consumerinfo.mobilenumber"
 												ng-disabled="quick.quickstatus" 
+												my-enter="searchconsumerdetails()"
 												 required></small>
 										</div>
 										<div class="col-md-12 mb-2"><small><strong>
-											<label for="accountnumber">Account Number</label></strong> <input
+											<label for="accountnumber">Account Number<span style="color: red;">*</span></label></strong> <input
 												type="text" class="form-control" id="accountnumber"
-												placeholder="" value=""
+												placeholder="Type & press enter" value=""
 												ng-model="consumerinfo.accountnumber" 
 												ng-disabled="quick.quickstatus" 
+												my-enter="searchconsumerdetails()"
 												required></small>
 										</div>
 										<div class="col-md-12 mb-2"><small><strong>
-											<label for="rrnumber">RR Number</label> </strong><input type="text"
+											<label for="rrnumber">RR Number<span style="color: red;">*</span></label> </strong><input type="text"
 												class="form-control" id="rrnumber" placeholder=""
-												value="" ng-model="consumerinfo.rrnumber" required></small>
+												value="" ng-model="consumerinfo.rrnumber" 
+												ng-disabled="recordfound == null ? true : false" 
+												required></small>
 										</div>
 										<div class="col-md-12 mb-2"><small><strong>
-											<label for="consumername">Consumer Name</label> </strong><input
+											<label for="consumername">Consumer Name<span style="color: red;">*</span></label> </strong><input
 												type="text" class="form-control" id="consumername"
 												placeholder="" value=""
-												ng-model="consumerinfo.consumername" required></small>
+												ng-model="consumerinfo.consumername" 
+												ng-disabled="recordfound == null ? true : false" 
+												required></small>
 										</div>
 										<div class="col-md-12 mb-2"><small><strong>
-											<label for="consumeraddress">Consumer Address</label></strong>
+											<label for="consumeraddress">Consumer Address<span style="color: red;">*</span></label></strong>
 											<textarea type="text" class="form-control" id="consumeraddress"
 												placeholder="" value=""
-												ng-model="consumerinfo.consumeraddress" rows="3" required> </textarea></small>
+												ng-model="consumerinfo.consumeraddress" rows="3" 
+												ng-disabled="recordfound == null ? true : false" 
+												required> </textarea></small>
 										</div>
 										<div class="col-md-12 mb-2"><small><strong>
 											<label for="emailid">E-mail ID</label> </strong>
 											<input
 												type="text" class="form-control" id="emailid"
-												placeholder="" value=""
+												placeholder="" value="" 
+												ng-disabled="recordfound == null ? true : false" 
 												ng-model="consumerinfo.emailid"></small>
 										</div>
 								  </div>
@@ -87,40 +132,48 @@
 							  <div class="card-header">Complaint Details</div>
 								  <div class="card-body">
 								  	<div class="col-md-12 mb-3"><small><strong>
-										<label for="comaplintcategory">Complaint Category</label></strong>
+										<label for="comaplintcategory">Complaint Category<span style="color: red;">*</span></label></strong>
 										 <select
 											id="comaplintcategory" class="custom-select browser-default"
 											ng-options="c.categoryname for c in CATEGORYLIST | orderBy:'categoryid'" 
 								      		ng-change="loadsubcategory(0)" 
-											ng-model="consumerinfo.selected_comaplintcategory" required>
+											ng-model="consumerinfo.selected_comaplintcategory" 
+											ng-disabled="recordfound == null ? true : false" 
+											required>
 											<option value="">--------Select--------- </option>
 										</select></small>
 									</div>
 									<div class="col-md-12 mb-3"><small><strong>
-										<label for="complaintsubcategory">Complaint Sub-Category</label></strong>
+										<label for="complaintsubcategory">Complaint Sub-Category<span style="color: red;">*</span></label></strong>
 										<select id="complaintsubcategory"
 											class="custom-select browser-default" 
 											ng-options="c.subcategoryname for c in SUBCATEGORYLIST " 
-											ng-model="consumerinfo.selected_complaintsubcategory" required>
+											ng-model="consumerinfo.selected_complaintsubcategory" 
+											ng-disabled="recordfound == null ? true : false"  
+											required>
 											<option value="">--------Select--------- </option>
 										</select></small>
 									</div>
 									<div class="col-md-12 mb-2"><small><strong>
-										<label for="consumerdescription">Complaint Description</label></strong>
+										<label for="consumerdescription">Complaint Description<span style="color: red;">*</span></label></strong>
 										<textarea type="text" class="form-control"
 											id="consumerdescription" placeholder=""
-											value="" ng-model="consumerinfo.consumerdescription" rows="3" required> </textarea></small>
+											value="" ng-model="consumerinfo.consumerdescription" rows="3" 
+											ng-disabled="recordfound == null ? true : false" 
+											required> </textarea></small>
 									</div>
 									<div class="col-md-12 mb-3"><small><strong>
-										<label for="complaintpriority">Complaint Priority</label></strong>
+										<label for="complaintpriority">Complaint Priority<span style="color: red;">*</span></label></strong>
 										 <select id="complaintpriority" class="custom-select browser-default" 
 										    ng-options="c.priorityname for c in COMPLAINTPRIORITYLIST " 
-											ng-model="consumerinfo.selected_complaintpriority" required>
+											ng-model="consumerinfo.selected_complaintpriority" 
+											ng-disabled="recordfound == null ? true : false" 
+											required>
 											<option value="">-------Select--------</option>
 										</select></small>
 									</div>
 									<div class="col-md-12 mb-3"><small><strong>
-										<label for="complaintstatus">Complaint Status</label></strong>
+										<label for="complaintstatus">Complaint Status<span style="color: red;">*</span></label></strong>
 										 <select id="complaintstatus" class="custom-select browser-default" 
 										    ng-options="c.statusname for c in COMPLAINTSTATUSLIST " 
 											ng-model="consumerinfo.selected_complaintstatus" ng-disabled="true" required>
@@ -136,46 +189,121 @@
 							  <div class="card-header">Office Details</div>
 								  <div class="card-body">
 									  <div class="col-md-12 mb-3"><small><strong>
-										<label for="subdivision">Sub Division</label></strong> <select
+										<label for="subdivision">Sub Division<span style="color: red;">*</span></label></strong> <select
 											id="subdivision" class="custom-select browser-default"
 											ng-options="c.ld_name for c in SUBDIVISIONLIST | orderBy:'ld_name'" 
 											ng-change="getomsectionlist(0);getofficersdetails()" 
+											ng-disabled="recordfound == null ? true : false" 
 											ng-model="consumerinfo.selected_subdivision" required>
 											<option value="">--------Select--------- </option>
 										</select></small>
 									</div>
 									<div class="col-md-12 mb-3"><small><strong>
-										<label for="omsection">O&M Section</label></strong> <select id="omsection"
+										<label for="omsection">O&M Section<span style="color: red;">*</span></label></strong> <select id="omsection"
 											class="custom-select browser-default" 
 											ng-options="c.ld_name for c in OMSECTIONLIST | orderBy:'ld_name'"     
-											 ng-model="consumerinfo.selected_omsection" required>
+											 ng-model="consumerinfo.selected_omsection" 
+											 ng-disabled="recordfound == null ? true : false" 
+											 required>
 											<option value="">--------Select--------- </option>
 										</select></small>
 									</div>
 									<div class="col-md-12 mb-3"><small><strong>
-										<label for="assignedto">Assigned To</label></strong>
+										<label for="assignedto">Assigned To<span style="color: red;">*</span></label></strong>
 										 <select id="assignedto" class="custom-select browser-default" 
 										    ng-options="c.od_address for c in OFFICERDETAILLIST " 
-											ng-model="consumerinfo.selected_assignedto" required>
+											ng-model="consumerinfo.selected_assignedto" 
+											ng-disabled="recordfound == null ? true : false" 
+											required>
 											<option value="">--------Select--------- </option>
 										</select></small>
 									</div>
 									<div class="col-md-12 mb-3"><small><strong>
-										<label for="complaintmode">Complaint Mode</label></strong>
+										<label for="complaintmode">Complaint Mode<span style="color: red;">*</span></label></strong>
 										 <select id="complaintmode" class="custom-select browser-default" 
 										    ng-options="c.modename for c in COMPLAINTMODELIST " 
-											ng-model="consumerinfo.selected_complaintmode" required>
+											ng-model="consumerinfo.selected_complaintmode" 
+											ng-disabled="recordfound == null ? true : false" 
+											required>
 											<option value="">--------Select--------- </option>
 										</select></small>
 									</div>
 								  </div>
 							</div>
+							
+							<button class="btn btn-md btn-success" type="submit" ng-click="save()"
+									ng-disabled="quickcomplaint_consumerinfo.$invalid">Register Complaint</button>
+									
+									<button class="btn btn-md btn-primary" type="button" ng-click="resetform()"
+									ng-disabled="">Reset</button>
+							
 						</div>
 						
 						
 					</div>	
 					
 					
+					
+					<!-- Central Modal Small -->
+					<div class="modal fade" id="searchdetailmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					
+					    <!-- Change class .modal-sm to change the size of the modal -->
+					    <div class="modal-dialog modal-lg" role="document">
+					
+					
+					      <div class="modal-content">
+					        <div class="modal-header">
+					          <h4 class="modal-title w-100" id="myModalLabel">Search List</h4>
+					          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					            <span aria-hidden="true">&times;</span>
+					          </button>
+					        </div>
+					        <div class="modal-body">
+								<table class="table table-bordered table-sm ">
+									  <thead>
+									    <tr>
+									      <th scope="col">#</th>
+									      <th scope="col">Mobile Number</th>
+									      <th scope="col">Account Number</th>
+									      <th scope="col">RR Number</th>
+									      <th scope="col">Consumer Name</th>
+									      <th scope="col">Address</th>
+									    </tr>
+									  </thead>
+									  <tbody>
+									  		<tr ng-repeat="s in searchlist | orderBy:'cm_consumer_name'">
+									  			<td><button class="btn btn-sm btn-warning" ng-click=fillsearchdetails(s,true)>Select</button></td>
+									  			<td>{{s.cm_mobile_number}}</td>
+									  			<td>{{s.cm_account_id}}</td>
+									  			<td>{{s.cm_rr_number}}</td>
+									  			<td>{{s.cm_consumer_name}}</td>
+									  			<td>{{s.cm_address}}</td>
+									  		</tr>
+									  </tbody>
+								</table>
+							
+					        </div>
+					       <!--  <div class="modal-footer">
+					          <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+					          <button type="button" class="btn btn-primary btn-sm">Save changes</button>
+					        </div> -->
+					      </div>
+					    </div>
+					  </div>
+					  <!-- Central Modal Small -->
+					  
+					  </form>
+			</div>
+		</div>
+	</div>
+</div>
+  <script>
+
+  $("#alert-target").click(function () {
+      toastr["success"]("I was launched via jQuery!")
+  });
+  </script>
+					  
 					
 					
 					<!-- <div class="form-row">
@@ -323,16 +451,6 @@
 					
 					
 
-					<button class="btn btn-md btn-indigo" type="submit" ng-click="save()"
-						ng-disabled="frm.$invalid">Register</button>
-				</form>
-			</div>
-		</div>
-	</div>
-</div>
-  <script>
-
-  $("#alert-target").click(function () {
-      toastr["success"]("I was launched via jQuery!")
-  });
-  </script>
+					<!-- <button class="btn btn-md btn-indigo" type="submit" ng-click="save()"
+						ng-disabled="frm.$invalid">Register</button> -->
+				

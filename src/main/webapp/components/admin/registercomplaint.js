@@ -225,6 +225,9 @@ angular
  			    			  $scope.message = "Consumer Details Not Found !!!";
  			    			  $scope.warning = true;
  			    		  }
+ 			    		  
+ 			    		 $scope.recordfound = false; //to enable fields
+ 			    		 
  			    	   },function (data){
  			    	   });
                 	}; 
@@ -277,23 +280,133 @@ angular
 			    		  		"&userid="+userid
 			    		  	)
 	  				  		.then(function (data){
-	  				  			
 	  				  			console.log(data.data);
-	  				  			
 	  				  			if(data.data[0].sts === "success"){
 	  				  			  $scope.message = "Complaint Registered Successfully. \n Docket No : "+data.data[0].docketno ;
 	 			    			  $scope.warning = false;
+	 			    			  
+	 			    			  $scope.consumerinfo = {} ;
+	 			    			  $scope.current_record = {};
+	 			    			  
 	  				  			}else{
 	   			    			  $scope.message = "Error occured while saving a complaint !!!";
 	 			    			  $scope.warning = true;
 	 			    		  }
-	  				  			
 	  				  		},function (data){
-	 				    	   
 	  				  		});
-			    		  
+                	};
+                	
+                	$scope.recordfound = null;
+                	$scope.searchconsumerdetails = function(){
+                		
+            		    var mobilenumber 				= $scope.consumerinfo.mobilenumber === undefined || $scope.consumerinfo.mobilenumber === null? '' : $scope.consumerinfo.mobilenumber ;
+               		    var accountnumber 				= $scope.consumerinfo.accountnumber === undefined || $scope.consumerinfo.accountnumber === null? '' : $scope.consumerinfo.accountnumber;
+                		
+                		$scope.current_record = null;
+                 		$scope.message = null;
+                 		$scope.error = null;
+                 		$scope.warning = null;
+                 		
+                 		$http.get(RSURL+"/query/searchconsumerdetails?mobileno="+mobilenumber+"&accountid="+accountnumber)
+   				  		.then(function (data){
+  			    		  console.log(data.data);	
+  			    		  
+  			    		  if(data.data.length === 0){
+  			    			  $scope.message = "Consumer Details Not Found !!!";
+  			    			  $scope.warning = true;
+  			    			  console.log("Record Not found");
+  			    			  $scope.recordfound = false;
+  			    			  return;
+  			    		  }else{
+  			    			$scope.recordfound = null;
+  			    		  }
+  			    		  
+  			    		 $scope.current_record = null;
+  			    		 $scope.searchlist = data.data;
+  			    		  
+  			    		  if($scope.searchlist.length > 1){
+  			    			  $scope.searchrecord = false;
+  			    			  //open modal to select 
+  			    			  $('#searchdetailmodal').modal('toggle');
+  			    		  }else{
+  			    			$scope.searchrecord = false;
+  			    			$scope.fillsearchdetails(data.data[0],false)
+  			    		  }
+  			    	   },function (data){
+  			    	   });
+                	};
+                	
+                	$scope.searchrecord = false;
+                	$scope.fillsearchdetails = function(object,status){
+                		
+                			$scope.searchrecord = true;
+                			 $scope.recordfound = false;
+                		
+                		  $scope.current_record = object;
+                		
+  			    		  $scope.consumerinfo.qc_pkid						= $scope.current_record.cm_pkid;
+  			    		  $scope.consumerinfo.mobilenumber  				= $scope.current_record.cm_mobile_number;
+  			    		  $scope.consumerinfo.accountnumber 				= $scope.current_record.cm_account_id;
+  			    		  $scope.consumerinfo.rrnumber      				= $scope.current_record.cm_rr_number;
+  			    		  $scope.consumerinfo.consumername     				= $scope.current_record.cm_consumer_name;
+  			    		  $scope.consumerinfo.emailid   					= $scope.current_record.cm_email_id;	
+  			    		  $scope.consumerinfo.consumeraddress 				= $scope.current_record.cm_address;
+  			    		  $scope.consumerinfo.consumerdescription 			= '';
+  			    		  $scope.consumerinfo.selected_subdivision 			= $filter('filter')($scope.SUBDIVISIONLIST,{ld_code:$scope.current_record.cm_location_code},true)[0];
+  			    		  $scope.consumerinfo.selected_comaplintcategory 	= $filter('filter')($scope.CATEGORYLIST,{categoryid:$scope.current_record.qc_complaint_category},true)[0];
+
+  			    		  $scope.getofficersdetails($scope.current_record.cm_section_code);
+  			    		  $scope.getomsectionlist($scope.current_record.cm_section_code);
+  			    		  $scope.loadsubcategory($scope.current_record.qc_complaint_subcategory);
+  			    		 
+  			    		  $scope.consumerinfo.selected_complaintmode 		= $filter('filter')($scope.COMPLAINTMODELIST,{modeid:2},true)[0];
+  			    		  $scope.consumerinfo.selected_complaintstatus 		= $filter('filter')($scope.COMPLAINTSTATUSLIST,{statusid:1},true)[0];
+  			    		  $scope.consumerinfo.selected_complaintpriority    = $filter('filter')($scope.COMPLAINTPRIORITYLIST,{priorityid:1},true)[0];
+  			    		  
+  			    		  $scope.consumerinfo.latitude  					= $scope.current_record.cm_lattitude;
+  			    		  $scope.consumerinfo.longitude  					= $scope.current_record.cm_longitude;
+  			    		  if($scope.current_record.recsts === true){
+  			    			  $scope.message = "Consumer Details Found !!!" ;
+  			    			  $scope.warning = false;
+  			    		  }else{
+  			    			  $scope.message = "Consumer Details Not Found !!!";
+  			    			  $scope.warning = true;
+  			    		  }
+  			    		  
+  			    		  if(status)
+  			    			  $('#searchdetailmodal').modal('toggle');
                 		
                 	};
+                	
+                	$scope.resetform = function(){
+                		
+                		  $scope.consumerinfo.qc_pkid							= null;
+			    		  $scope.consumerinfo.mobilenumber  				= null;
+			    		  $scope.consumerinfo.accountnumber 				= null;
+			    		  $scope.consumerinfo.rrnumber      				= null;
+			    		  $scope.consumerinfo.consumername     				= null;
+			    		  $scope.consumerinfo.emailid   					= null;	
+			    		  $scope.consumerinfo.consumeraddress 				= null;
+			    		  $scope.consumerinfo.consumerdescription 			= null;
+			    		  $scope.consumerinfo.latitude  					= null;
+			    		  $scope.consumerinfo.longitude  					= null;
+			    		  $scope.getsubdivisionlist();
+		                  $scope.loadcategory();
+   	                	  $scope.loadcomplaintmodes();
+		                  $scope.loadcomplaintpriority();
+		                  $scope.loadcomplaintstatus();
+		                  $scope.getomsectionlist(0);
+		                  $scope.getofficersdetails();
+		                  
+		                  $scope.searchrecord = false;
+		                  $scope.warning = null;
+		                  $scope.recordfound = null;
+		                  
+		                  $scope.quickcomplaint_consumerinfo.$setPristine();
+                		
+                	};
+                	
+                	
                 	
                 	if($scope.quick.quickstatus){
                 		$scope.getComplaintDetails($scope.quick.mobileno,$scope.quick.accountid);

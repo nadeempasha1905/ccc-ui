@@ -157,4 +157,18 @@ factory('CADRE',['$resource','RSURL',function($resource,RSURL) {
 		$('#notification').html(content);
 		$('#notification').fadeIn( 800 ).delay( 2000 ).fadeOut( 800 );
 	}
-}]);
+}])
+
+.directive('myEnter', function () {
+    return function (scope, element, attrs) {
+        element.bind("keydown keypress", function (event) {
+            if(event.which === 13) {
+                scope.$apply(function (){
+                    scope.$eval(attrs.myEnter);
+                });
+                event.preventDefault();
+            }
+        });
+    };
+})
+;
