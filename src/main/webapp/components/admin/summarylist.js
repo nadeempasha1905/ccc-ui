@@ -63,15 +63,21 @@ angular
    				  		.then(function (data){
    				    		  console.log(data);	
    				    		  $scope.SUMMARYLIST = data.data;
+   				    		  
+                          	 $timeout(function(){         
+                         		 $('#dtBasicExample').DataTable();
+                            	  	 $('.dataTables_length').addClass('bs-select');
+      		            	},1000);
+                          	 
    				    	   },function (data){
    				    	   });
                     };
                     
                     $scope.getdashboardcomplaintdetais();
                 	
-                	$scope.opencomplaintupdate = function(location_code,docketno,docketdate,subcategoryid){
+                	$scope.opencomplaintupdate = function(requestid,statusid,location_code,docketno,docketdate,subcategoryid){
                 		
-                		$state.go('admin.updatedocket',{location_code:location_code,docketno:docketno,docketdate:docketdate,subcategoryid:subcategoryid,statusname:$scope.summarylist.statusname});
+                		$state.go('admin.updatedocket',{requestid:requestid,statusid:statusid,location_code:location_code,docketno:docketno,docketdate:docketdate,subcategoryid:subcategoryid,statusname:$scope.summarylist.statusname});
                 		
                 	};
                 	

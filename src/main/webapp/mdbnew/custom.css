@@ -1,6 +1,11 @@
 @CHARSET "ISO-8859-1";
 
 
+.container-fluid {
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
 /* panel colors  */
 
 /* .mdb-skin .card-header, .mdb-skin .form-header {
@@ -10,5 +15,13 @@
 
 /*Grif header color  */
 .default-color-dark {
-    background-color: #0d47a1 !important;
+    background-color: #009acb !important;
 }
+
+.mdb-skin .navbar {
+    /* background-color: #243a51; */
+    background: linear-gradient(to right, #0178bc 0%, #00bdda 100%);
+    color: #fff;
+}
+
+

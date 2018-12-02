@@ -223,6 +223,8 @@ angular.module('CCCapp',['ngRoute','ngResource','ui.router','ngCookies','angular
         .state('admin.updatedocket', {
             url: '/updatedocket',
             params:{
+            	requestid:null,
+            	statusid:null,
             	location_code:null,
             	docketno:null,
             	docketdate:null,
@@ -546,7 +548,7 @@ angular.module('CCCapp',['ngRoute','ngResource','ui.router','ngCookies','angular
         	if ($cookies.get("access_token")==null) {
             	event.preventDefault();
             	console.log("222");
-            	return $state.go('dashboardmdb');
+            	return $state.go('dashboard');
              //   return $state.go('home');
             }
             return;
@@ -782,6 +784,16 @@ angular.module('CCCapp',['ngRoute','ngResource','ui.router','ngCookies','angular
 	$rootScope.version=CACHEBUST_VERSION;
 	
 			
+	 $rootScope.getquickcomplaints = function(){
+   		
+   		$rootScope.QUICKCOMPLAINTS = [];
+          	 $http.get(RSURL+"/query/getquickcomplaints")
+	  		.then(function (data){
+	    		  console.log(data);	
+	    		  $rootScope.QUICKCOMPLAINTS = data.data;
+	    	   },function (data){
+	    	   });
+   		};
          
 
          $rootScope.logout = function() {

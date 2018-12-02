@@ -1,9 +1,28 @@
+<style type="text/css">
+table thead {
+	background-color: #00c0e0;
+}
+table thead tr th {
+   font-size: small;
+    text-align: center;
+}
+
+
+table tbody tr td {
+    font-size: small;
+    font-weight: 400;
+    text-align: center;
+}
+</style>
+
+
+
 <div class="row">
 	<div class="col-md-12">
 		<div class="card mb-4">
 				<div class="card-body">
 					<div style="text-align: center;">
-								<h2>Summary List - Open Status</h2>
+								<h2>Summary List - {{summarylist.statusname}} Status</h2>
 							</div>
 					<hr>
 					  <div class="row">
@@ -15,13 +34,13 @@
 							      <th class="th-sm font-weight-bold default-color-dark text-white" width="10%">Docket Number
 							        <i class="fa fa-sort float-right" aria-hidden="true"></i>
 							      </th>
-							      <th class="th-sm font-weight-bold default-color-dark text-white" width="15%">Docket Date & Time
+							      <th class="th-sm font-weight-bold default-color-dark text-white" width="20%">Docket Date & Time
 							        <i class="fa fa-sort float-right" aria-hidden="true"></i>
 							      </th>
 							       <th class="th-sm font-weight-bold default-color-dark text-white" width="20%">Consumer Name
 							        <i class="fa fa-sort float-right" aria-hidden="true"></i>
 							      </th>
-							       <th class="th-sm font-weight-bold default-color-dark text-white" width="15%">Consumer Mobile
+							       <th class="th-sm font-weight-bold default-color-dark text-white" width="10%">Consumer Mobile
 							        <i class="fa fa-sort float-right" aria-hidden="true"></i>
 							      </th>
 							       <th class="th-sm font-weight-bold default-color-dark text-white" width="15%">O&M Section
@@ -38,13 +57,13 @@
 					  		<tbody>	
 					  		<tr ng-repeat="s in SUMMARYLIST">
 					  			<td>{{$index+1}}</td>
-					  			<td><a href="" ng-click="opencomplaintupdate(s.location_code,s.docketno,s.docketdate,s.subcategory_id)">{{s.docketno}}</a></td>
-					  			<td><a href="" ng-click="opencomplaintupdate(s.location_code,s.docketno,s.docketdate,s.subcategory_id)">{{s.docketdate}}</a></td>
-					  			<td><a href="" ng-click="opencomplaintupdate(s.location_code,s.docketno,s.docketdate,s.subcategory_id)">{{s.consumer_name}}</a></td>
-					  			<td><a href="" ng-click="opencomplaintupdate(s.location_code,s.docketno,s.docketdate,s.subcategory_id)">{{s.consumer_mobile_number}}</a></td>
-					  			<td><a href="" ng-click="opencomplaintupdate(s.location_code,s.docketno,s.docketdate,s.subcategory_id)">{{s.location_name}}</a></td>
-					  			<td><a href="" ng-click="opencomplaintupdate(s.location_code,s.docketno,s.docketdate,s.subcategory_id)">{{s.subcategory_name}}</a></td>
-					  			<td><a href="" ng-click="opencomplaintupdate(s.location_code,s.docketno,s.docketdate,s.subcategory_id)">{{s.description}}</a></td>
+					  			<td><a href="" ng-click="opencomplaintupdate(s.requestid,summarylist.statusid,s.location_code,s.docketno,s.docketdate,s.subcategory_id)">{{s.docketno}}</a></td>
+					  			<td><a href="" ng-click="opencomplaintupdate(s.requestid,summarylist.statusid,s.location_code,s.docketno,s.docketdate,s.subcategory_id)">{{s.docketdate}}</a></td>
+					  			<td><a href="" ng-click="opencomplaintupdate(s.requestid,summarylist.statusid,s.location_code,s.docketno,s.docketdate,s.subcategory_id)">{{s.consumer_name}}</a></td>
+					  			<td><a href="" ng-click="opencomplaintupdate(s.requestid,summarylist.statusid,s.location_code,s.docketno,s.docketdate,s.subcategory_id)">{{s.consumer_mobile_number}}</a></td>
+					  			<td><a href="" ng-click="opencomplaintupdate(s.requestid,summarylist.statusid,s.location_code,s.docketno,s.docketdate,s.subcategory_id)">{{s.location_name}}</a></td>
+					  			<td><a href="" ng-click="opencomplaintupdate(s.requestid,summarylist.statusid,s.location_code,s.docketno,s.docketdate,s.subcategory_id)">{{s.subcategory_name}}</a></td>
+					  			<td><a href="" ng-click="opencomplaintupdate(s.requestid,summarylist.statusid,s.location_code,s.docketno,s.docketdate,s.subcategory_id)">{{s.description}}</a></td>
 					  		</tr>
 					  		</tbody>
 							</table>

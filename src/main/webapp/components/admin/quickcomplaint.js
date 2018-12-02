@@ -206,16 +206,6 @@ angular
                 		
                 	};*/
                 	
-                	 $rootScope.getquickcomplaints = function(){
-                  		
-                  		$rootScope.QUICKCOMPLAINTS = [];
-  	                   	 $http.get(RSURL+"/query/getquickcomplaints")
-  				  		.then(function (data){
-  				    		  console.log(data);	
-  				    		  $rootScope.QUICKCOMPLAINTS = data.data;
-  				    	   },function (data){
-  				    	   });
-                  	};
                 	
                 	$scope.gotoregistercomplaint = function(mobileno,accountid,quickstatus){
                 		$state.go('admin.registercomplaint',{mobileno:mobileno,accountid:accountid,quickstatus:quickstatus});

@@ -1,5 +1,21 @@
-<div ng-include="'components/admin/navmenu.html'"></div>
-<div class="row">	
-	<div class="col-md-12" ui-view="admin">		
-    </div>
-</div>
+
+
+
+	<!-- Heading -->
+	<div class="card wow fadeIn">
+		<!--Card content-->
+		<div class="card-body">
+			
+			<div class="row">	
+				<div class="col-md-12">
+					<div ng-include="'components/admin/navmenu.html'">
+					</div>
+				</div>
+			</div>
+			<hr/>
+			<div class="row">	
+				<div class="col-md-12" ui-view="admin">		
+	    		</div>
+	   		</div>
+		</div>
+		</div>

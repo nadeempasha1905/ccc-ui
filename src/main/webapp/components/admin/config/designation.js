@@ -105,7 +105,7 @@ angular
                     	}
                     	
                     	console.log("row",row,$scope.selecteddepartment,$scope.selectedcadre);
-                    	$('#centralModalLGInfoDemo').modal('toggle');
+                    	$('#addeditdesignationmodal').modal('toggle');
                     };
                     
                     $scope.addDesignation = function(){
@@ -119,7 +119,7 @@ angular
                     	$scope.selecteddepartment=undefined;
                     	$scope.selectedcadre=undefined;   
                     	
-                    	$('#centralModalLGInfoDemo').modal('toggle');
+                    	$('#addeditdesignationmodal').modal('toggle');
                     };
                     
                     $scope.save = function(){

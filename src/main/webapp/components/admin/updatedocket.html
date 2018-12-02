@@ -1,5 +1,5 @@
 
-<div class="row">
+<div class="row" id="updatepage">
 	<div class="col-md-12">
 		<div class="card mb-4">
 		<!-- Card header -->
@@ -14,9 +14,18 @@
 					
 				<div class="row">
 					<div class="col-md-6">
-						<h4>Update Docket : {{updatedocket.docketno}}</h4>
-						<h6>Current Status :{{updatedocket.statusname}}</h6>
-						<h6>Last updated :{{updatedocket.docketdate}}</h6>
+						<h4>Docket Number  : {{updatedocket.docketno}}</h4>
+						<h6>Current Status : 
+								<span class="badge badge-primary badge-pill" ng-show="{{updatedocket.statusid === 1}}">{{updatedocket.statusname}}</span>
+								<span class="badge badge-secondary badge-pill" ng-show="{{updatedocket.statusid === 6}}">{{updatedocket.statusname}}</span>
+								<span class="badge badge-primary badge-pill" ng-show="{{updatedocket.statusid === 2}}">{{updatedocket.statusname}}</span>
+								<span class="badge badge-success badge-pill" ng-show="{{updatedocket.statusid === 4}}">{{updatedocket.statusname}}</span>
+								<span class="badge badge-danger badge-pill" ng-show="{{updatedocket.statusid === 3}}">{{updatedocket.statusname}}</span>
+								<span class="badge badge-warning badge-pill" ng-show="{{updatedocket.statusid === 5}}">{{updatedocket.statusname}}</span>
+								<span class="badge badge-info badge-pill" ng-show="{{updatedocket.statusid === 7}}">{{updatedocket.statusname}}</span>
+								<span class="badge badge-dark badge-pill" ng-show="{{updatedocket.statusid === 8}}">{{updatedocket.statusname}}</span>
+						</h6>
+						<h6>Last updated   : {{updatedocket.docketdate}}</h6>
 						<hr/>
 						
 						<!-- <div class="col-md-12 mb-3"><small><strong>
@@ -29,40 +38,184 @@
 								<option value="">--------Select--------- </option>
 							</select></small>
 						</div> -->
-						<div class="col-md-12 mb-3"><small><strong>
-							<label for="complaintupdates">Updates<span style="color: red;">*</span></label></strong>
-							<select id="complaintupdates"
-								class="custom-select browser-default" 
-								ng-options="c.cu_name for c in UPDATESLIST " 
-								ng-model="updatedocket.selected_complaintupdates" 
-								required>
-								<option value="">--------Select--------- </option>
-							</select></small>
-						</div>
-						<div class="col-md-12 mb-3"><small><strong>
-							<label for="complaintstatus">Status<span style="color: red;">*</span></label></strong>
-							 <select id="complaintstatus" class="custom-select browser-default" 
-							    ng-options="c.statusname for c in COMPLAINTSTATUSLIST " 
-							    ng-model="updatedocket.selected_complaintstatus" 
-								required>
-								<option value="">--------Select--------- </option>
-							</select></small>
-						</div>
-						<div class="col-md-12 mb-2"><small><strong>
-							<label for="consumerdescription">Comments<span style="color: red;">*</span></label></strong>
-							<textarea type="text" class="form-control"
-								id="consumerdescription" placeholder=""
-								value="" ng-model="updatedocket.consumerdescription" rows="3" 
-								required> </textarea></small>
-						</div>
 						
-						<table>
-							<tr>
-								<td>Current status:</td><td></td>
-								
-							</tr>
-						</table>
-					
+					<!-- Tab panels -->
+						<div class="tab-content"  style="padding: 0rem 0rem 0rem;">
+						
+						  <!-- Panel 1 -->
+						  <div class="tab-pane fade in show active" id="panel555" role="tabpanel">
+						
+						    <!-- Nav tabs -->
+						    <div class="row">
+						      <div class="col-md-3">
+						        <ul class="nav md-pills pills-primary flex-column" role="tablist" id="myTab">
+						          <li class="nav-item">
+						            <a class="nav-link active" data-toggle="tab" href="#panel21" role="tab"
+						            ng-hide="(updatedocket.statusid != 1 && updatedocket.statusid != 2 && updatedocket.statusid != 4)">Update Docket
+						              <i class="fa fa-download ml-2"></i>
+						            </a>
+						          </li>
+						          <li class="nav-item">
+						            <a class="nav-link" data-toggle="tab" href="#panel22" role="tab">Update Complaint
+						              <i class="fa fa-file-text ml-2"></i>
+						            </a>
+						          </li>
+						        </ul>
+						      </div>
+						      <div class="col-md-9">
+						        <!-- Tab panels -->
+						        <div class="tab-content vertical">
+						          <!-- Panel 1 -->
+						          <div class="tab-pane fade in show active" id="panel21" role="tabpanel">
+						          <form role="form" class="" name="updatedocketform">
+						            	<!-- <h5 class="my-2 h5">Update Docket</h5> -->
+								            <div class="col-md-12 mb-3"><small><strong>
+												<label for="complaintupdates">Updates<span style="color: red;">*</span></label></strong>
+												<select id="complaintupdates"
+													class="custom-select browser-default" 
+													ng-options="c.cu_name for c in UPDATESLIST " 
+													ng-model="updatedocket.selected_complaintupdates" 
+													required>
+													<option value="">--------Select--------- </option>
+												</select></small>
+											</div>
+											<!-- <div class="col-md-12 mb-3"><small><strong>
+												<label for="complaintstatus">Status<span style="color: red;">*</span></label></strong>
+												 <select id="complaintstatus" class="custom-select browser-default" 
+												    ng-options="c.statusname for c in COMPLAINTSTATUSLIST " 
+												    ng-model="updatedocket.selected_complaintstatus" 
+													required>
+													<option value="">--------Select--------- </option>
+												</select></small>
+											</div> -->
+											<div class="col-md-12 mb-2"><small><strong>
+												<label for="consumerdescription">Comments<span style="color: red;">*</span></label></strong>
+												<textarea type="text" class="form-control"
+													id="consumerdescription" placeholder=""
+													value="" ng-model="updatedocket.consumerdescription" rows="3" 
+													required> </textarea></small>
+											</div>
+											<div class="row">
+												<div class="col-md-4">
+													<button class="btn btn-green btn-md waves-effect waves-light" 
+														type="submit" ng-click="logcomment(4,'In Progress',true)"	
+														
+														
+														ng-disabled="updatedocketform.$invalid">Update</button>
+													</div>	
+													<div class="col-md-4 mb-2">
+													<a class="btn btn-primary btn-md waves-effect waves-light" 
+														type="submit" ui-sref="admin.complaintdashboard">Back</a>
+													</div>
+											</div>
+										</form>
+						          </div>
+						          <!-- Panel 1 -->
+						          <!-- Panel 2 -->
+						          <div class="tab-pane fade" id="panel22" role="tabpanel">
+						            <!-- <h5 class="my-2 h5">Panel 2</h5> -->
+						             <form role="form" class="" name="updatecomplaintform">
+						            	<!-- <h5 class="my-2 h5">Update Docket</h5> -->
+											<div class="col-md-12 mb-2"><small><strong>
+												<label for="updatecomplaintform_consumerdescription">Comments<span style="color: red;">*</span></label></strong>
+												<textarea type="text" class="form-control"
+													id="updatecomplaintform_consumerdescription" placeholder=""
+													value="" ng-model="updatecomplaintform.consumerdescription" rows="4" 
+													required> </textarea></small>
+											</div>
+											<div class="row">
+												<div class="col-md-4" ng-repeat = "c in COMPLAINTSTATUSMAPPINGLIST" ng-show="c.statusid === 2">
+													<button type="button" class="btn btn-outline-primary btn-rounded waves-effect" 
+													 ng-click="logcomment(2,'Assigned',false)">Assign</button>
+												</div>
+												
+												<div class="col-md-4" ng-repeat = "c in COMPLAINTSTATUSMAPPINGLIST" ng-show="c.statusid === 3">
+													<button type="button" class="btn btn-outline-danger btn-rounded waves-effect" 
+													 ng-click="logcomment(3,'Rejected',false)">Reject</button>
+												</div>
+												
+												<div class="col-md-4" ng-repeat = "c in COMPLAINTSTATUSMAPPINGLIST" ng-show="c.statusid === 4">
+													<button type="button" class="btn btn-outline-success btn-rounded waves-effect" 
+													 ng-click="logcomment(4,'In Progress',false)">In Progress</button>
+												</div>
+												
+												<div class="col-md-4" ng-repeat = "c in COMPLAINTSTATUSMAPPINGLIST" ng-show="c.statusid === 5">
+													<button type="button" class="btn btn-outline-warning btn-rounded waves-effect" 
+													 ng-click="logcomment(5,'Close',false)">Close</button>
+												</div>
+												
+												<div class="col-md-4" ng-repeat = "c in COMPLAINTSTATUSMAPPINGLIST" ng-show="c.statusid === 6">
+													<button type="button" class="btn btn-outline-secondary btn-rounded waves-effect" 
+													 ng-click="logcomment(6,'Re-Opened',false)">Re-Open</button>
+												</div>
+												
+												<div class="col-md-4" ng-repeat = "c in COMPLAINTSTATUSMAPPINGLIST" ng-show="c.statusid === 7">
+													<button type="button" class="btn btn-outline-default btn-rounded waves-effect" 
+													 ng-click="logcomment(7,'Resolved',false)">Resolved</button>
+												</div>
+												
+												<div class="col-md-4" ng-repeat = "c in COMPLAINTSTATUSMAPPINGLIST" ng-show="c.statusid === 8">
+													<button type="button" class="btn btn-outline-info btn-rounded waves-effect" 
+													 ng-click="logcomment(8,'Escalate',false)">Escalate</button>
+												</div>
+												
+											</div>
+											<!-- <div class="row">
+												<div class="col-md-4">
+													<button type="button" class="btn btn-outline-default btn-rounded waves-effect">Reject</button>
+												</div>
+												<div class="col-md-4">
+													<button type="button" class="btn btn-outline-info btn-rounded waves-effect">Info</button>
+												</div>
+												<div class="col-md-4">
+													<button type="button" class="btn btn-outline-warning btn-rounded waves-effect">Warning</button>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-4">
+													
+												</div>	
+											</div>	 -->
+										</form>
+						          	</div>
+						          <!-- Panel 2 -->
+						        </div>
+						      </div>
+						    </div>
+						    <!-- Nav tabs -->
+						
+						  </div>
+						  <!-- Panel 1 -->
+						
+						  <!-- Panel 2 -->
+						  <div class="tab-pane fade" id="panel666" role="tabpanel">
+						
+						    <p class="pt-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil odit magnam minima, soluta doloribus reiciendis molestiae placeat unde eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione porro voluptate odit minima.</p>
+						    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil odit magnam minima, soluta doloribus reiciendis molestiae placeat unde eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione porro voluptate odit minima.</p>
+						
+						  </div>
+						  <!-- Panel 2 -->
+						
+						</div>
+						<!-- Tab panels -->
+						
+						<div class="row" ng-show="warning != null">
+							<div class="col-md-12">
+								<div class="alert alert-warning alert-dismissible fade show" role="alert" ng-show="warning">
+								<a href="#" class="alert-link">{{message}}</a>
+								 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								    <span aria-hidden="true">&times;</span>
+								  </button>
+							</div>
+							<div class="alert alert-success alert-dismissible fade show" role="alert" ng-show="!warning">
+								<a href="#" class="alert-link">{{message}}</a>
+								 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								    <span aria-hidden="true">&times;</span>
+								  </button>
+							</div>
+							</div>
+						</div>
+
 				</div>
 				
 				<div class="col-md-6">
@@ -82,201 +235,52 @@
       <!-- Newsfeed -->
       <div class="mdb-feed">
 
-        <!-- First news -->
-        <div class="news">
-
-          <!-- Label -->
-          <div class="label">
-            <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-1-mini.jpg" class="rounded-circle z-depth-1-half">
-          </div>
-
-          <!-- Excerpt -->
-          <div class="excerpt">
-
-            <!-- Brief -->
-            <div class="brief">
-              <a class="name">John Doe</a> added you as a friend
-              <div class="date">1 hour ago</div>
-            </div>
-
-            <!-- Feed footer -->
-            <div class="feed-footer">
-              <a class="comment" data-toggle="collapse" href="#collapseExample-1" aria-expanded="false"
-                aria-controls="collapseExample-1">Comment</a> &middot;
-              <span>
-                <a>7</a>
-              </span>
-              <a class="thumbs" data-toggle="tooltip" data-placement="top" title="I like it">
-                <i class="fa fa-thumbs-up"></i>
-              </a>
-              <a class="thumbs" data-toggle="tooltip" data-placement="top" title="I don't like it">
-                <i class="fa fa-thumbs-down"></i>
-              </a>
-              <div class="collapse" id="collapseExample-1">
-                <div class="card card-body mt-1">
-
-                  <!-- Add comment -->
-                  <div class="md-form mt-1 mb-1">
-                    <textarea type="text" id="form7" class="form-control md-textarea" rows="3"></textarea>
-                    <label for="form7">Add comment</label>
-                  </div>
-                  <div class="d-flex justify-content-end">
-                    <button type="button" class="btn btn-flat waves-effect" data-toggle="collapse" data-target="#collapseExample-1"
-                      aria-expanded="false" aria-controls="collapseExample-1">Cancel</button>
-                    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#collapseExample-1"
-                      aria-expanded="false" aria-controls="collapseExample-1">Reply</button>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-            <!-- Feed footer -->
-
-          </div>
-          <!-- Excerpt -->
-
-        </div>
-        <!-- First news -->
-
-        <!-- Second news -->
-        <div class="news">
-
-          <!-- Label -->
-          <div class="label">
-            <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(17)-mini.jpg" class="rounded-circle z-depth-1-half">
-          </div>
-
-          <!-- Excerpt -->
-          <div class="excerpt">
-
-            <!-- Brief -->
-            <div class="brief">
-              <a class="name">Anna Smith</a> added
-              <a> 2 new illustrations</a>
-              <div class="date">4 hours ago</div>
-            </div>
-
-            <!-- Added images -->
-            <div class="added-images">
-              <img src="https://mdbootstrap.com/img/Photos/Others/images/50.jpg" class="z-depth-1 rounded mb-md-0 mb-2">
-              <img src="https://mdbootstrap.com/img/Photos/Others/images/52.jpg" class="z-depth-1 rounded">
-            </div>
-
-            <!-- Feed footer -->
-            <div class="feed-footer">
-              <a class="comment" data-toggle="collapse" href="#collapseExample-2" aria-expanded="false"
-                aria-controls="collapseExample-2">Comment</a> &middot;
-              <span>
-                <a>31</a>
-              </span>
-              <a class="thumbs" data-toggle="tooltip" data-placement="top" title="I like it">
-                <i class="fa fa-thumbs-up"></i>
-              </a>
-              <a class="thumbs" data-toggle="tooltip" data-placement="top" title="I don't like it">
-                <i class="fa fa-thumbs-down"></i>
-              </a>
-              <div class="collapse" id="collapseExample-2">
-                <div class="card card-body mt-1">
-
-                  <!-- Add comment -->
-                  <div class="md-form mt-1 mb-1">
-                    <textarea type="text" id="form7" class="form-control md-textarea" rows="3"></textarea>
-                    <label for="form7">Add comment</label>
-                  </div>
-                  <div class="d-flex justify-content-end">
-                    <button type="button" class="btn btn-flat waves-effect" data-toggle="collapse" data-target="#collapseExample-2"
-                      aria-expanded="false" aria-controls="collapseExample-2">Cancel</button>
-                    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#collapseExample-2"
-                      aria-expanded="false" aria-controls="collapseExample-2">Reply</button>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-            <!-- Feed footer -->
-
-          </div>
-          <!-- Excerpt -->
-
-        </div>
-        <!-- Second news -->
-
-        <!-- Third news -->
-        <div class="news">
-
-          <!-- Label -->
-          <div class="label">
-            <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(9)-mini.jpg" class="rounded-circle z-depth-1-half">
-          </div>
-
-          <!-- Excerpt -->
-          <div class="excerpt">
-
-            <!-- Brief -->
-            <div class="brief">
-              <a class="name">Danny Moore</a> added you as a friend
-              <div class="date">7 hours ago</div>
-            </div>
-
-            <!-- Feed footer -->
-            <div class="feed-footer">
-              <a class="comment" data-toggle="collapse" href="#collapseExample-3" aria-expanded="false"
-                aria-controls="collapseExample-3">Comment</a> &middot;
-              <span>
-                <a>12</a>
-              </span>
-              <a class="thumbs" data-toggle="tooltip" data-placement="top" title="I like it">
-                <i class="fa fa-thumbs-up"></i>
-              </a>
-              <a class="thumbs" data-toggle="tooltip" data-placement="top" title="I don't like it">
-                <i class="fa fa-thumbs-down"></i>
-              </a>
-              <div class="collapse" id="collapseExample-3">
-                <div class="card card-body mt-1">
-
-                  <!-- Add comment -->
-                  <div class="md-form mt-1 mb-1">
-                    <textarea type="text" id="form7" class="form-control md-textarea" rows="3"></textarea>
-                    <label for="form7">Add comment</label>
-                  </div>
-                  <div class="d-flex justify-content-end">
-                    <button type="button" class="btn btn-flat waves-effect" data-toggle="collapse" data-target="#collapseExample-3"
-                      aria-expanded="false" aria-controls="collapseExample-3">Cancel</button>
-                    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#collapseExample-3"
-                      aria-expanded="false" aria-controls="collapseExample-3">Reply</button>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-            <!-- Feed footer -->
-
-          </div>
-
-        </div>
-        <!-- Third news -->
+       
 
         <!-- Fourth news -->
-        <div class="news">
+        <div class="news" ng-repeat="comment in COMMENTSLIST">
 
           <!-- Label -->
           <div class="label">
-            <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(18)-mini.jpg" class="rounded-circle z-depth-1-half">
+           <!--  <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(18)-mini.jpg" class="rounded-circle z-depth-1-half"> -->
+            <img src="images/call-center.png" class="rounded-circle z-depth-1-half">
           </div>
 
           <!-- Excerpt -->
           <div class="excerpt">
             <!-- Brief -->
             <div class="brief">
-              <a class="name">Lili Rose</a> posted on his page
-              <div class="date">2 days ago</div>
+              <a class="name">{{comment.username}}</a> updated the docket at
+              <div class="date">{{comment.cdate}}</div>
             </div>
+            <div class="row">
+
+            <!-- Grid column -->
+            <div class="col-12">
+
+              <!-- Badge -->
+             Changed Status : <a href="#!">
+             <span class="badge badge-primary badge-pill" ng-show="{{comment.statusid === 1}}">{{comment.statusname}}</span>
+			<span class="badge badge-secondary badge-pill" ng-show="{{comment.statusid === 6}}">{{comment.statusname}}</span>
+			<span class="badge badge-primary badge-pill" ng-show="{{comment.statusid === 2}}">{{comment.statusname}}</span>
+			<span class="badge badge-success badge-pill" ng-show="{{comment.statusid === 4}}">{{comment.statusname}}</span>
+			<span class="badge badge-danger badge-pill" ng-show="{{comment.statusid === 3}}">{{comment.statusname}}</span>
+			<span class="badge badge-warning badge-pill" ng-show="{{comment.statusid === 5}}">{{comment.statusname}}</span>
+			<span class="badge badge-info badge-pill" ng-show="{{comment.statusid === 7}}">{{comment.statusname}}</span>
+			<span class="badge badge-dark badge-pill" ng-show="{{comment.statusid === 8}}">{{comment	.statusname}}</span>
+             </a>
+
+            </div>
+            <!-- Grid column -->
+
+			 <div class="col-12" ng-show="comment.updatesid">
+			 	Updates:{{comment.updatesname}}
+			 </div>
+          </div>
             <!-- Added text -->
-            <div class="added-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero inventore,
-              iste quas libero eius? Vitae sint neque animi alias sunt dolor, accusantium ducimus, non placeat
-              voluptate.</div>
+            <div class="added-text">{{comment.comment_description}}.</div>
             <!-- Feed footer -->
-            <div class="feed-footer">
+           <!--  <div class="feed-footer">
               <a class="comment" data-toggle="collapse" href="#collapseExample-4" aria-expanded="false"
                 aria-controls="collapseExample-4">Comment</a> &middot;
               <span>
@@ -290,7 +294,7 @@
               </a>
               <div class="collapse" id="collapseExample-4">
                 <div class="card card-body mt-1">
-                  <!-- Add comment -->
+                  Add comment
                   <div class="md-form mt-1 mb-1">
                     <textarea type="text" id="form7" class="form-control md-textarea" rows="3"></textarea>
                     <label for="form7">Add comment</label>
@@ -303,74 +307,12 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
 
         </div>
         <!-- Fourth news -->
 
-        <!-- Fifth news -->
-        <div class="news">
-
-          <!-- Label -->
-          <div class="label">
-            <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(20)-mini.jpg" class="rounded-circle z-depth-1-half">
-          </div>
-
-          <!-- Excerpt -->
-          <div class="excerpt mb-0">
-
-            <!-- Brief -->
-            <div class="brief">
-              <a class="name">Kate Harrison</a> added
-              <a> 2 new photos</a> of you
-              <div class="date">3 days ago</div>
-            </div>
-
-            <!-- Added images -->
-            <div class="added-images">
-              <img src="https://mdbootstrap.com/img/Photos/Others/images/81.jpg" class="z-depth-1 rounded mb-md-0 mb-2">
-              <img src="https://mdbootstrap.com/img/Photos/Others/images/86.jpg" class="z-depth-1 rounded">
-            </div>
-
-            <!-- Feed footer -->
-            <div class="feed-footer">
-              <a class="comment" data-toggle="collapse" href="#collapseExample-5" aria-expanded="false"
-                aria-controls="collapseExample-5">Comment</a> &middot;
-              <span>
-                <a>47</a>
-              </span>
-              <a class="thumbs" data-toggle="tooltip" data-placement="top" title="I like it">
-                <i class="fa fa-thumbs-up"></i>
-              </a>
-              <a class="thumbs" data-toggle="tooltip" data-placement="top" title="I don't like it">
-                <i class="fa fa-thumbs-down"></i>
-              </a>
-              <div class="collapse" id="collapseExample-5">
-                <div class="card card-body mt-1">
-
-                  <!-- Add comment -->
-                  <div class="md-form mt-1 mb-1">
-                    <textarea type="text" id="form7" class="form-control md-textarea" rows="3"></textarea>
-                    <label for="form7">Add comment</label>
-                  </div>
-                  <div class="d-flex justify-content-end">
-                    <button type="button" class="btn btn-flat waves-effect" data-toggle="collapse" data-target="#collapseExample-5"
-                      aria-expanded="false" aria-controls="collapseExample-5">Cancel</button>
-                    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#collapseExample-5"
-                      aria-expanded="false" aria-controls="collapseExample-5">Reply</button>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-            <!-- Feed footer -->
-
-          </div>
-          <!-- Excerpt -->
-
-        </div>
-        <!-- Fifth news -->
 
       </div>
       <!-- Newsfeed -->
@@ -396,3 +338,10 @@
 </div>
 </div>
 </div>
+
+
+<script>
+$("#updatepage a").click(function(event){
+	 event.preventDefault();
+	});
+</script>

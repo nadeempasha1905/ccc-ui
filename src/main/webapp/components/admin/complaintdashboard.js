@@ -68,7 +68,7 @@ angular
                 		$state.go('admin.updatedocket',{requestid:requestid,categoryid:categoryid,subcategoryid:subcategoryid});
                 	};
                 	
-                	
+                	$rootScope.getquickcomplaints();
                 	
                 	
                 	

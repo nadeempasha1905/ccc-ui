@@ -413,4 +413,7 @@ angular
                 	}else{
                 		
                 	}
+                	
+                	$rootScope.getquickcomplaints();
+                	
                 });

@@ -7,14 +7,19 @@
 <!--
 
 table thead {
-	background-color: #d0d0d0;
+	background-color: #00c0e0;
 }
 table thead tr th {
-    font-size: 1.1 rem;
-    /* font-weight: 400; */
+       font-weight: 500;
+    font-size: large;
     text-align: center;
 }
 
+
+table tbody tr td {
+	font-weight: 400;
+    font-size: medium;
+}
 
 -->
 </style>
@@ -231,10 +236,10 @@ table thead tr th {
 								  </div>
 							</div>
 							
-							<button class="btn btn-md btn-success" type="submit" ng-click="save()"
+							<button class="btn btn-green btn-md waves-effect waves-light" type="submit" ng-click="save()"
 									ng-disabled="quickcomplaint_consumerinfo.$invalid">Register Complaint</button>
 									
-									<button class="btn btn-md btn-primary" type="button" ng-click="resetform()"
+									<button class="btn btn-primary btn-md waves-effect waves-light" type="button" ng-click="resetform()"
 									ng-disabled="">Reset</button>
 							
 						</div>
@@ -253,7 +258,7 @@ table thead tr th {
 					
 					      <div class="modal-content">
 					        <div class="modal-header">
-					          <h4 class="modal-title w-100" id="myModalLabel">Search List</h4>
+					          <h4 class="modal-title w-100" id="myModalLabel">List</h4>
 					          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					            <span aria-hidden="true">&times;</span>
 					          </button>

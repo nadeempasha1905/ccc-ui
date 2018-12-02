@@ -25,7 +25,7 @@ angular
                     if($cookies.get("access_token")){
                    	 
                    	 $rootScope.IsLogin = true;
-                   	 $state.go('admin.dashboardmdb');
+                   	 $state.go('dashboard');
                    	 $rootScope.username = $cookies.get("user");
                    	 
                     }else{
@@ -98,7 +98,7 @@ angular
                            //function to get quick complaints on load
                      		$rootScope.getquickcomplaints();
                              
-                             $state.go('admin.dashboardmdb');
+                             $state.go('dashboard');
                             },
                             function (error) {
            	                 $scope.error = true;

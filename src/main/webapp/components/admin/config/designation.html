@@ -12,6 +12,11 @@
     width: 100%;
 }
 
+table tbody tr td {
+	font-weight: 400;
+    font-size: medium;
+}
+
 </style>
 
 <div class="jumbotron jumbotron-fluid">
@@ -20,7 +25,7 @@
   
   <div class="row">
 		<div class="col-md-4">
-			<button class="btn btn-info btn-sm waves-effect waves-light text-center" type="button" ng-click = "addDesignation()">
+			<button class="btn btn-primary btn-md waves-effect waves-light text-center" type="button" ng-click = "addDesignation()">
 		  		<i class="fa fa-plus"></i> &nbsp;&nbsp;&nbsp;Add Designation
 			</button>
 		</div>  
@@ -67,9 +72,123 @@
   <!-- </div> -->
 </div>
 
-<div class="modal fade" id="centralModalLGInfoDemo" tabindex="-1" role="dialog" 
-		aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
-	<div class="modal-dialog modal-lg modal-notify modal-info" role="document">
+
+
+<div class="modal fade" id="addeditdesignationmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title w-100 font-weight-bold" id="myModalLabel">Add/Edit Designation</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+			<form role="form" name="frm" class="">
+				<div class="form-row">
+					<div class="col-md-12">
+						<p class="h6 font-weight-bold"><u>{{modaltitle}}</u></p>
+					</div>  
+					<div class="col-md-12">
+						<div class="alert alert-success waves-effect waves-light text-center" role="alert" ng-show="message.length > 0 && !error">
+							  {{message}}
+						</div>
+						<div class="alert alert-danger waves-effect waves-light text-center" role="alert" ng-show="message.length > 0 && error">
+							  {{message}}
+						</div>
+					</div>
+				</div>		
+					  <div class="form-row">
+						    <div class="col-md-6 mb-3">
+						      <label for="validationCustom02" class="font-weight-bold">Department</label>
+						      <select class="custom-select browser-default" 
+						      ng-options="dep.departmentname for dep in DepartmentList | orderBy:'departmentname'" ng-model="selecteddepartment"
+						      required>
+							      <option value="">Select Department</option>
+							    </select>
+						      <div class="invalid-feedback">
+						        Please choose department!
+						      </div>
+						    </div>
+						    
+						     <div class="col-md-6 mb-3">
+						      <label for="validationCustom02" class="font-weight-bold">Cadre</label>
+						      <select class="custom-select browser-default" 
+						      ng-options="c.cdrName for c in CadreList | orderBy:'cdrName'" ng-model="selectedcadre"
+						       required>
+							      <option value="">Select Cadre</option>
+							    </select>
+						      <div class="invalid-feedback">
+						        Please choose cadre!
+						      </div>
+						    </div>
+						    
+						    </div>
+					     <div class="form-row">
+						     <div class="col-md-6 mb-3">
+						      <label for="validationCustom01" class="font-weight-bold">Designation Name</label>
+						      <input type="text" class="form-control" id="designationname" placeholder="Designation name" value="" ng-model="departmentrecord.dsgName"
+						      	required>
+						      <div class="invalid-feedback">
+						        Please provide Designation!
+						      </div>	
+						    </div>
+					    </div>
+					    	<div class="form-group">
+							    <div class="custom-control custom-checkbox">
+							      <input type="checkbox" class="custom-control-input" id="invalidCheck" ng-model="departmentrecord.dsgDeleteStatus">
+							      <label class="custom-control-label" for="invalidCheck">Deleted Flag</label>
+							      <div class="invalid-feedback">
+							        You must agree before submitting.
+							      </div>
+					    	</div>
+					  </div>
+					  <button class="btn btn-success" type="submit" ng-click="save()" 
+					  		ng-disabled="frm.$invalid">{{(editrecord == true ? 'Update' : 'Save')}}
+					 </button>
+					 <button class="btn btn-info" type="button" data-dismiss="modal" 
+					 		ng-click="getDesignationList()">Close
+					 </button>
+				</form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Central Modal Small -->
+<div class="modal fade" id="" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					
+<!-- Change class .modal-sm to change the size of the modal -->
+ <div class="modal-dialog modal-lg" role="document">
 		<!--Content-->
 		<div class="modal-content">
 			<!--Header-->

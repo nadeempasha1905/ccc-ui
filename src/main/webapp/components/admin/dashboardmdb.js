@@ -15,11 +15,11 @@ angular
                 	
                 	if($cookies.get("access_token")) {
                 		$rootScope.IsLogin=true;
-                		$http.get(RSURL+"/profile")
+                		/*$http.get(RSURL+"/profile")
 				  		.then(function (data){
 				    		  console.log(data);	
 				    	   },function (data){
-				    	   });
+				    	   });*/
                 		$rootScope.username = $cookies.get("user");
                 		
                 		
@@ -27,5 +27,7 @@ angular
 						   $rootScope.IsLogin=false;
 						   $state.go('login');
 					   }
+                	
+                	
                 	
                 });
