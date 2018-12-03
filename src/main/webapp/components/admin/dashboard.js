@@ -48,18 +48,8 @@ angular
                     }
                   	
                   	$scope.dashboardlisttype = "";
-                  	$scope.getdahboardcomplaintlist = function(type)
+                  	$scope.getdahboardcomplaintlist = function()
                     {
-                  		if(type === 1){
-                  			$scope.dashboardlisttype = "total";
-                  		}else if(type === 2){
-                  			$scope.dashboardlisttype = "pending";
-                  		}else if(type === 3){
-                  			$scope.dashboardlisttype = "resolved";
-                  		}else if(type === 4){
-                  			$scope.dashboardlisttype = "rejected";
-                  		}
-                  		
                   		 var locationcode = "2";
                   		 var fromdate = '01/01/2017';
                   		 var todate = '30/11/2018';
@@ -73,11 +63,12 @@ angular
    				    		 // console.log(data);	
    				    		  $scope.DASHBOARDCOMPLAINTLIST = data.data;
    				    		
-   				    		 $('#dashboarddetaillist').modal('toggle');
+   				    		// $('#dashboarddetaillist').modal('toggle');
    				    		 
-   				    		 $timeout(function(){
-   				    			 $scope.openmodalanddisplaychart();
-   				    		 },500);
+   				    		// $timeout(function(){
+   				    			// $scope.openmodalanddisplaychart_c3();
+   				    			// $scope.openmodalanddisplaychart();
+   				    		// },500);
    				    		  
    				    	   },function (data){
    				    	   });
@@ -555,6 +546,124 @@ angular
 	  				  		});
                   	}; 
                   	
+                  	$scope.openmodalanddisplaychart_c3 = function(type){
+                  		
+                  		if(type === 1){
+                  			$scope.dashboardlisttype = "total";
+                  			$scope.modal_heading = "Total Complaints";
+                  		}else if(type === 2){
+                  			$scope.dashboardlisttype = "pending";
+                  			$scope.modal_heading = "Pending Complaints";
+                  		}else if(type === 3){
+                  			$scope.dashboardlisttype = "resolved";
+                  			$scope.modal_heading = "Resolved Complaints";
+                  		}else if(type === 4){
+                  			$scope.dashboardlisttype = "rejected";
+                  			$scope.modal_heading = "Rejected Complaints";
+                  		}
+                  		
+                  		var CATEGORY_OBJ = ['x'];
+                  		var TOTAL_OBJ = ["Total"];
+                  		var PENDING_OBJ = ["Pending"];
+                  		var RESOLVED_OBJ = ["Resolved"];
+                  		var CLOSED_OBJ = ["Closed"];
+                  		var TOTAL_RESOLVED_OBJ = ["Total Resolved"];
+                  		var REJECTED_OBJ = ["Rejected"];
+                  		var OPEN_OBJ = ["Open"];
+                  		var ASSIGNED_OBJ = ["Assigned"];
+                  		var INPROGRESS_OBJ = ["In Progress"];
+                  		var REOPENED_OBJ = ["Re Opned"];
+                  		var ESCALATED_OBJ = ["Escalated"];
+                  		
+                  		$scope.DASHBOARDCOMPLAINTLIST.map(function(e,index){
+                  			
+                  			CATEGORY_OBJ.push(e.monthyear);
+                  			TOTAL_OBJ.push(parseInt(e.total));
+                  			PENDING_OBJ.push(parseInt(e.pending));
+                  			RESOLVED_OBJ.push(parseInt(e.resolved));
+                  			CLOSED_OBJ.push(parseInt(e.closed));
+                  			TOTAL_RESOLVED_OBJ.push(parseInt(e.resolvedtotal));
+                  			REJECTED_OBJ.push(parseInt(e.rejected));
+                  			OPEN_OBJ.push(parseInt(e.open));
+                  			ASSIGNED_OBJ.push(parseInt(e.assigned));
+                  			INPROGRESS_OBJ.push(parseInt(e.inprogress));
+                  			REOPENED_OBJ.push(parseInt(e.reopened));
+                  			ESCALATED_OBJ.push(parseInt(e.escalated));
+                  			
+                  		});
+                  		
+                        var chart_dashboardlist = c3.generate({
+                            bindto: '#chart_dashboardlist',
+                            data: {
+                                x: 'x',
+                                columns: [],
+                                type: 'bar',
+                            },
+                            legend: {
+                                position: 'right'
+                            },
+                            zoom: {
+                                enabled: true
+                            },
+            				tooltip : {
+            					grouped : true
+            				},
+                            axis: {
+                                x: {
+                                    type: 'category',
+                                    tick: {
+                                        rotate: 75,
+                                        multiline: false
+                                    },
+                                    height: 130
+                                }
+                            },
+                            grid: {
+                                y: {
+                                    lines: [{value: 0}]
+                                }
+                            }
+                        });
+                  		
+                  		
+                  		if($scope.dashboardlisttype === "total"){
+                  			
+                  			$timeout(function () {
+                  				chart_dashboardlist.load({
+                  			        columns: [CATEGORY_OBJ,  TOTAL_OBJ ,PENDING_OBJ, TOTAL_RESOLVED_OBJ ,REJECTED_OBJ]
+                  			    });
+                  			}, 200);
+                  			
+                  		}else if($scope.dashboardlisttype === "pending"){
+                  			$timeout(function () {
+                  				chart_dashboardlist.load({
+                  			        columns: [CATEGORY_OBJ,  PENDING_OBJ, OPEN_OBJ ,ASSIGNED_OBJ,INPROGRESS_OBJ, REOPENED_OBJ ,ESCALATED_OBJ]
+                  			    });
+                  			}, 200);
+                  			
+                  			
+                  		}else if($scope.dashboardlisttype === "resolved"){
+                  			$timeout(function () {
+                  				chart_dashboardlist.load({
+                  			        columns: [CATEGORY_OBJ,  RESOLVED_OBJ, CLOSED_OBJ ,TOTAL_RESOLVED_OBJ]
+                  			    });
+                  			}, 200);
+                  			
+                  		}else if($scope.dashboardlisttype === "rejected"){
+                  			$timeout(function () {
+                  				chart_dashboardlist.load({
+                  			        columns: [CATEGORY_OBJ,  REJECTED_OBJ]
+                  			    });
+                  			}, 200);
+                  		}
+                  		
+                  		
+                  	
+                  		
+                  		$('#dashboarddetaillist').modal('toggle');
+                  		
+                  	};
+                  	
                   	$scope.openmodalanddisplaychart = function(){
                   		
                   		var OBJECT = [];
@@ -668,7 +777,91 @@ angular
                   		}
                   		chart_dashboardlist.scrollbarX = new am4core.Scrollbar();
                   	};
+                  	
+                  	$scope.render_comparision_chart = function(){
+                  		
+                  		 var locationcode = "2";
+                  		 var fromdate = '01/01/2017';
+                  		 var todate = '30/11/2018';
+                  		 
+                    	$scope.COMPARISIONDATALIST = [];
+                    	 $http.get(RSURL+"/query/getcomparisoindata?" +
+	                   			"locationcode="+locationcode+"" +
+               					"&category=" +
+               					"&year=" +
+	                   			"&fromdate="+fromdate+"" +
+	                   			"&todate="+todate)
+   				  		.then(function (data){
+   				    		  $scope.COMPARISIONDATALIST = data.data;
+   				    		
+   				    		  
+   				    		  var tmp = $scope.COMPARISIONDATALIST[0].yr;
+   				    		  var YEARS = [$scope.COMPARISIONDATALIST[0].yr];
+   				    		  
+   				    		$scope.COMPARISIONDATALIST.map(function(e,index){
+   				    			if(tmp != e.yr){
+   				    				YEARS.push(e.yr);
+   				    				tmp = e.yr;
+   				    			}
+   				    		});
+   				    		
+   				    		var OBJECT = new Array(YEARS.length);
+   				    		var MONTHS = [];
+   				    		for(var i = 0; i < YEARS.length; i++){
+   				    			
+   				    			OBJECT[i] = [];
+   				    			OBJECT[i].push(YEARS[i]);
+   				    			$scope.COMPARISIONDATALIST.map(function(e,index){
+   	   				    			if(i === 0 && YEARS[i] === e.yr){
+   	   				    				MONTHS.push(e.month);
+   	   				    			}
+   				    				if(YEARS[i] === e.yr){
+   				    					OBJECT[i].push(parseInt(e.month_year_count));
+   	   				    			}
+   				    				
+   	   				    		});
+   				    		}
+   				    		
+   				    		//console.log("OBJECT",OBJECT);
+   				    		//console.log("MONTHS",MONTHS);
+   				    		  
+   				    		  
+   				    		var chart_compare = c3.generate({
+                     			 bindto: '#chart_compare',
+                     			data: {
+                                    columns: [],
+                                    type: 'spline',
+                                },
+                                axis: {
+                                    x: {
+                                    type: 'category',
+                                    categories:MONTHS,
+                                      tick: {
+                                        rotate: 0,
+                                        format: '%b%Y'
+                                      }
+                                    }
+                                  }
+                     		});
+   				    		
+   				    		$timeout(function () {
+   				    			for(var i = 0 ; i < OBJECT.length; i++){
+   				    				chart_compare.load({
+   	                  			        columns: [OBJECT[i]]
+   	                  			    });
+   				    			}
+                  			}, 200);
+   				    		
+   				    	   },function (data){
+   				    	   });
+                  		
+                  		
+                  		
+                  	};
+                  	
+                  	$scope.render_comparision_chart();
                   	$scope.getmaindashboarddetails();
+                  	$scope.getdahboardcomplaintlist();
                 	
                 });
 

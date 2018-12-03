@@ -27,8 +27,11 @@ angular.module('CCCapp',['ngRoute','ngResource','ui.router','ngCookies','angular
         {
             name : 'dashboard', 
             files: ['components/admin/dashboard.js'+'?v='+CACHEBUST_VERSION]    
-        } 
-        ,
+        },
+        {
+            name : 'trackcomplaint', 
+            files: ['components/admin/trackcomplaint.js'+'?v='+CACHEBUST_VERSION]    
+        },
         /*{
             name : 'dashboardmdb', 
             files: ['components/admin/dashboardmdb.js'+'?v='+CACHEBUST_VERSION]    
@@ -151,6 +154,20 @@ angular.module('CCCapp',['ngRoute','ngResource','ui.router','ngCookies','angular
                     //     return $state.go('login');
                     // }
                     return $ocLazyLoad.load('dashboard'); // Resolve promise and load before view 
+                }]
+            }                  
+        }) 
+        
+         .state('trackcomplaint', {
+            url: '/trackcomplaint',
+            templateUrl: 'components/admin/trackcomplaint.html',
+            controller:'trackcomplaintCtrl',                         
+            resolve: {
+                loadMyCtrl: ['$ocLazyLoad','$cookies','$state', function($ocLazyLoad,$cookies,$state) {
+                    // if($cookies.get("access_token")==null) {                                
+                    //     return $state.go('login');
+                    // }
+                    return $ocLazyLoad.load('trackcomplaint'); // Resolve promise and load before view 
                 }]
             }                  
         }) 

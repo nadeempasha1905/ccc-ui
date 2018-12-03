@@ -21,13 +21,31 @@
 		max-width: 90%;
 	}
 	
-	#chart_dashboardlist {
-  width: 100%;
-  height: 500px;
+#chart_dashboardlist {
+	  width: 100%;
+	  height: 500px;
 }
 
+#chart_compare {
+ width: 100%;
+	  height: 500px;
+}
+
+table thead {
+	background-color: #00c0e0;
+}
+table thead tr th {
+   font-size: small;
+    text-align: center;
+}
+
+
+table tbody tr td {
+    font-size: small;
+    font-weight: 400;
+    text-align: center;
+}
 </style>
-	
        
    <div class="card mb-4"> 
 		<!--Card content-->
@@ -44,7 +62,7 @@
 									<div class="col-md-3">
 										<div class="row mb-4 white-text">
 											<div class="col-md-12">
-												<a ng-click="getdahboardcomplaintlist(1)">
+												<a ng-click="openmodalanddisplaychart_c3(1)">
 								                   <div class="card classic-admin-card primary-color">
 								                       <div class="card-body">
 								                           <div class="pull-right">
@@ -60,7 +78,7 @@
 										
 										<div class="row mb-4 white-text">
 											<div class="col-md-12">
-												<a ng-click="getdahboardcomplaintlist(2)">
+												<a ng-click="openmodalanddisplaychart_c3(2)">
 								                   <div class="card classic-admin-card warning-color">
 								                       <div class="card-body">
 								                           <div class="pull-right">
@@ -78,7 +96,7 @@
 									<div class="col-md-3">
 										<div class="row mb-4 white-text">
 											<div class="col-md-12">
-												<a ng-click="getdahboardcomplaintlist(3)">
+												<a ng-click="openmodalanddisplaychart_c3(3)">
 								                   <div class="card classic-admin-card success-color lighten-1">
 								                       <div class="card-body">
 								                           <div class="pull-right">
@@ -94,7 +112,7 @@
 										
 										<div class="row mb-4 white-text">
 											<div class="col-md-12">
-												<a ng-click="getdahboardcomplaintlist(4)">
+												<a ng-click="openmodalanddisplaychart_c3(4)">
 								                   <div class="card classic-admin-card red accent-2">
 								                       <div class="card-body">
 								                           <div class="pull-right" >
@@ -165,6 +183,19 @@
 						</div>
 					</div>
 				</div>
+				
+				<div class="row">
+					<div class="col-md-12">
+						<div class="card border-light mb-3">
+						  <div class="card-header">Comparision Year Wise</div>
+						    <div class="card-body">
+						    	<div id="chart_compare"></div>
+						    </div>
+						  </div>
+					</div>
+				</div>		    
+				
+				
  			</div>
  		</div>
  
@@ -176,7 +207,7 @@
 	
 	      <div class="modal-content">
 	        <div class="modal-header">
-	          <h4 class="modal-title w-100" id="myModalLabel">Search List</h4>
+	          <h4 class="modal-title w-100" id="myModalLabel">{{modal_heading}}</h4>
 	          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	            <span aria-hidden="true">&times;</span>
 	          </button>
@@ -184,10 +215,7 @@
 	        <div class="modal-body">
 	        
 	        <div class="row">
-	        	<div class="col-md-12">
-	        		<div id="chart_dashboardlist"></div>
-	        	</div>
-	        	<div class="col-md-12">
+	        	<div class="col-md-6">
 	        			<table class="table table-bordered table-sm ">
 					  <thead>
 					    <tr>
@@ -223,7 +251,9 @@
 					  </tbody>
 				</table>
 	        	</div>
-	        	
+	        	<div class="col-md-6">
+	        		<div id="chart_dashboardlist"></div>
+	        	</div>
 	        	
 	        </div>
 	        
