@@ -859,9 +859,270 @@ angular
                   		
                   	};
                   	
-                  	$scope.render_comparision_chart();
+                  	
+                  	$scope.render_resolutionstatus_chart = function(){
+                  		
+                		 var locationcode = "2";
+                		 var fromdate = '01/01/2017';
+                		 var todate = '30/11/2018';
+                		 
+                  	$scope.RESOLUTIONSUMMARYLIST = [];
+                  	 $http.get(RSURL+"/query/getdashboard_resolution_status_summary?" +
+	                   			"locationcode="+locationcode)
+ 				  		.then(function (data){
+ 				    		  $scope.RESOLUTIONSUMMARYLIST = data.data;
+ 				    		  $scope.makeresolutionobjects();
+ 				    	   },function (data){
+ 				    	   });
+                	};
+                	
+                	
+                 	$scope.makeresolutionobjects = function(){
+                 		
+                 		var RESOLUTION_LOCATION_OBJ = [];
+                 		var RESOLUTION_DEPARTMENT_OBJ = [];
+                 		
+                 		$scope.RESOLUTION_LOCATIONS = [];
+                 		
+                 		RESOLUTION_LOCATION_OBJ = $filter('filter')($scope.RESOLUTIONSUMMARYLIST, {group_type:'LOCATION'},true);
+                 		RESOLUTION_DEPARTMENT_OBJ = $filter('filter')($scope.RESOLUTIONSUMMARYLIST, {group_type:'DEPARTMENT'},true);
+                 		
+                 		var tmp = RESOLUTION_LOCATION_OBJ[0].group_code;
+                 		var temp_obj = {
+                 				group_code : RESOLUTION_LOCATION_OBJ[0].group_code,
+                 				group_name : RESOLUTION_LOCATION_OBJ[0].group_name,
+                 		};
+                 		$scope.RESOLUTION_LOCATIONS.push(temp_obj);
+				    		  
+                 		RESOLUTION_LOCATION_OBJ.map(function(e,index){
+			    			if(tmp != e.group_code){
+			    				temp_obj = {
+			    						group_code : e.group_code,
+		                 				group_name : e.group_name,
+		                 		};
+			    				$scope.RESOLUTION_LOCATIONS.push(temp_obj);
+			    				tmp = e.group_code;
+			    			}
+			    		});
+                 		
+                 		for(var i = 0; i < $scope.RESOLUTION_LOCATIONS.length; i++){
+                 			
+                 			var DATES = ['x'];
+                 			var CHART_DATA_RECEIVED = ['Received'];
+                 			var CHART_DATA_RESOLVED = ['Resolved'];
+                 			
+                 			RESOLUTION_LOCATION_OBJ.map(function(e,index){
+                 				if(e.group_code === $scope.RESOLUTION_LOCATIONS[i].group_code){
+                 					DATES.push(e.group_date);
+                 					CHART_DATA_RECEIVED.push(parseInt(e.received));
+                 					CHART_DATA_RESOLVED.push(parseInt(e.resolved));
+                 				}
+                 			});
+                 			$scope.drawlinecharts(DATES,CHART_DATA_RECEIVED,CHART_DATA_RESOLVED,$scope.RESOLUTION_LOCATIONS[i].group_code);
+                 		}
+                 		
+                 	};
+                 	
+                 	$scope.drawlinecharts = function(DATES,CHART_DATA_RECEIVED,CHART_DATA_RESOLVED,idx){
+                 		
+                 		console.log(DATES);
+                 		console.log(CHART_DATA_RECEIVED);
+                 		console.log(CHART_DATA_RESOLVED);
+                 		
+                 		$timeout(function(){
+                 			
+                            var chart_dashboardlist = c3.generate({
+                                bindto: '#resolutionstatus_chart'+idx,
+                                data: {
+                                    x: 'x',
+                                    columns: [DATES,CHART_DATA_RECEIVED,CHART_DATA_RESOLVED],
+                                    type: 'line',
+                                },
+                                zoom: {
+                                    enabled: true
+                                },
+                				tooltip : {
+                					grouped : true
+                				},
+                                axis: {
+                                    x: {
+                                        type: 'category',
+                                        tick: {
+                                            rotate: 75,
+                                            multiline: false
+                                        },
+                                        height: 130
+                                    }
+                                },
+                                grid: {
+                                    y: {
+                                        lines: [{value: 0}]
+                                    }
+                                }
+                            });
+                 		
+                 		},200);
+                 	};
+                  	
+                  	$scope.render_agewisesummary_chart = function(){
+                  		
+                 		 var locationcode = "2";
+                 		 var fromdate = '01/01/2017';
+                 		 var todate = '30/11/2018';
+                 		 
+                   	$scope.AGEWISESUMMARYLIST = [];
+                   	 $http.get(RSURL+"/query/getdashboard_agewise_summary?" +
+	                   			"locationcode="+locationcode)
+  				  		.then(function (data){
+  				    		  $scope.AGEWISESUMMARYLIST = data.data;
+  				    		  $scope.makeagewiseobjects();
+  				    	   },function (data){
+  				    	   });
+                 	};
+                 	
+                 	$scope.makeagewiseobjects = function(){
+                 		
+                 		var AGEWISE_CATEGORY_OBJ = [];
+                 		var AGEWISE_DEPARTMENT_OBJ = [];
+                 		
+                 		$scope.AGEWISE_LOCATIONS = [];
+                 		
+                 		AGEWISE_CATEGORY_OBJ = $filter('filter')($scope.AGEWISESUMMARYLIST, {group_type:'CATEGORY'},true);
+                 		AGEWISE_DEPARTMENT_OBJ = $filter('filter')($scope.AGEWISESUMMARYLIST, {group_type:'DEPARTMENT'},true);
+                 		
+                 		var tmp = AGEWISE_CATEGORY_OBJ[0].location_code;
+                 		var temp_obj = {
+                 				location_code : AGEWISE_CATEGORY_OBJ[0].location_code,
+                 				location_name : AGEWISE_CATEGORY_OBJ[0].location_name,
+                 		};
+                 			
+                 		$scope.AGEWISE_LOCATIONS.push(temp_obj);
+                 		//$scope.AGEWISE_LOCATIONS = [AGEWISE_CATEGORY_OBJ[0].location_code];
+				    		  
+                 		AGEWISE_CATEGORY_OBJ.map(function(e,index){
+			    			if(tmp != e.location_code){
+			    				temp_obj = {
+		                 				location_code : e.location_code,
+		                 				location_name : e.location_name,
+		                 		};
+			    				$scope.AGEWISE_LOCATIONS.push(temp_obj);
+			    				//$scope.AGEWISE_LOCATIONS.push(e.location_code);
+			    				tmp = e.location_code;
+			    			}
+			    		});
+                 		
+                 		//console.log($scope.AGEWISE_LOCATIONS);
+                 		//console.log(AGEWISE_CATEGORY_OBJ);
+                 		//console.log(AGEWISE_DEPARTMENT_OBJ);
+                 		
+                 		
+                 		var group_type    = [];
+                 		var category_name = [];
+                 		for(var i = 0; i < $scope.AGEWISE_LOCATIONS.length; i++){
+                 			
+                 			var lessthaneight = [];
+                     		var eighttothirty = [];
+                     		var thirtyabove   = [];
+                     		
+                     		var record = 0 ;
+                 			AGEWISE_CATEGORY_OBJ.map(function(e,index){
+                 				
+                 				
+                 				if(e.location_code === $scope.AGEWISE_LOCATIONS[i].location_code){
+                 					
+                 					var temp = [];
+                 					
+                 					temp = [e.category_name,parseInt(e.lessthaneight)];
+                 					lessthaneight.push(temp);
+                 					
+                 					temp = [e.category_name,parseInt(e.eighttothirty)];
+                 					eighttothirty.push(temp);
+                 					
+                 					temp = [e.category_name,parseInt(e.thirtyabove)];
+                 					thirtyabove.push(temp);
+                 					
+                 				}
+                 				
+                 			});
+                 			
+                 			$scope.drawpiecharts(lessthaneight,eighttothirty,thirtyabove,$scope.AGEWISE_LOCATIONS[i].location_code);
+                 		}
+                 	};
+                 	
+                 	$scope.drawpiecharts = function(lessthaneight,eighttothirty,thirtyabove,idx){
+                 		
+                 		$timeout(function(){
+                 			
+                 		var chart1 = c3.generate({
+                 			bindto:"#lessthaneight"+idx,
+                 		    data: {
+                 		        // iris data from R
+                 		        columns: [],
+                 		        type : 'pie'
+                 		    },
+                            legend: {
+                                position: 'right'
+                            }
+                 		});
+                 		
+                 		var chart2 = c3.generate({
+                 			bindto:"#eighttothirty"+idx,
+                 		    data: {
+                 		        // iris data from R
+                 		        columns: [],
+                 		        type : 'pie'
+                 		    },
+                            legend: {
+                                position: 'right'
+                            }
+                 		});
+                 		
+                 		var chart3 = c3.generate({
+                 			bindto:"#thirtyabove"+idx,
+                 		    data: {
+                 		        // iris data from R
+                 		        columns: [],
+                 		        type : 'pie'
+                 		    },
+                            legend: {
+                                position: 'right'
+                            }
+                 		});
+                 		
+                 		$timeout(function(){
+                 			for(var i = 0 ; i < lessthaneight.length; i++){
+             					chart1.load({
+	                  			        columns: [lessthaneight[i]]
+	                  			    });
+				    			}
+                 		},200);
+                 		
+                 		$timeout(function(){
+                 			for(var i = 0 ; i < eighttothirty.length; i++){
+             					chart2.load({
+	                  			        columns: [eighttothirty[i]]
+	                  			    });
+				    			}
+                 		},200);
+                 		
+                 		$timeout(function(){
+                 			for(var i = 0 ; i < thirtyabove.length; i++){
+             					chart3.load({
+	                  			        columns: [thirtyabove[i]]
+	                  			    });
+				    			}
+                 		},200);
+                 		
+                 		},200);
+                 	};
+                  	
+                 	
                   	$scope.getmaindashboarddetails();
                   	$scope.getdahboardcomplaintlist();
+                  	$scope.render_comparision_chart();
+                  	$scope.render_agewisesummary_chart();
+                  	$scope.render_resolutionstatus_chart();
+                  	
                 	
                 });
 

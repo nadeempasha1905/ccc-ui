@@ -158,8 +158,12 @@ angular.module('CCCapp',['ngRoute','ngResource','ui.router','ngCookies','angular
             }                  
         }) 
         
+        
          .state('trackcomplaint', {
             url: '/trackcomplaint',
+            params:{
+            	p_trackcomplaint : null
+            },
             templateUrl: 'components/admin/trackcomplaint.html',
             controller:'trackcomplaintCtrl',                         
             resolve: {

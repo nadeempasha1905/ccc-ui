@@ -193,6 +193,42 @@ table tbody tr td {
 						    </div>
 						  </div>
 					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-12">
+						<div class="card border-light mb-3">
+						  <div class="card-header">Pending Complaints</div>
+						    <div class="card-body">
+						    	<div class="row" ng-repeat="c in AGEWISE_LOCATIONS">
+						    		<div class="col-md-12"><h4><span class="badge badge-dark badge-pill">{{c.location_name}}</span></h4></div>
+						    		<div class="col-md-4"><center style="margin-top: 5px;"><h5><span> Count &lt; 7 Days</span><br></h5></center>
+						    		<div id="lessthaneight{{c.location_code}}" style="margin-top: -50px;"></div></div>
+						    		<div class="col-md-4"><center style="margin-top: 5px;"><h5><span> Count 8 - 30 Days</span><br></h5></center>
+						    		<div id="eighttothirty{{c.location_code}}" style="margin-top: -50px;"></div></div>
+						    		<div class="col-md-4"><center style="margin-top: 5px;"><h5><span> Count &gt; 30 Days</span><br></h5></center>
+						    		<div id="thirtyabove{{c.location_code}}" style="margin-top: -50px;"></div></div>
+							    	<hr/>
+						    	</div>
+						    </div>
+						  </div>
+					</div>
+				</div>	
+				
+				<div class="row">
+					<div class="col-md-12">
+						<div class="card border-light mb-3">
+						  <div class="card-header">Resolution Status</div>
+						    <div class="card-body">
+						    	<div class="row"  style="height: 450px;">
+						    		<div class="col-md-6" ng-repeat="c in RESOLUTION_LOCATIONS">
+						    			<center style="margin-top: 5px;"><h5><span> {{c.group_name}}</span><br></h5></center>
+						    		<div id="resolutionstatus_chart{{c.group_code}}"></div></div>
+							    	<hr/>
+						    	</div>
+						    </div>
+						  </div>
+					</div>
 				</div>		    
 				
 				

@@ -168,4 +168,29 @@ angular
 				    	   });
                 	};
                 	
+                	$scope.trackcomplaint = function(){
+                		
+                		if(!$scope.track.docketnumber){
+                			alert("Please enter docket number to track complaint !!!");
+                			return;
+                		}
+                		
+                		$scope.TRACKCOMPLAINT = [];
+	                   	 $http.get(RSURL+"/query/trackcomplaint?docketnumber="+$scope.track.docketnumber)
+				  		.then(function (data){
+				    		  console.log(data.data);	
+				    		  $scope.TRACKCOMPLAINT = data.data;
+				    		  
+				    		  if($scope.TRACKCOMPLAINT.length > 0){
+				    			  $state.go('trackcomplaint',{'p_trackcomplaint':$scope.TRACKCOMPLAINT});
+				    		  }else{
+				    			  $scope.message = "Docket Number Not Exists !!!";
+					    		  $scope.error = true;
+				    			  return;
+				    		  }
+				    		  
+				    	   },function (data){
+				    	   });
+                	};
+                	
                 });
