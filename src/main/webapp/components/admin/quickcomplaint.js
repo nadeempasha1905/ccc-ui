@@ -9,6 +9,8 @@ angular
                 	console.log("quickcomplaintCtrl initiated !!!");
                 	$scope.heading = "quickcomplaintCtrl Page";
                 	
+                	$rootScope.getUserRoles();
+                	
                 	$('#quickcmplaintlink').addClass('active');
                 	
                 	console.log($('#pills-tab'));

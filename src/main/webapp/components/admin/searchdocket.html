@@ -1,0 +1,86 @@
+<style type="text/css">
+table thead {
+	background-color: #00c0e0;
+}
+table thead tr th {
+   font-size: small;
+    text-align: center;
+}
+
+
+table tbody tr td {
+    font-size: small;
+    font-weight: 400;
+    text-align: center;
+}
+</style>
+
+
+
+<div class="row">
+	<div class="col-md-12">
+		<div style="text-align: left;">
+			<strong> <i class="glyphicon glyphicon-link"></i> &nbsp;<span
+				class="h5">Search Docket</span>
+			</strong> &nbsp;&gt;&gt;&nbsp;
+		</div>
+<hr>
+			<div class="row">
+			  	<div class="col-md-3">
+			  		<div class="col-md-12 mb-2"><small><strong>
+						<label for="docketnumber">Docket Number<span style="color: red;">*</span></label></strong> <input
+							type="text" class="form-control" id="docketnumber"
+							placeholder="Type & press enter" value=""
+							ng-model="searchdocket.docketnumber" 
+							my-enter="getsearchcomplaintdetais()"
+							 required></small>
+					</div>
+			  	</div>
+			</div>  	
+			  	
+			  <div class="row">
+			  	<div class="col-md-12">
+			  	  <table id="dtBasicExample" class="table table-striped table-bordered table-sm text-center" cellspacing="0" width="100%">
+					  <thead>
+					    <tr>
+					   	  <th class="th-sm font-weight-bold default-color-dark text-white">#</th>
+					      <th class="th-sm font-weight-bold default-color-dark text-white" width="10%">Docket Number
+					        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+					      </th>
+					      <th class="th-sm font-weight-bold default-color-dark text-white" width="20%">Docket Date & Time
+					        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+					      </th>
+					       <th class="th-sm font-weight-bold default-color-dark text-white" width="20%">Consumer Name
+					        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+					      </th>
+					       <th class="th-sm font-weight-bold default-color-dark text-white" width="10%">Consumer Mobile
+					        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+					      </th>
+					       <th class="th-sm font-weight-bold default-color-dark text-white" width="15%">O&M Section
+					        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+					      </th>
+					      <th class="th-sm font-weight-bold default-color-dark text-white" width="15%">Sub Category
+					        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+					      </th>
+					       <th class="th-sm font-weight-bold default-color-dark text-white" width="10%">Issues
+					        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+					      </th>
+					    </tr>
+					  </thead>
+			  		<tbody>	
+			  		<tr ng-repeat="s in SEARCHDOCKETLIST">
+			  			<td>{{$index+1}}</td>
+			  			<td><a href="" ng-click="opencomplaintupdate(s.requestid,s.status_id,s.location_code,s.docketno,s.docketdate,s.subcategory_id,s.status_name)">{{s.docketno}}</a></td>
+			  			<td><a href="" ng-click="opencomplaintupdate(s.requestid,s.status_id,s.location_code,s.docketno,s.docketdate,s.subcategory_id,s.status_name)">{{s.docketdate}}</a></td>
+			  			<td><a href="" ng-click="opencomplaintupdate(s.requestid,s.status_id,s.location_code,s.docketno,s.docketdate,s.subcategory_id,s.status_name)">{{s.consumer_name}}</a></td>
+			  			<td><a href="" ng-click="opencomplaintupdate(s.requestid,s.status_id,s.location_code,s.docketno,s.docketdate,s.subcategory_id,s.status_name)">{{s.consumer_mobile_number}}</a></td>
+			  			<td><a href="" ng-click="opencomplaintupdate(s.requestid,s.status_id,s.location_code,s.docketno,s.docketdate,s.subcategory_id,s.status_name)">{{s.location_name}}</a></td>
+			  			<td><a href="" ng-click="opencomplaintupdate(s.requestid,s.status_id,s.location_code,s.docketno,s.docketdate,s.subcategory_id,s.status_name)">{{s.subcategory_name}}</a></td>
+			  			<td><a href="" ng-click="opencomplaintupdate(s.requestid,s.status_id,s.location_code,s.docketno,s.docketdate,s.subcategory_id,s.status_name)">{{s.description}}</a></td>
+			  		</tr>
+			  		</tbody>
+					</table>
+			  	</div>
+		  </div>
+	</div>
+</div>

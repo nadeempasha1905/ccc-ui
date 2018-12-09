@@ -1,0 +1,76 @@
+
+
+<style type="text/css">
+table thead {
+	background-color: #00c0e0;
+}
+table thead tr th {
+   font-size: small;
+    text-align: center;
+}
+
+
+table tbody tr td {
+    font-size: small;
+    font-weight: 400;
+    text-align: center;
+}
+
+
+
+</style>
+
+
+		<div class="row" id="mycomplaintpage">
+			<div class="col-md-12">
+				<div style="text-align: left;">
+					<strong> <i class="glyphicon glyphicon-link"></i> &nbsp;<span
+						class="h5">View Interruptions</span>
+					</strong> &nbsp;&gt;&gt;&nbsp;
+				</div>
+				<hr>
+				
+				<div class="row">
+					<div class="col-md-12">
+						<div style="text-align: left;">
+							<table class="table table-bordered table-sm ">
+									  <thead>
+									    <tr>
+									    	<th scope="col">#</th>
+									      <th scope="col">Station</th>
+									      <th scope="col">Feeder</th>
+									      <th scope="col">Interruption</th>
+									      <th scope="col">Reason</th>
+									      <th scope="col">From Date & Time</th>
+									      <th scope="col">To Date & time</th>
+									      <th scope="col">Created By</th>
+									      <th scope="col">Created On</th>
+									    </tr>
+									  </thead>
+									  <tbody>
+									  		<tr ng-repeat="s in INTERRUPTIONDETAILS">
+									  		<td>{{$index+1}}</td>
+									  		<td>{{s.ir_station_name}}</td>
+									  		<td>{{s.ir_feeder_name}}</td>
+									  		<td>{{s.ir_type}}</td>
+									  		<td>{{s.ir_reason}}</td>
+									  		<td>{{s.ir_from}}</td>
+									  		<td>{{s.ir_to}}</td>
+									  		<td>{{s.ir_created_by}}</td>
+									  		<td>{{s.ir_created_on}}</td>
+									  		</tr>
+									  </tbody>
+								</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+				
+				
+				
+<script>
+$("#mycomplaintpage a").click(function(event){
+	 event.preventDefault();
+	});
+</script>

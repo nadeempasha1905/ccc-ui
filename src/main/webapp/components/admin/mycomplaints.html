@@ -1,0 +1,161 @@
+
+
+<style type="text/css">
+table thead {
+	background-color: #00c0e0;
+}
+table thead tr th {
+   font-size: small;
+    text-align: center;
+}
+
+
+table tbody tr td {
+    font-size: small;
+    font-weight: 400;
+    text-align: center;
+}
+
+
+
+</style>
+
+
+		<div class="row" id="mycomplaintpage">
+			<div class="col-md-12">
+				<div style="text-align: left;">
+					<strong> <i class="glyphicon glyphicon-link"></i> &nbsp;<span
+						class="h5">My Complaints</span>
+					</strong> &nbsp;&gt;&gt;&nbsp;
+				</div>
+				<hr>
+				
+				<div class="row">
+					<div class="col-md-6">
+						<a class="btn btn-danger " data-toggle="collapse" href="#collapse-complaintblock"
+						 aria-expanded="false" aria-controls="collapse-complaintblock" ng-click="refreshcard()">Make Complaint</a>
+						 
+						 <div class="collapse" id="collapse-complaintblock">
+			                <div class="card card-body mt-1">
+			                 
+			                 <div class="col-md-12 mb-3"><small><strong>
+									<label for="comaplintcategory">Complaint Category<span style="color: red;">*</span></label></strong>
+									 <select
+										id="comaplintcategory" class="custom-select browser-default"
+										ng-options="c.categoryname for c in CATEGORYLIST | orderBy:'categoryid'" 
+							      		ng-change="loadsubcategory(0)" 
+										ng-model="consumerinfo.selected_comaplintcategory" 
+										required>
+										<option value="">--------Select--------- </option>
+									</select></small>
+								</div>
+								<div class="col-md-12 mb-3"><small><strong>
+									<label for="complaintsubcategory">Complaint Sub-Category<span style="color: red;">*</span></label></strong>
+									<select id="complaintsubcategory"
+										class="custom-select browser-default" 
+										ng-options="c.subcategoryname for c in SUBCATEGORYLIST " 
+										ng-model="consumerinfo.selected_complaintsubcategory" 
+										required>
+										<option value="">--------Select--------- </option>
+									</select></small>
+								</div>
+								<div class="col-md-12 mb-2"><small><strong>
+									<label for="consumerdescription">Complaint Description<span style="color: red;">*</span></label></strong>
+									<textarea type="text" class="form-control"
+										id="consumerdescription" placeholder=""
+										value="" ng-model="consumerinfo.consumerdescription" rows="3" 
+										required> </textarea></small>
+								</div>
+			                 
+			                 
+			                  <div class="d-flex justify-content-end">
+			                    <button type="button" class="btn btn-flat waves-effect" data-toggle="collapse" data-target="#collapse-complaintblock"
+			                      aria-expanded="false" aria-controls="collapseExample-4">Cancel</button>
+			                    <button type="button" class="btn btn-green btn-md waves-effect waves-light" 
+			                     data-toggle="collapse" data-target="#collapse-complaintblock"
+			                      aria-expanded="false" aria-controls="collapseExample-4"  
+			                      ng-click="save()">Submit</button>
+			                  </div>
+			                </div>
+			              </div>
+					</div>
+					<div class="col-md-6" ng-show="warning != null">
+							<div class="alert alert-warning alert-dismissible fade show" role="alert" ng-show="warning">
+								<a href="#" class="alert-link">{{message}}</a>
+								 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								    <span aria-hidden="true">&times;</span>
+								  </button>
+							</div>
+							<div class="alert alert-success alert-dismissible fade show" role="alert" ng-show="!warning">
+								<a href="#" class="alert-link">{{message}}</a>
+								 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								    <span aria-hidden="true">&times;</span>
+								  </button>
+							</div>
+							<!-- <a class="btn btn-info btn-lg" id="alert-target" >Click me!</a> -->
+						</div>
+				</div>
+				
+				<br>
+				<div style="text-align: left;" class="h5">History</div>
+					<div class="row">
+					  	<div class="col-md-12">
+					  	  <table id="dtBasicExample" class="table table-striped table-bordered table-sm text-center" cellspacing="0" width="100%">
+							  <thead>
+							    <tr>
+							   	  <th class="th-sm font-weight-bold default-color-dark text-white" width="1%">#</th>
+							      <th class="th-sm font-weight-bold default-color-dark text-white" width="10%">Docket Number
+							        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+							      </th>
+							      <th class="th-sm font-weight-bold default-color-dark text-white" width="15%">Docket Date & Time
+							        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+							      </th>
+							       <th class="th-sm font-weight-bold default-color-dark text-white" width="15%">Department
+							        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+							      </th>
+							       <th class="th-sm font-weight-bold default-color-dark text-white" width="25%">Sub-Category
+							        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+							      </th>
+							       <th class="th-sm font-weight-bold default-color-dark text-white" width="15%">Comments
+							        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+							      </th>
+							       <th class="th-sm font-weight-bold default-color-dark text-white" width="10%">Status
+							        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+							      </th>
+							    </tr>
+							  </thead>
+					  		<tbody>	
+					  		<tr ng-repeat="s in MYCOMPLAINTLIST">
+					  			<td>{{$index+1}}</td>
+					  			<td>{{s.docketno}}</a></td>
+					  			<td>{{s.docketdate}}</a></td>
+					  			<td>{{s.department_name}}</a></td>
+					  			<td>{{s.subcategory_name}}</a></td>
+					  			<td>{{s.description}}</a></td>
+					  			<td>
+					  				<h6>
+							  			<span class="badge badge-primary badge-pill" ng-show="{{s.status_id === 1}}">{{s.status_name}}</span>
+										<span class="badge badge-secondary badge-pill" ng-show="{{s.status_id === 6}}">{{s.status_name}}</span>
+										<span class="badge badge-primary badge-pill" ng-show="{{s.status_id === 2}}">{{s.status_name}}</span>
+										<span class="badge badge-success badge-pill" ng-show="{{s.status_id === 4}}">{{s.status_name}}</span>
+										<span class="badge badge-danger badge-pill" ng-show="{{s.status_id === 3}}">{{s.status_name}}</span>
+										<span class="badge badge-warning badge-pill" ng-show="{{s.status_id === 5}}">{{s.status_name}}</span>
+										<span class="badge badge-info badge-pill" ng-show="{{s.status_id === 7}}">{{s.status_name}}</span>
+										<span class="badge badge-dark badge-pill" ng-show="{{s.status_id === 8}}">{{s.status_name}}</span>
+					  				</h6>
+					  		</td>
+					  		</tr>
+					  		</tbody>
+							</table>
+					  	</div>
+				</div>
+			</div>
+		</div>
+				
+				
+				
+<script>
+$("#mycomplaintpage a").click(function(event){
+	 event.preventDefault();
+	});
+</script>

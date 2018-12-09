@@ -1,0 +1,133 @@
+
+
+<style type="text/css">
+table thead {
+	background-color: #00c0e0;
+}
+table thead tr th {
+   font-size: small;
+    text-align: center;
+}
+
+
+table tbody tr td {
+    font-size: small;
+    font-weight: 400;
+    text-align: center;
+}
+
+
+
+</style>
+
+
+		<div class="row" id="mycomplaintpage">
+			<div class="col-md-12">
+				<div style="text-align: left;">
+					<strong> <i class="glyphicon glyphicon-link"></i> &nbsp;<span
+						class="h5">Interruptions</span>
+					</strong> &nbsp;&gt;&gt;&nbsp;
+				</div>
+				<hr>
+				
+				<div class="row">
+					<div class="col-md-4">
+						<form role="form" class="was-validated" name="interruption_form">
+			                 <div class="col-md-12 mb-3"><small><strong>
+									<label for="stationlist">Station<span style="color: red;">*</span></label></strong>
+									 <select
+										id="stationlist" class="custom-select browser-default"
+										ng-options="c.sm_station_name for c in STATIONLIST | orderBy:'sm_station_id'" 
+							      		ng-change="loadfeederlist()" 
+										ng-model="interruption.station" 
+										required>
+										<option value="">--------Select--------- </option>
+									</select></small>
+								</div>
+								<div class="col-md-12 mb-3"><small><strong>
+									<label for="feederlist">Feeder<span style="color: red;">*</span></label></strong>
+									<select id="feederlist"
+										class="custom-select browser-default" 
+										ng-options="c.fm_feeder_name for c in FEEDERLIST | orderBy:'fm_feeder_id'" 
+										ng-model="interruption.feeder" 
+										required>
+										<option value="">--------Select--------- </option>
+									</select></small>
+								</div>
+								<div class="col-md-12 mb-3"><small><strong>
+									<label for="interruptiontype">Interruption Type<span style="color: red;">*</span></label></strong>
+									<select id="interruptiontype"
+										class="custom-select browser-default" 
+										ng-options="c.interrupt_name for c in INTERRUPTIONLIST " 
+										ng-model="interruption.type" 
+										required>
+										<option value="">--------Select--------- </option>
+									</select></small>
+								</div>
+								<div class="col-md-12 mb-2"><small><strong>
+									<label for="interruptiondescription">Interruption Description<span style="color: red;">*</span></label></strong>
+									<textarea type="text" class="form-control"
+										id="interruptiondescription" placeholder=""
+										value="" ng-model="interruption.description" rows="3" 
+										required> </textarea></small>
+								</div>
+			                 
+			                 
+			                 <button class="btn btn-green btn-md waves-effect waves-light" type="submit" ng-click="save()"
+									ng-disabled="interruption_form.$invalid">Save</button>
+									
+									<button class="btn btn-primary btn-md waves-effect waves-light" type="button" ng-click="resetform()"
+									ng-disabled="">Reset</button>
+						</form>
+					</div>
+					
+				 <div class="row mb-2">
+				 	<div class="col-md-12">
+							<h6><small>
+								<strong>
+									<label for="date-picker-example">From Date<span style="color: red;">*</span></label>
+								</strong>
+						  		<input placeholder="Selected from date" type="text" id="fromdate" 
+						  		class="form-control datepicker" ng-model="interruption.fromdate" >
+						  	</small></h6>
+						  	<br>
+							<h6><small>
+								<strong>
+									<label for="date-picker-example">To Date<span style="color: red;">*</span></label>
+								</strong>
+						  		<input placeholder="Selected to date" type="text" id="todate" 
+						  		 class="form-control datepicker" ng-model="interruption.todate" >
+						  	</small></h6>
+						</div>
+				 </div>
+					
+					
+					<div class="col-md-6" ng-show="warning != null">
+							<div class="alert alert-warning alert-dismissible fade show" role="alert" ng-show="warning">
+								<a href="#" class="alert-link">{{message}}</a>
+								 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								    <span aria-hidden="true">&times;</span>
+								  </button>
+							</div>
+							<div class="alert alert-success alert-dismissible fade show" role="alert" ng-show="!warning">
+								<a href="#" class="alert-link">{{message}}</a>
+								 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								    <span aria-hidden="true">&times;</span>
+								  </button>
+							</div>
+							<!-- <a class="btn btn-info btn-lg" id="alert-target" >Click me!</a> -->
+						</div>
+				</div>
+			</div>
+		</div>
+				
+				
+				
+<script>
+	
+//Data Picker Initialization
+$('.datepicker').pickadate({
+	format: 'dd/mm/yyyy',
+	formatSubmit: 'dd/mm/yyyy'
+});
+</script>

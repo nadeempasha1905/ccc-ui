@@ -1,0 +1,136 @@
+   <div class="card mb-4"> 
+		<!--Card content-->
+		<div class="card-body">
+		
+		
+			<div class="row">
+			   <div class="col-md-12"> 
+			   <div style="text-align: left;">
+					<strong>
+						<i class="glyphicon glyphicon-link"></i>
+							&nbsp;<span class="h5">Quick Complaint</span>
+					</strong>
+					&nbsp;&gt;&gt;&nbsp;
+				</div>
+					<hr>
+			   <div class="row mb-1">
+			   		<div class="col-md-2">
+			   			<select class="mdb-select md-form colorful-select dropdown-primary"
+						ng-model="report.reporttype" >
+						  <option value="">---------SELECT---------</option>
+						  <option value="1">Category Wise</option>
+						  <option value="2">Department Wise</option>
+						  <option value="3">Location Wise</option>
+						  <option value="4">Mode Wise</option>
+						  <option value="5">Sub-Category Wise</option>
+						</select>
+						<label><h5><small><strong>Report Type</strong></small></h5></label>
+			   		</div>
+			   </div>
+			    <div class="row mb-1">
+				 	<div class="col-md-2">
+						<select class="mdb-select md-form colorful-select dropdown-primary"
+						ng-model="report.zone" 
+						ng-change="getcirclelist()"
+						ng-options="c.ld_name for c in ZONELIST"
+						ng-disabled="CIRCLE_USER || DIVISION_USER || SUBDIVISION_USER || OMSECTION_USER">
+						  <option value="">---------SELECT---------</option>
+						</select>
+						<label><h5><small><strong>Zone</strong></small></h5></label>
+				 	</div>
+				 	<div class="col-md-2">
+				 		<!--Blue select-->
+						<select class="mdb-select md-form colorful-select dropdown-primary"
+						ng-model="report.circle" 
+						ng-change="getdivisionlist()"
+						ng-options="c.ld_name for c in CIRCLELIST" 
+						ng-disabled="DIVISION_USER || SUBDIVISION_USER || OMSECTION_USER">
+						 <option value="">---------SELECT---------</option>
+						</select>
+						<label><h5><small><strong>Circle</strong></small></h5></label>
+						<!--/Blue select-->
+				 	</div>
+				 	<div class="col-md-2">
+				 		<!--Blue select-->
+						<select class="mdb-select md-form colorful-select dropdown-primary"
+						ng-model="report.division" 
+						ng-change="getsubdivisionlist()"
+						ng-options="c.ld_name for c in DIVISIONLIST" 
+						ng-disabled="SUBDIVISION_USER || OMSECTION_USER">
+						  <option value="">---------SELECT---------</option>
+						</select>
+						<label><h5><small><strong>Division</strong></small></h5></label>
+						<!--/Blue select-->
+				 	</div>
+				 	<div class="col-md-2">
+				 		<!--Blue select-->
+						<select class="mdb-select md-form colorful-select dropdown-primary" 
+						ng-model="report.subdivision" 
+						ng-change="getomsectionlist()"
+						ng-options="c.ld_name for c in SUBDIVISIONLIST" 
+						ng-disabled="OMSECTION_USER">
+						  <option value="">---------SELECT---------</option>
+						</select>
+						<label><h5><small><strong>Sub Division</strong></small></h5></label>
+						<!--/Blue select-->
+				 	</div>
+				 	<div class="col-md-2">
+				 		<!--Blue select-->
+						<select class="mdb-select md-form colorful-select dropdown-primary" 
+						ng-model="report.omsection" 
+						ng-options="c.ld_name for c in OMSECTIONLIST" 
+						ng-disabled="OMSECTION_USER">
+						  <option value="">---------SELECT---------</option>
+						</select>
+						<label><h5><small><strong>O&M Section</strong></small></h5></label>
+						<!--/Blue select-->
+				 	</div>
+				 </div>
+				 
+				 <div class="row mb-2">
+				 	<div class="col-md-2">
+							<h5><small>
+								<strong>
+									<label for="date-picker-example">From Date</label>
+								</strong>
+						  		<input placeholder="Selected from date" type="text" id="fromdate" 
+						  		class="form-control datepicker" ng-model="report.fromdate" >
+						  	</small></h5>
+						</div>
+						
+						<div class="col-md-2">
+							<h5><small>
+								<strong>
+									<label for="date-picker-example">To Date</label>
+								</strong>
+						  		<input placeholder="Selected to date" type="text" id="todate" 
+						  		 class="form-control datepicker" ng-model="report.todate" >
+						  	</small></h5>
+						</div>
+						
+						<div class="col-md-4" style="margin-top: 25px;">
+							<button class="btn btn-green btn-md waves-effect waves-light" 
+									type="submit" ng-click="downloadreport()">Download</button>
+
+							<button class="btn btn-primary btn-md waves-effect waves-light" 
+							type="button" ng-click="resetpage()">Reset</button>
+						</div>
+				 </div>
+			</div>	
+		</div>	
+	</div>
+</div>
+ 
+ 
+ <script type="text/javascript">
+//Material Select Initialization
+ $(document).ready(function() {
+  $('.mdb-select').materialSelect();
+ });
+ 
+//Data Picker Initialization
+$('.datepicker').pickadate({
+	format: 'dd/mm/yyyy',
+	formatSubmit: 'dd/mm/yyyy'
+});
+ </script>

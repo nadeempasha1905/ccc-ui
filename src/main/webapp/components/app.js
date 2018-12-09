@@ -29,6 +29,10 @@ angular.module('CCCapp',['ngRoute','ngResource','ui.router','ngCookies','angular
             files: ['components/admin/dashboard.js'+'?v='+CACHEBUST_VERSION]    
         },
         {
+            name : 'reports', 
+            files: ['components/admin/reports.js'+'?v='+CACHEBUST_VERSION]    
+        },
+        {
             name : 'trackcomplaint', 
             files: ['components/admin/trackcomplaint.js'+'?v='+CACHEBUST_VERSION]    
         },
@@ -53,12 +57,28 @@ angular.module('CCCapp',['ngRoute','ngResource','ui.router','ngCookies','angular
             files: ['components/admin/updatedocket.js'+'?v='+CACHEBUST_VERSION]    
         },
         {
+            name : 'searchdocket', 
+            files: ['components/admin/searchdocket.js'+'?v='+CACHEBUST_VERSION]    
+        },
+        {
             name : 'summarylist', 
             files: ['components/admin/summarylist.js'+'?v='+CACHEBUST_VERSION]    
         },
         {
             name : 'complaintdashboard', 
             files: ['components/admin/complaintdashboard.js'+'?v='+CACHEBUST_VERSION]    
+        },
+        {
+            name : 'mycomplaints', 
+            files: ['components/admin/mycomplaints.js'+'?v='+CACHEBUST_VERSION]    
+        },
+        {
+            name : 'interruptions', 
+            files: ['components/admin/interruptions.js'+'?v='+CACHEBUST_VERSION]    
+        },
+        {
+            name : 'viewinterruptions', 
+            files: ['components/admin/viewinterruptions.js'+'?v='+CACHEBUST_VERSION]    
         },
         {
             name : 'designation', 
@@ -154,6 +174,20 @@ angular.module('CCCapp',['ngRoute','ngResource','ui.router','ngCookies','angular
                     //     return $state.go('login');
                     // }
                     return $ocLazyLoad.load('dashboard'); // Resolve promise and load before view 
+                }]
+            }                  
+        }) 
+        
+     .state('reports', {
+            url: '/reports',
+            templateUrl: 'components/admin/reports.html',
+            controller:'reportsCtrl',                         
+            resolve: {
+                loadMyCtrl: ['$ocLazyLoad','$cookies','$state', function($ocLazyLoad,$cookies,$state) {
+                    // if($cookies.get("access_token")==null) {                                
+                    //     return $state.go('login');
+                    // }
+                    return $ocLazyLoad.load('reports'); // Resolve promise and load before view 
                 }]
             }                  
         }) 
@@ -265,6 +299,31 @@ angular.module('CCCapp',['ngRoute','ngResource','ui.router','ngCookies','angular
               } 
                                 
         })
+        
+        .state('admin.searchdocket', {
+            url: '/searchdocket',
+            params:{
+            	requestid:null,
+            	statusid:null,
+            	location_code:null,
+            	docketno:null,
+            	docketdate:null,
+            	subcategoryid:null,
+            	statusname:null
+            },
+            views:{
+          	  "admin": {  
+          		 controller:'searchdocketCtrl',  
+	    		 templateUrl: 'components/admin/searchdocket.html'		    		 
+	           }		           
+              },
+              resolve: {
+                  loadMyCtrl: ['$ocLazyLoad','$cookies','$state', function($ocLazyLoad,$cookies,$state) {                  
+                      return $ocLazyLoad.load('searchdocket'); // Resolve promise and load before view 
+                  }]
+              } 
+                                
+        })
         .state('admin.summarylist', {
             url: '/summarylist',
             params:{
@@ -298,6 +357,50 @@ angular.module('CCCapp',['ngRoute','ngResource','ui.router','ngCookies','angular
               resolve: {
                   loadMyCtrl: ['$ocLazyLoad','$cookies','$state', function($ocLazyLoad,$cookies,$state) {                  
                       return $ocLazyLoad.load('complaintdashboard'); // Resolve promise and load before view 
+                  }]
+              } 
+                                
+        })
+        .state('admin.mycomplaints', {
+            url: '/mycomplaints',
+            views:{
+          	  "admin": {  
+          		 controller:'mycomplaintsCtrl',  
+	    		 templateUrl: 'components/admin/mycomplaints.html'		    		 
+	           }		           
+              },
+              resolve: {
+                  loadMyCtrl: ['$ocLazyLoad','$cookies','$state', function($ocLazyLoad,$cookies,$state) {                  
+                      return $ocLazyLoad.load('mycomplaints'); // Resolve promise and load before view 
+                  }]
+              } 
+                                
+        })
+         .state('admin.interruptions', {
+            url: '/interruptions',
+            views:{
+          	  "admin": {  
+          		 controller:'interruptionsCtrl',  
+	    		 templateUrl: 'components/admin/interruptions.html'		    		 
+	           }		           
+              },
+              resolve: {
+                  loadMyCtrl: ['$ocLazyLoad','$cookies','$state', function($ocLazyLoad,$cookies,$state) {                  
+                      return $ocLazyLoad.load('interruptions'); // Resolve promise and load before view 
+                  }]
+              } 
+        })
+         .state('admin.viewinterruptions', {
+            url: '/viewinterruptions',
+            views:{
+          	  "admin": {  
+          		 controller:'viewinterruptionsCtrl',  
+	    		 templateUrl: 'components/admin/viewinterruptions.html'		    		 
+	           }		           
+              },
+              resolve: {
+                  loadMyCtrl: ['$ocLazyLoad','$cookies','$state', function($ocLazyLoad,$cookies,$state) {                  
+                      return $ocLazyLoad.load('viewinterruptions'); // Resolve promise and load before view 
                   }]
               } 
                                 
@@ -803,6 +906,139 @@ angular.module('CCCapp',['ngRoute','ngResource','ui.router','ngCookies','angular
 	
 	$scope.testdate=new Date();
 	$rootScope.version=CACHEBUST_VERSION;
+	$rootScope.COMPANY_USER = false;
+	$rootScope.ZONE_USER = false;
+	$rootScope.CIRCLE_USER = false;
+	$rootScope.DIVISION_USER = false;
+	$rootScope.SUBDIVISION_USER = false;
+	$rootScope.OMSECTION_USER = false;
+	$rootScope.COMPANY_CODE = 0;
+	$rootScope.ZONE_CODE = 0;
+	$rootScope.CIRCLE_CODE = 0;
+	$rootScope.DIVISION_CODE = 0;
+	$rootScope.SUBDIVISION_CODE = 0;
+	$rootScope.OMSECTION_CODE = 0;
+	
+	$rootScope.COMPANYCODE = '2';
+
+	$rootScope.getUserRoles = function(){
+		
+    	var USERINFO= store.get("userinfo");
+    	
+    	if((USERINFO.location_code).length === 1 
+    			&& (USERINFO.role_code === "EC" 
+    				|| USERINFO.role_code === "CRE" 
+    					|| USERINFO.role_code === "DT" 
+    						|| USERINFO.role_code === "MD" 
+    							|| USERINFO.role_code === "FA")){
+    		$rootScope.COMPANY_USER = true;
+    		$rootScope.ZONE_USER = false;
+    		$rootScope.CIRCLE_USER = false;
+    		$rootScope.DIVISION_USER = false;
+    		$rootScope.SUBDIVISION_USER = false;
+    		$rootScope.OMSECTION_USER = false;
+    		
+    		$rootScope.GLOBAL_LOCATION_CODE = USERINFO.location_code;
+    		
+    		$rootScope.COMPANY_CODE = USERINFO.location_code;
+    		$rootScope.ZONE_CODE = 0;
+    		$rootScope.CIRCLE_CODE = 0;
+    		$rootScope.DIVISION_CODE = 0;
+    		$rootScope.SUBDIVISION_CODE = 0;
+    		$rootScope.OMSECTION_CODE = 0;
+    		
+    	}else if((USERINFO.location_code).length === 2 
+    			&& (USERINFO.role_code === "CE" 
+    				|| USERINFO.role_code === "CA" )){
+    		$rootScope.COMPANY_USER = false;
+    		$rootScope.ZONE_USER = true;
+    		$rootScope.CIRCLE_USER = false;
+    		$rootScope.DIVISION_USER = false;
+    		$rootScope.SUBDIVISION_USER = false;
+    		$rootScope.OMSECTION_USER = false;
+    		
+    		$rootScope.GLOBAL_LOCATION_CODE = USERINFO.location_code;
+    		
+    		$rootScope.COMPANY_CODE = 0;
+    		$rootScope.ZONE_CODE = USERINFO.location_code;
+    		$rootScope.CIRCLE_CODE = 0;
+    		$rootScope.DIVISION_CODE = 0;
+    		$rootScope.SUBDIVISION_CODE = 0;
+    		$rootScope.OMSECTION_CODE = 0;
+    	}else if((USERINFO.location_code).length === 3 
+    			&& (USERINFO.role_code === "SE" 
+    				|| USERINFO.role_code === "DCA" )){
+    		$rootScope.COMPANY_USER = false;
+    		$rootScope.ZONE_USER = false;
+    		$rootScope.CIRCLE_USER = true;
+    		$rootScope.DIVISION_USER = false;
+    		$rootScope.SUBDIVISION_USER = false;
+    		$rootScope.OMSECTION_USER = false;
+    		
+    		$rootScope.GLOBAL_LOCATION_CODE = USERINFO.location_code;
+    		
+    		$rootScope.COMPANY_CODE = 0;
+    		$rootScope.ZONE_CODE = 0;
+    		$rootScope.CIRCLE_CODE = USERINFO.location_code;
+    		$rootScope.DIVISION_CODE = 0;
+    		$rootScope.SUBDIVISION_CODE = 0;
+    		$rootScope.OMSECTION_CODE = 0;
+    	}else if((USERINFO.location_code).length === 5 
+    			&& (USERINFO.role_code === "EE" 
+    				|| USERINFO.role_code === "AO" )){
+    		$rootScope.COMPANY_USER = false;
+    		$rootScope.ZONE_USER = false;
+    		$rootScope.CIRCLE_USER = false;
+    		$rootScope.DIVISION_USER = true;
+    		$rootScope.SUBDIVISION_USER = false;
+    		$rootScope.OMSECTION_USER = false;
+    		
+    		$rootScope.GLOBAL_LOCATION_CODE = USERINFO.location_code;
+    		
+    		$rootScope.COMPANY_CODE = 0;
+    		$rootScope.ZONE_CODE = 0;
+    		$rootScope.CIRCLE_CODE = 0;
+    		$rootScope.DIVISION_CODE = USERINFO.location_code;
+    		$rootScope.SUBDIVISION_CODE = 0;
+    		$rootScope.OMSECTION_CODE = 0;
+    	}else if((USERINFO.location_code).length === 7 
+    			&& (USERINFO.role_code === "AEE" 
+    				|| USERINFO.role_code === "AAO" )){
+    		$rootScope.COMPANY_USER = false;
+    		$rootScope.ZONE_USER = false;
+    		$rootScope.CIRCLE_USER = false;
+    		$rootScope.DIVISION_USER = false;
+    		$rootScope.SUBDIVISION_USER = true;
+    		$rootScope.OMSECTION_USER = false;
+    		
+    		$rootScope.GLOBAL_LOCATION_CODE = USERINFO.location_code;
+    		
+    		$rootScope.COMPANY_CODE = 0;
+    		$rootScope.ZONE_CODE = 0;
+    		$rootScope.CIRCLE_CODE = 0;
+    		$rootScope.DIVISION_CODE = 0;
+    		$rootScope.SUBDIVISION_CODE = USERINFO.location_code;
+    		$rootScope.OMSECTION_CODE = 0;
+    	}else if((USERINFO.location_code).length === 9 
+    			&& (USERINFO.role_code === "SO")){
+    		$rootScope.COMPANY_USER = false;
+    		$rootScope.ZONE_USER = false;
+    		$rootScope.CIRCLE_USER = false;
+    		$rootScope.DIVISION_USER = false;
+    		$rootScope.SUBDIVISION_USER = false;
+    		$rootScope.OMSECTION_USER = true;
+    		
+    		$rootScope.GLOBAL_LOCATION_CODE = USERINFO.location_code;
+    		
+    		$rootScope.COMPANY_CODE = 0;
+    		$rootScope.ZONE_CODE = 0;
+    		$rootScope.CIRCLE_CODE = 0;
+    		$rootScope.DIVISION_CODE = 0;
+    		$rootScope.SUBDIVISION_CODE = 0;
+    		$rootScope.OMSECTION_CODE = USERINFO.location_code;
+    	}
+    	
+	}
 	
 			
 	 $rootScope.getquickcomplaints = function(){

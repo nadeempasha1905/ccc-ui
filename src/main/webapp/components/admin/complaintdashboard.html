@@ -16,31 +16,25 @@ table tbody tr td {
     font-size: medium;
 }
 
+#complaintdashboard a {
+	color: blue;
+}
 
+#complaintdashboard a:hover {
+	font-size: medium;
+}
 -->
 </style>
 
-<div class="row">
+<div class="row" id="complaintdashboard">
 	<div class="col-md-12">
-		<div class="card mb-4">
-		<!-- Card header -->
-		<!-- <div class="card-header h5">Consumer Registration</div> -->
-		<!--Card content-->
-				<div class="card-body">
 					
-					<!-- <div class="row">
-						<div class="col-md-12">
-							<div style="text-align: center;">
-								<h2>Complaint Summary</h2>
-							</div>
-						</div>
-					</div> -->
-					
-					<div style="text-align: center;">
-								<h4>Complaint Summary</h4>
-							</div>
-					<hr>
-					
+					<div style="text-align: left;">
+			<strong> <i class="glyphicon glyphicon-link"></i> &nbsp;<span
+				class="h5">Complaint Summary</span>
+			</strong> &nbsp;&gt;&gt;&nbsp;
+		</div>
+					<hr/>
 					<div class="row">
 						<div class="col-md-3 mb-3"><small><strong>
 							<label for="complaintmode">Complaint Mode</label></strong>
@@ -52,22 +46,28 @@ table tbody tr td {
 							</select></small>
 						</div>
 						
-						<div class="col-md-3 mb-3">
+						<div class="col-md-2 mb-3">
 							<small>
 								<strong>
 									<label for="date-picker-example">From Date</label>
 								</strong>
-						  		<input placeholder="Selected from date" type="text" id="fromdate" class="form-control datepicker">
+						  		<input placeholder="Selected from date" type="text" id="fromdate" 
+						  		ng-model="complaintdashboard.fromdate" class="form-control datepicker">
 						  	</small>
 						</div>
 						
-						<div class="col-md-3 mb-3">
+						<div class="col-md-2 mb-3">
 							<small>
 								<strong>
 									<label for="date-picker-example">To Date</label>
 								</strong>
-						  		<input placeholder="Selected to date" type="text" id="todate" class="form-control datepicker">
+						  		<input placeholder="Selected to date" type="text" id="todate" 
+						  		ng-model="complaintdashboard.todate"  class="form-control datepicker">
 						  	</small>
+						</div>
+						<div class="col-md-2 mb-3">
+							<button class="btn btn-green btn-md waves-effect waves-light" style="margin-top: 25px;"
+									type="submit" ng-click="getdashboardreportsummary()">Search</button>
 						</div>
 						
 					<div class="col-md-12">
@@ -106,14 +106,13 @@ table tbody tr td {
 					</div>
 					</div>
 			</div>
-		</div>
-</div>
 </div>
 
 
 <script type="text/javascript">
 //Data Picker Initialization
 $('.datepicker').pickadate({
+	format: 'dd/mm/yyyy',
 	formatSubmit: 'dd/mm/yyyy'
 });
 </script>

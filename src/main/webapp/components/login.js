@@ -91,23 +91,53 @@ angular
                              $cookies.put("access_token", data.data.access_token, {'expires': expireDate});
                              $rootScope.username = $scope.user.username;
                              $cookies.put("user", $scope.user.username);
-                             $rootScope.IsLogin = true;
                              
-                            // $('#signinmodal').modal('toggle');
                              
-                           //function to get quick complaints on load
-                     		$rootScope.getquickcomplaints();
-                             
-                             $state.go('dashboard');
+    	                   	 $http.get(RSURL+"/query/getuserinfo?username="+$scope.user.username)
+    					  		.then(function (data){
+	    					  			console.log(data.data);	
+	    					  			
+    					  			if(data.data.length > 0){
+    					  				
+    					  				$rootScope.IsLogin = true;
+    					  				$scope.error = false;
+    					  			  store.set('userinfo',data.data[0]);
+   		                             
+      					    		  $rootScope.getquickcomplaints();
+      					    		  //$state.go('dashboard');
+      					    		$state.go('admin.quickcomplaint');
+      					    		  
+    					  			}else{
+    					  				console.log("User information not found !!!");
+    					  				alert("User information not found !!!");
+    					  				$scope.error = true;
+    					  				$scope.message = "User information not found. Contact Administrator !!!";
+    					  				$timeout(function () {
+    		           	                     $scope.error = false;
+    		           	                  $scope.message = null;
+    		           	                 }, 2000);
+    					  				
+    					  				$cookies.remove("access_token");
+    	                                $cookies.remove("user");
+    					  				return;
+    					  			}
+    					    	   },function (data){
+    					    	   });
                             },
                             function (error) {
+                            	
+                            	$cookies.remove("access_token");
+                                $cookies.remove("user");
+                            console.log("error",error);	
            	                 $scope.error = true;
+           	                 $scope.message = (error.data.error_description === undefined || error.data.error_description === null ? error.data.error : error.data.error_description);
            	                 $timeout(function () {
            	                     $scope.error = false;
+           	                     $scope.message = null;
            	                 }, 2000);
                             }
                         ),function(response){
-                        	console.log(response);
+                        	console.log("response",response);
                         };           
                     }
                     

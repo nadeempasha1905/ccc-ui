@@ -16,14 +16,20 @@ angular
 				    	   },function (data){
 				    	   });*/
                 		$rootScope.username = $cookies.get("user");
-                		
-                		
 					   }else{
 						   $rootScope.IsLogin=false;
 						   $state.go('login');
 					   }
                 	
+                	var USERINFO= store.get("userinfo");
+                	
                 	$scope.complaintdashboard = {};
+                	$scope.complaintdashboard.fromdate = moment(new Date()).subtract(1, 'year').format('DD/MM/YYYY').toString();
+                    $scope.complaintdashboard.todate = moment(new Date()).format("DD/MM/YYYY").toString();
+                    
+                	$scope.LOCATION_CODE_PARAM = '';
+                    $scope.complaintdashboard.location = USERINFO.location_code;
+              		//$scope.complaintdashboard.selected_complaintmode.modeid = undefined;
                 	
                   	 $scope.loadcomplaintmodes = function()
                      {
@@ -38,15 +44,12 @@ angular
                   	 
                   	$scope.getdashboardreportsummary = function()
                     {
-                  		$scope.complaintdashboard.location = '2';
-                  		$scope.complaintdashboard.modeid = 0;
-                  		$scope.complaintdashboard.fromdate = '01/01/2018';
-                  		$scope.complaintdashboard.todate = '26/11/2018';
-                  		
                     	$scope.COMPLAINTSUMMARYLIST = [];
                     	 $http.get(RSURL+"/query/getdashboardreportsummary?" +
                     	 		"location="+$scope.complaintdashboard.location+"&" +
-                    	 		"modeid="+$scope.complaintdashboard.modeid+"&" +
+                    	 		"modeid="+($scope.complaintdashboard.selected_complaintmode === undefined || 
+                    	 					$scope.complaintdashboard.selected_complaintmode === null ? 0 : 
+                    	 						$scope.complaintdashboard.selected_complaintmode.modeid)+"&" +
                     	 		"fromdate="+$scope.complaintdashboard.fromdate+"&"+
                     	 		"todate="+$scope.complaintdashboard.todate)
    				  		.then(function (data){
@@ -58,7 +61,7 @@ angular
                   	 
                 	
                 	$scope.gotosummarylist = function(statusname,categoryid,statusid,modeid){
-                		$state.go('admin.summarylist',{location:'2',categoryid:categoryid,statusid:statusid,modeid:modeid,statusname:statusname});
+                		$state.go('admin.summarylist',{location:$scope.complaintdashboard.location,categoryid:categoryid,statusid:statusid,modeid:modeid,statusname:statusname});
                 	};
                 	
                 	$scope.loadcomplaintmodes();

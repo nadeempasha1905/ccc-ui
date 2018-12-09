@@ -104,14 +104,15 @@
   					  </li>
 					</ul>
 					 <hr>
-					 <div class="tab-content pt-2 pl-1" id="pills-tabContent">
-					 <div class="tab-pane fade show active" id="quick-complaint" role="tabpanel" aria-labelledby="quick-complaint-tab">
-					 <div class="alert alert-success waves-effect waves-light text-center" role="alert" ng-show="message.length > 0 && !error">
+					  <div class="alert alert-success waves-effect waves-light text-center" role="alert" ng-show="message.length > 0 && !error">
 							  {{message}}
 						</div>
 						<div class="alert alert-danger waves-effect waves-light text-center" role="alert" ng-show="message.length > 0 && error">
 							  {{message}}
 						</div>
+					 <div class="tab-content pt-2 pl-1" id="pills-tabContent">
+					 <div class="tab-pane fade show active" id="quick-complaint" role="tabpanel" aria-labelledby="quick-complaint-tab">
+					
 					 <form role="form" name="quickcomplaintform"  class="was-validated">
 					 
 					 	<h3 class="dark-grey-text text-center">

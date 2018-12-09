@@ -9,6 +9,14 @@ angular
                 	console.log("Dashboard Page initiated !!!");
                 	$scope.heading = "Dashboard Page";
                 	
+                	$scope.dashboard = {
+                			
+                	};
+                	
+                	$scope.LOCATION_CODE_PARAM = '';
+                    $scope.dashboard.fromdate = moment(new Date()).subtract(1, 'year').format('DD/MM/YYYY').toString();
+                    $scope.dashboard.todate = moment(new Date()).format("DD/MM/YYYY").toString();
+                	
                 	if($cookies.get("access_token")) {
                 		$rootScope.IsLogin=true;
                 		/*$http.get(RSURL+"/profile")
@@ -21,6 +29,11 @@ angular
 						   $rootScope.IsLogin=false;
 						   $state.go('login');
 					   }
+                	
+                	$rootScope.getUserRoles();
+                	
+                	console.log("rootscope = ",$rootScope.COMPANY_USER ,$rootScope.ZONE_USER,$rootScope.CIRCLE_USER,
+                			$rootScope.DIVISION_USER,$rootScope.SUBDIVISION_USER ,$rootScope.OMSECTION_USER);
                 	
                 	// Themes begin
                 	am4core.useTheme(am4themes_animated);
@@ -50,9 +63,9 @@ angular
                   	$scope.dashboardlisttype = "";
                   	$scope.getdahboardcomplaintlist = function()
                     {
-                  		 var locationcode = "2";
-                  		 var fromdate = '01/01/2017';
-                  		 var todate = '30/11/2018';
+                  		 var locationcode = $scope.LOCATION_CODE_PARAM;
+                  		 var fromdate = $scope.dashboard.fromdate;
+                  		 var todate = $scope.dashboard.todate;
                   		 
                     	$scope.DASHBOARDCOMPLAINTLIST = [];
                     	 $http.get(RSURL+"/query/getdahboardcomplaintlist?" +
@@ -79,9 +92,9 @@ angular
                   		
                   		chart1.data = null;
                   		
-                  		 var locationcode = "2";
-                  		 var fromdate = '01/01/2017';
-                  		 var todate = '30/11/2018';
+                  		 var locationcode = $scope.LOCATION_CODE_PARAM;
+                  		 var fromdate = $scope.dashboard.fromdate;
+                  		 var todate = $scope.dashboard.todate;
                   		 //var statusname = filter_type;
                   		 
                   		$scope.heading_label = "Category Wise Complaints Breakup";
@@ -168,9 +181,9 @@ angular
                   		
                   		chart1.data = null;
                   		
-                  		 var locationcode = "212";
-                  		 var fromdate = '01/01/2017';
-                  		 var todate = '30/11/2018';
+                  		 var locationcode = $scope.LOCATION_CODE_PARAM;
+                  		 var fromdate = $scope.dashboard.fromdate;
+                  		 var todate = $scope.dashboard.todate;
                   		 //var statusname = filter_type;
                   		 
                   		$scope.heading_label = "Location Wise Complaints Breakup";
@@ -384,6 +397,8 @@ angular
 
                   	$scope.render_mainpiechart = function(){
                   		
+                  		chart  = am4core.create("chart", am4charts.PieChart);
+                  		
                     	// Add data
                     	chart.data = [
 		                    	/*{"complainttypes": "Total Complaints","values": $scope.MAINDASHBOARDDETAILS.total},*/ 
@@ -453,9 +468,9 @@ angular
                   		
                   		 var chart1 = am4core.create("chart1", am4charts.PieChart);
                   		
-                 		 var locationcode = "2";
-                  		 var fromdate = '01/01/2017';
-                  		 var todate = '30/11/2018';
+                  		 var locationcode = $scope.LOCATION_CODE_PARAM;
+                  		 var fromdate = $scope.dashboard.fromdate;
+                  		 var todate = $scope.dashboard.todate;
                   		 
                   		 $scope.heading_label = "Department Wise Complaints Breakup";
 
@@ -502,9 +517,9 @@ angular
                   		
                   		 var chart1 = am4core.create("chart1", am4charts.PieChart);
                    		
-                 		 var locationcode = "2";
-                  		 var fromdate = '01/01/2017';
-                  		 var todate = '30/11/2018';
+                  		 var locationcode = $scope.LOCATION_CODE_PARAM;
+                  		 var fromdate = $scope.dashboard.fromdate;
+                  		 var todate = $scope.dashboard.todate;
                   		 
                   		 $scope.heading_label = "Complaint Mode Wise Complaints Breakup";
 
@@ -780,9 +795,9 @@ angular
                   	
                   	$scope.render_comparision_chart = function(){
                   		
-                  		 var locationcode = "2";
-                  		 var fromdate = '01/01/2017';
-                  		 var todate = '30/11/2018';
+                  		 var locationcode = $scope.LOCATION_CODE_PARAM;
+                  		 var fromdate = $scope.dashboard.fromdate;
+                  		 var todate = $scope.dashboard.todate;
                   		 
                     	$scope.COMPARISIONDATALIST = [];
                     	 $http.get(RSURL+"/query/getcomparisoindata?" +
@@ -862,9 +877,9 @@ angular
                   	
                   	$scope.render_resolutionstatus_chart = function(){
                   		
-                		 var locationcode = "2";
-                		 var fromdate = '01/01/2017';
-                		 var todate = '30/11/2018';
+                  		 var locationcode = $scope.LOCATION_CODE_PARAM;
+                  		 var fromdate = $scope.dashboard.fromdate;
+                  		 var todate = $scope.dashboard.todate;
                 		 
                   	$scope.RESOLUTIONSUMMARYLIST = [];
                   	 $http.get(RSURL+"/query/getdashboard_resolution_status_summary?" +
@@ -945,14 +960,28 @@ angular
                 					grouped : true
                 				},
                                 axis: {
-                                    x: {
+                                   /* x: {
                                         type: 'category',
                                         tick: {
                                             rotate: 75,
                                             multiline: false
                                         },
                                         height: 130
-                                    }
+                                    }*/
+                                	 x: {
+                                         type: 'category',
+                                         tick: {
+                                             count:10,
+                                             multiline: false
+                                         }
+                                     },
+                      		        y: {					
+                     		        	min:0,
+                                        label: { // ADD
+                                          text: 'Number Of Pending Complaints',
+                                          position: 'outer-middle'
+                                        }
+                     		        }
                                 },
                                 grid: {
                                     y: {
@@ -966,9 +995,9 @@ angular
                   	
                   	$scope.render_agewisesummary_chart = function(){
                   		
-                 		 var locationcode = "2";
-                 		 var fromdate = '01/01/2017';
-                 		 var todate = '30/11/2018';
+                  		 var locationcode = $scope.LOCATION_CODE_PARAM;
+                  		 var fromdate = $scope.dashboard.fromdate;
+                  		 var todate = $scope.dashboard.todate;
                  		 
                    	$scope.AGEWISESUMMARYLIST = [];
                    	 $http.get(RSURL+"/query/getdashboard_agewise_summary?" +
@@ -1095,7 +1124,7 @@ angular
 	                  			        columns: [lessthaneight[i]]
 	                  			    });
 				    			}
-                 		},200);
+                 		},100);
                  		
                  		$timeout(function(){
                  			for(var i = 0 ; i < eighttothirty.length; i++){
@@ -1103,7 +1132,7 @@ angular
 	                  			        columns: [eighttothirty[i]]
 	                  			    });
 				    			}
-                 		},200);
+                 		},100);
                  		
                  		$timeout(function(){
                  			for(var i = 0 ; i < thirtyabove.length; i++){
@@ -1111,18 +1140,178 @@ angular
 	                  			        columns: [thirtyabove[i]]
 	                  			    });
 				    			}
-                 		},200);
+                 		},100);
                  		
                  		},200);
                  	};
-                  	
                  	
-                  	$scope.getmaindashboarddetails();
-                  	$scope.getdahboardcomplaintlist();
-                  	$scope.render_comparision_chart();
-                  	$scope.render_agewisesummary_chart();
-                  	$scope.render_resolutionstatus_chart();
-                  	
+                  	$scope.getdashboard_locationwise_complients_summary = function(){
+                  		
+                  		 var locationcode = $scope.LOCATION_CODE_PARAM;
+                  		 var fromdate = $scope.dashboard.fromdate;
+                  		 var todate = $scope.dashboard.todate;
+                		 var year = "2018";
+                		 
+                  	$scope.LOCATIONSCOMPLAINTSSUMMARY = [];
+                  	 $http.get(RSURL+"/query/getdashboard_locationwise_complients_summary?" +
+	                   			"locationcode="+locationcode+"&year="+year)
+ 				  		.then(function (data){
+ 				    		  
+ 				  				$scope.LOCATIONSCOMPLAINTSSUMMARY = data.data;
+ 				  				
+ 				  				$scope.LOCATIONSCOMPLAINTSSUMMARY_NEW = [];
+ 				    		  
+ 				  				var COLORS = ["#ea8703","#4b134f","#f94f62","#f0ad4e","#337ab7","#5cb85c","#81911e","#1f4037","#d9534f","#6D6027","#CB356B"];
+ 				  				
+ 				  				
+ 				  				var record = 0 ;
+ 				  				$scope.LOCATIONSCOMPLAINTSSUMMARY.map(function(e,index){
+ 				  					
+ 				  					var obj = {
+			  							"location_code": e.location_code,
+			  						    "location_name": e.location_name,
+			  						    "total": e.total,
+			  						    "pending": e.pending,
+			  						    "resolved": e.resolved,
+			  						    "color" : COLORS[index]
+ 				  					};
+ 				  					
+ 				  					$scope.LOCATIONSCOMPLAINTSSUMMARY_NEW.push(obj);
+ 				  					
+ 				  					if(index === COLORS.length){
+ 				  						record = 0;
+ 				  					}else{
+ 				  						record++;
+ 				  					}
+ 				  					
+ 				  					
+ 				  					
+ 				  				});
+ 				    		  
+ 				    	   },function (data){
+ 				    	   });
+                	};
                 	
+                  	$scope.ZONELIST = [];
+                  	$scope.CIRCLELIST = [];
+                  	$scope.DIVISIONLIST = [];
+                  	$scope.SUBDIVISIONLIST = [];
+                  	$scope.OMSECTIONLIST = [];
+                  	
+                  	$scope.getzonelist = function(){
+	                	$scope.ZONELIST = [];
+	                	$scope.CIRCLELIST = [];
+	                	
+	                	 $http.get(RSURL+"/query/getzonelist?locationcode="+$rootScope.COMPANYCODE)
+				  		.then(function (data){
+				    		  $scope.ZONELIST = data.data;
+				    		  
+				    		  if(!$rootScope.ZONE_USER){
+				    			  $scope.dashboard.zone =  $filter('filter')($scope.ZONELIST,{ld_code:$rootScope.GLOBAL_LOCATION_CODE.substring(0,2)},true)[0];
+				    			  $scope.getcirclelist();
+			                	}
+				    	   },function (data){
+				    	   });
+                  	 }
+                  	
+                  	$scope.getcirclelist = function(){
+                  		$scope.CIRCLELIST = [];
+                      	$scope.DIVISIONLIST = [];
+                  		if($scope.dashboard.zone != undefined || $scope.dashboard.zone != null){
+                  			$http.get(RSURL+"/query/getcirclelist?locationcode="+$scope.dashboard.zone.ld_code)
+    				  		.then(function (data){
+    				    		  $scope.CIRCLELIST = data.data;
+    				    		  if(!$rootScope.CIRCLE_USER){
+    				    			  $scope.dashboard.circle =  $filter('filter')($scope.CIRCLELIST,{ld_code:$rootScope.GLOBAL_LOCATION_CODE.substring(0,3)},true)[0];
+    				    			  $scope.getdivisionlist();
+    			                	}
+    				    	   },function (data){
+    				    	   });
+                  		}
+                  	 }
+                  	
+                  	$scope.getdivisionlist = function(){
+                  		$scope.DIVISIONLIST = [];
+                      	$scope.SUBDIVISIONLIST = [];
+                  		if($scope.dashboard.circle != undefined || $scope.dashboard.circle != null){
+                  			$http.get(RSURL+"/query/getdivisionlist?locationcode="+$scope.dashboard.circle.ld_code)
+    				  		.then(function (data){
+    				    		  $scope.DIVISIONLIST = data.data;
+    				    		  
+    				    		  if(!$rootScope.DIVISION_USER){
+    				    			  $scope.dashboard.division =  $filter('filter')($scope.DIVISIONLIST,{ld_code:$rootScope.GLOBAL_LOCATION_CODE.substring(0,5)},true)[0];
+    				    			  $scope.getsubdivisionlist();
+    			                	}
+    				    	   },function (data){
+    				    	   });
+                  		}
+                  	 }
+                  	
+                  	$scope.getsubdivisionlist = function(){
+                  		$scope.SUBDIVISIONLIST = [];
+                      	$scope.OMSECTIONLIST = [];
+                  		if($scope.dashboard.division != undefined || $scope.dashboard.division != null){
+                  			$http.get(RSURL+"/query/getsubdivisionlistbydivision?locationcode="+$scope.dashboard.division.ld_code)
+    				  		.then(function (data){
+    				    		  $scope.SUBDIVISIONLIST = data.data;
+    				    		  
+    				    		  if(!$rootScope.SUBDIVISION_USER){
+    				    			  $scope.dashboard.subdivision =  $filter('filter')($scope.SUBDIVISIONLIST,{ld_code:$rootScope.GLOBAL_LOCATION_CODE.substring(0,7)},true)[0];
+    				    			  $scope.getomsectionlist();
+    			                	}
+    				    	   },function (data){
+    				    	   });
+                  		}
+                  	 }
+                  	
+                  	$scope.getomsectionlist = function(){
+                  		$scope.OMSECTIONLIST = [];
+                  		if($scope.dashboard.subdivision != undefined || $scope.dashboard.subdivision != null){
+                  			$http.get(RSURL+"/query/getomsectionlist?locationcode="+$scope.dashboard.subdivision.ld_code)
+    				  		.then(function (data){
+    				    		  $scope.OMSECTIONLIST = data.data;
+    				    			  $scope.dashboard.omsection =  $filter('filter')($scope.OMSECTIONLIST,{ld_code:$rootScope.GLOBAL_LOCATION_CODE.substring(0,9)},true)[0];
+    				    	   },function (data){
+    				    	   });
+                  		}
+                  	 }
+                  	
+                  	$scope.resetpage = function(){
+                  		
+                  	}
+                  	
+                  	$scope.applyfilter = function(){
+                  		
+                  		$scope.LOCATION_CODE_PARAM = $rootScope.COMPANYCODE;
+                  		
+                  		if($scope.dashboard.zone != undefined || $scope.dashboard.zone != null){
+                  			$scope.LOCATION_CODE_PARAM = $scope.dashboard.zone.ld_code;
+                  		}
+                  		if($scope.dashboard.circle != undefined || $scope.dashboard.circle != null){
+                  			$scope.LOCATION_CODE_PARAM = $scope.dashboard.circle.ld_code;
+                  		}
+                  		if($scope.dashboard.division != undefined || $scope.dashboard.division != null){
+                  			$scope.LOCATION_CODE_PARAM = $scope.dashboard.division.ld_code;
+                  		}
+                  		if($scope.dashboard.subdivision != undefined || $scope.dashboard.subdivision != null){
+                  			$scope.LOCATION_CODE_PARAM = $scope.dashboard.subdivision.ld_code;
+                  		}
+                  		if($scope.dashboard.omsection != undefined || $scope.dashboard.omsection != null){
+                  			$scope.LOCATION_CODE_PARAM = $scope.dashboard.omsection.ld_code;
+                  		}
+                  		
+                  		$scope.getmaindashboarddetails();
+                      	$scope.getdahboardcomplaintlist();
+                      	$scope.render_comparision_chart();
+                      	$scope.render_agewisesummary_chart();
+                      	$scope.render_resolutionstatus_chart();
+                      	$scope.getdashboard_locationwise_complients_summary();
+                  		
+                  	};
+                  	
+                  	$scope.getzonelist();
+                  	
+                  	$scope.applyfilter();
+                  	
                 });
 
