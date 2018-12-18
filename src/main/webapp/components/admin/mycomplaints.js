@@ -17,6 +17,8 @@ angular
 						   $state.go('login');
 					   }
                 	
+                	$rootScope.activelink(4);
+                	
                 	var USERINFO= store.get("userinfo");
                 	
                	 $scope.loadcategory = function()

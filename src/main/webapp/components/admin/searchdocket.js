@@ -21,6 +21,8 @@ angular
 						   $state.go('login');
 					   }
                 	
+                	$rootScope.activelink(5);
+                	
                 	var USERINFO= store.get("userinfo");
                 	
                 	

@@ -11,15 +11,7 @@ angular
                 	
                 	$rootScope.getUserRoles();
                 	
-                	$('#quickcmplaintlink').addClass('active');
-                	
-                	console.log($('#pills-tab'));
-                	
-                	 $(this).closest("ul").find(".active").removeClass("active"); 
-                     // add active to the clicked
-                     $(this).addClass("active");
-                     // add active to the clicked's parent LI 
-                     $(this).parent().addClass("active");
+                	$rootScope.activelink(2);
                 	
                 	$scope.consumerinfo = {}; 
                 	

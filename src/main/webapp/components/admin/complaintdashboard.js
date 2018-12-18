@@ -23,6 +23,8 @@ angular
                 	
                 	var USERINFO= store.get("userinfo");
                 	
+                	$rootScope.activelink(1);
+                	
                 	$scope.complaintdashboard = {};
                 	$scope.complaintdashboard.fromdate = moment(new Date()).subtract(1, 'year').format('DD/MM/YYYY').toString();
                     $scope.complaintdashboard.todate = moment(new Date()).format("DD/MM/YYYY").toString();
@@ -51,7 +53,7 @@ angular
                     	 					$scope.complaintdashboard.selected_complaintmode === null ? 0 : 
                     	 						$scope.complaintdashboard.selected_complaintmode.modeid)+"&" +
                     	 		"fromdate="+$scope.complaintdashboard.fromdate+"&"+
-                    	 		"todate="+$scope.complaintdashboard.todate)
+                    	 		"todate="+$scope.complaintdashboard.todate+"&department_id="+(USERINFO.department_id == null ? 0 : USERINFO.department_id))
    				  		.then(function (data){
    				    		  console.log(data);	
    				    		  $scope.COMPLAINTSUMMARYLIST = data.data;

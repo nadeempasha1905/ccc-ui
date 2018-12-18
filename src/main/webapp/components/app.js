@@ -672,8 +672,8 @@ angular.module('CCCapp',['ngRoute','ngResource','ui.router','ngCookies','angular
         	if ($cookies.get("access_token")==null) {
             	event.preventDefault();
             	console.log("222");
-            	return $state.go('dashboard');
-             //   return $state.go('home');
+            	return $state.go('admin.complaintdashboard');
+            	//return $state.go('dashboard');
             }
             return;
         });
@@ -923,7 +923,7 @@ angular.module('CCCapp',['ngRoute','ngResource','ui.router','ngCookies','angular
 
 	$rootScope.getUserRoles = function(){
 		
-    	var USERINFO= store.get("userinfo");
+		var USERINFO= store.get("userinfo");
     	
     	if((USERINFO.location_code).length === 1 
     			&& (USERINFO.role_code === "EC" 
@@ -1056,11 +1056,96 @@ angular.module('CCCapp',['ngRoute','ngResource','ui.router','ngCookies','angular
          $rootScope.logout = function() {
         	 $rootScope.IsLogin = false;
      		$cookies.remove("access_token");
-     		//$state.go('dashboardmdb');
+     		store.remove('userinfo');
+     		$rootScope.COMPANY_USER = false;
+     		$rootScope.ZONE_USER = false;
+     		$rootScope.CIRCLE_USER = false;
+     		$rootScope.DIVISION_USER = false;
+     		$rootScope.SUBDIVISION_USER = false;
+     		$rootScope.OMSECTION_USER = false;
+     		$rootScope.COMPANY_CODE = 0;
+     		$rootScope.ZONE_CODE = 0;
+     		$rootScope.CIRCLE_CODE = 0;
+     		$rootScope.DIVISION_CODE = 0;
+     		$rootScope.SUBDIVISION_CODE = 0;
+     		$rootScope.OMSECTION_CODE = 0;
+     		
      		$state.go('login',null,{reload:true});
      		$window.location.reload();
-     		//$state.go('dashboardmdb');
-     	}       
+     	}
+         
+     	$rootScope.hasRole=function(rolename){  
+     		var USERINFO= store.get("userinfo");
+     		var found=false;	
+     		if(USERINFO === null){
+     			found =  false;
+     		}else{
+	   			 if(USERINFO.role_code===rolename){
+	   				 found=true;				
+	   			 }
+     		}
+	   		 return found;						
+       };
+       
+       $rootScope.activelink = function(id){
+    	   if(id===1){
+    		   $('#pills-complaintdashboardlink-tab').addClass('active');
+    		   $('#pills-quickcomplaint-tab').removeClass('active');
+    		   $('#pills-registercomplaintlink-tab').removeClass('active'); 
+    		   $('#pills-mycomplaintslink-tab').removeClass('active');
+    		   $('#pills-searchdocketlink-tab').removeClass('active');
+    		   $('#pills-interruptionslink-tab').removeClass('active');
+    		   $('#pills-viewinterruptionslink-tab').removeClass('active');
+    	   }else if(id===2){
+    		   $('#pills-quickcomplaint-tab').addClass('active');
+    		   $('#pills-complaintdashboardlink-tab').removeClass('active');
+    		   $('#pills-registercomplaintlink-tab').removeClass('active'); 
+    		   $('#pills-mycomplaintslink-tab').removeClass('active');
+    		   $('#pills-searchdocketlink-tab').removeClass('active');
+    		   $('#pills-interruptionslink-tab').removeClass('active');
+    		   $('#pills-viewinterruptionslink-tab').removeClass('active');
+    	   }else if(id===3){
+    		   $('#pills-registercomplaintlink-tab').addClass('active'); 
+    		   $('#pills-complaintdashboardlink-tab').removeClass('active');
+    		   $('#pills-quickcomplaint-tab').removeClass('active');
+    		   $('#pills-mycomplaintslink-tab').removeClass('active');
+    		   $('#pills-searchdocketlink-tab').removeClass('active');
+    		   $('#pills-interruptionslink-tab').removeClass('active');
+    		   $('#pills-viewinterruptionslink-tab').removeClass('active');
+    	   }else if(id===4){
+    		   $('#pills-mycomplaintslink-tab').addClass('active');
+    		   $('#pills-complaintdashboardlink-tab').removeClass('active');
+    		   $('#pills-quickcomplaint-tab').removeClass('active');
+    		   $('#pills-registercomplaintlink-tab').removeClass('active'); 
+    		   $('#pills-searchdocketlink-tab').removeClass('active');
+    		   $('#pills-interruptionslink-tab').removeClass('active');
+    		   $('#pills-viewinterruptionslink-tab').removeClass('active');
+    	   }else if(id===5){
+    		   $('#pills-searchdocketlink-tab').addClass('active');
+    		   $('#pills-complaintdashboardlink-tab').removeClass('active');
+    		   $('#pills-quickcomplaint-tab').removeClass('active');
+    		   $('#pills-registercomplaintlink-tab').removeClass('active'); 
+    		   $('#pills-mycomplaintslink-tab').removeClass('active');
+    		   $('#pills-interruptionslink-tab').removeClass('active');
+    		   $('#pills-viewinterruptionslink-tab').removeClass('active');
+    	   }else if(id===6){
+    		   $('#pills-interruptionslink-tab').addClass('active');
+    		   $('#pills-complaintdashboardlink-tab').removeClass('active');
+    		   $('#pills-quickcomplaint-tab').removeClass('active');
+    		   $('#pills-registercomplaintlink-tab').removeClass('active'); 
+    		   $('#pills-mycomplaintslink-tab').removeClass('active');
+    		   $('#pills-searchdocketlink-tab').removeClass('active');
+    		   $('#pills-viewinterruptionslink-tab').removeClass('active');
+    	   }else if(id===7){
+    		   $('#pills-viewinterruptionslink-tab').addClass('active');
+    		   $('#pills-complaintdashboardlink-tab').removeClass('active');
+    		   $('#pills-quickcomplaint-tab').removeClass('active');
+    		   $('#pills-registercomplaintlink-tab').removeClass('active'); 
+    		   $('#pills-mycomplaintslink-tab').removeClass('active');
+    		   $('#pills-searchdocketlink-tab').removeClass('active');
+    		   $('#pills-interruptionslink-tab').removeClass('active');
+    	   }
+       };
 	
 	$rootScope.downloadApk=function(){
 		$window.open(RSURL+'/downloadapk?access_token='+$cookies.get("access_token"),'_self');

@@ -17,6 +17,7 @@ angular
 						   $state.go('login');
 					   }
                 	
+                	
                 	var USERINFO= store.get("userinfo");
                 	
                	 $scope.loadinterruptions = function()
@@ -33,5 +34,5 @@ angular
                 $scope.loadinterruptions();
                 	
                 	
-                	
+            	$rootScope.activelink(7);	
                 });

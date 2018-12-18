@@ -8,7 +8,7 @@ angular
                 	
                 	console.log("registercomplaintCtrl initiated !!!");
                 	
-                	console.log($('#pills-tab'));
+                	$rootScope.activelink(3);
                 	
                 	console.log($stateParams);
                 	$scope.quick = {}; 

@@ -17,6 +17,8 @@ angular
 						   $state.go('login');
 					   }
                 	
+                	$rootScope.activelink(6);
+                	
                 	var USERINFO= store.get("userinfo");
                 	
                 	$scope.interruption = {};

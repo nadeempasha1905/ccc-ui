@@ -89,23 +89,7 @@ to {
   
 </head>
 
-<!-- <div class="full-page-intro" style="background-image: url('https://mdbootstrap.com/img/Photos/Others/images/78.jpg'); 
-background-repeat: no-repeat; background-size: cover;">
- -->
-
 <body class="hidden-sn mdb-skin main_section"  ng-cloak 	ng-controller="appCtrl">
-
-<!-- <body class="hidden-sn mdb-skin full-page-intro" style="background-image: url('https://mdbootstrap.com/img/Photos/Others/images/78.jpg'); 
-background-repeat: no-repeat; background-size: cover;" aria-busy="true" ng-cloak 	ng-controller="navCtrl"> -->
-
-		<!-- <div class="loader" data-loading>
-				<img src="images/loading.gif" style="width: 32px; height: auto;" />
-		</div>
-		<div id="loading" >
-			<div class="loader">Loading...</div>
-		</div> -->
-		
-		<!-- <div class="loading" id="loading">Loading&#8230;</div> -->
 
 		<dir-custom-loader class="ng-hide"></dir-custom-loader>
 	
@@ -125,64 +109,32 @@ background-repeat: no-repeat; background-size: cover;" aria-busy="true" ng-cloak
 						</a>
 					</div>
 				</li>
-				<!--/. Logo -->
-				<!--Social-->
-<!-- 				<li>
-					<ul class="social">
-						<li><a
-							href="https://mdbootstrap.com/previews/docs/latest/html/navigation/side-nav-hidden-navbar-fixed.html#"
-							class="icons-sm fb-ic"><i class="fa fa-facebook"> </i></a></li>
-						<li><a
-							href="https://mdbootstrap.com/previews/docs/latest/html/navigation/side-nav-hidden-navbar-fixed.html#"
-							class="icons-sm pin-ic"><i class="fa fa-pinterest"> </i></a></li>
-						<li><a
-							href="https://mdbootstrap.com/previews/docs/latest/html/navigation/side-nav-hidden-navbar-fixed.html#"
-							class="icons-sm gplus-ic"><i class="fa fa-google-plus"> </i></a></li>
-						<li><a
-							href="https://mdbootstrap.com/previews/docs/latest/html/navigation/side-nav-hidden-navbar-fixed.html#"
-							class="icons-sm tw-ic"><i class="fa fa-twitter"> </i></a></li>
-					</ul>
-				</li> -->
-				<!--/Social-->
-				<!--Search Form-->
-				<!-- <li>
-					<form class="search-form" role="search">
-						<div
-							class="form-group md-form mt-0 pt-1 waves-light waves-effect waves-light">
-							<input type="text" class="form-control" placeholder="Search">
-						</div>
-					</form>
-				</li> -->
-				<!--/.Search Form-->
-				<!-- Side navigation links -->
 				<li>
 					<ul class="collapsible collapsible-accordion">
-						<li>
-						<a class="collapsible-header waves-effect arrow-r active" ui-sref="dashboard"><i
-								class="fa fa-chevron-right"></i> Dashboard</a>
-							<!-- <div class="collapsible-body" style="display: block;">
-								<ul>
-									<li><a
-										href="https://mdbootstrap.com/previews/docs/latest/html/navigation/side-nav-hidden-navbar-fixed.html#"
-										class="waves-effect">Submit listing</a></li>
-									<li><a
-										href="https://mdbootstrap.com/previews/docs/latest/html/navigation/side-nav-hidden-navbar-fixed.html#"
-										class="waves-effect">Registration form</a></li>
-								</ul>
-							</div> -->
+						<li ng-show="!hasRole('ADM')">
+						<a class="collapsible-header waves-effect arrow-r active" ui-sref="dashboard">
+						<i class="fa fa-chevron-right"></i> Dashboard</a>
 						</li>
 
-						<li><a class="collapsible-header waves-effect arrow-r"><i
-								class="fa fa-chevron-right"></i> Complaints<i
-								class="fa fa-angle-down rotate-icon"></i></a>
+						<li  ng-show="!hasRole('ADM')">
+							<a class="collapsible-header waves-effect arrow-r">
+								<i class="fa fa-chevron-right"></i> Complaints
+								<i class="fa fa-angle-down rotate-icon"></i>
+							</a>
 							<div class="collapsible-body" style="display: block;">
 								<ul>
-									<li><a href="" ui-sref="admin.quickcomplaint"
-										class="waves-effect">Quick Complaints </a></li>
+									<li><a href="" ui-sref="admin.complaintdashboard" class="waves-effect" ng-click="activelink(1)">Complaint Summary </a></li>
+									<li ng-show="hasRole('CRE')"><a href="" ui-sref="admin.quickcomplaint" class="waves-effect" ng-click="activelink(2)">Quick Complaints </a></li>
+									<li ng-show="hasRole('CRE')"><a href="" ui-sref="admin.registercomplaint({mobileno:null,accountid:null,quickstatus:false})" class="waves-effect" ng-click="activelink(3)">Register Complaint </a></li>
+									<li ng-show="hasRole('SO')"><a href="" ui-sref="admin.mycomplaints" class="waves-effect" ng-click="activelink(4)">My Complaints </a></li>
+									<li><a href="" ui-sref="admin.searchdocket" class="waves-effect" ng-click="activelink(5)">Search Complaint </a></li>
+									<li ng-show="hasRole('SO')"><a href="" ui-sref="admin.interruptions" class="waves-effect" ng-click="activelink(6)">Interruptions </a></li>
+									<li><a href="" ui-sref="admin.viewinterruptions" class="waves-effect" ng-click="activelink(7)">View Interruptions </a></li>
 								</ul>
-							</div></li>
+							</div>
+						</li>
 
-						<li>
+						<li ng-show="hasRole('ADM')">
 						<a class="collapsible-header waves-effect arrow-r"><i
 								class="fa fa-chevron-right"></i> Settings<i
 								class="fa fa-angle-down rotate-icon"></i></a>
@@ -197,7 +149,7 @@ background-repeat: no-repeat; background-size: cover;" aria-busy="true" ng-cloak
 							</div>
 						</li>
 						
-						<li>
+						<li ng-show="!hasRole('ADM')">
 						<a class="collapsible-header waves-effect arrow-r active" ui-sref="reports"><i
 								class="fa fa-chevron-right"></i> Reports</a>
 						</li>

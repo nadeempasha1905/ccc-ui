@@ -1,13 +1,19 @@
 
 			<h6 class="mb-2 mb-sm-0 pt-1">
 				<ul class="nav nav-pills mb-1" id="pills-tab" role="tablist">
-				<li class="nav-item" id="dashboardlink">
-				    <a class="nav-link active" id="pills-dashboard-tab" data-toggle="pill" href="" role="tab"
-				      aria-controls="pills-home" aria-selected="true" ui-sref="dashboard">
+				<li class="nav-item" id="dashboardlink" ng-show="false">
+				    <a class="nav-link" id="pills-dashboard-tab" data-toggle="pill" href="" role="tab"
+				      aria-controls="pills-home" aria-selected="true" ui-sref="dashboard" >
 				      <i class="fa fa-users"></i>&nbsp;&nbsp;Dashboard&nbsp;&nbsp;
 					</a>
 				  </li>
-				 <li class="nav-item active" id="quickcmplaintlink">
+				<li class="nav-item" id="complaintdashboardlink">
+				    <a class="nav-link" id="pills-complaintdashboardlink-tab" data-toggle="pill" href="" role="tab"
+				      aria-controls="pills-home" aria-selected="true" ui-sref="admin.complaintdashboard">
+				      <i class="fa fa-users"></i>&nbsp;&nbsp;Complaint Summary&nbsp;&nbsp;
+					</a>
+				  </li>
+				 <li class="nav-item" id="quickcmplaintlink"  ng-show="hasRole('CRE')">
 				    <a class="nav-link" id="pills-quickcomplaint-tab" data-toggle="pill" href="" role="tab"
 				      aria-controls="pills-home" aria-selected="true" ui-sref="admin.quickcomplaint">
 				      <i class="fa fa-users"></i>&nbsp;&nbsp;Quick Complaints&nbsp;&nbsp;
@@ -16,58 +22,35 @@
 					 </span> 
 					</a>
 				  </li>
-				   <li class="nav-item" id="registercomplaintlink">
+				   <li class="nav-item" id="registercomplaintlink"  ng-show="hasRole('CRE')">
 				    <a class="nav-link" id="pills-registercomplaintlink-tab" data-toggle="pill" href="" role="tab"
 				      aria-controls="pills-home" aria-selected="true" ui-sref="admin.registercomplaint({mobileno:null,accountid:null,quickstatus:false})">
 				      <i class="fa fa-users"></i>&nbsp;&nbsp;Register Complaint&nbsp;&nbsp;
-				      <!-- <span class="badge badge-danger badge-pill pull-right">{{QUICKCOMPLAINTS.length}}
-							<i class="fa fa-arrow-down ml-1"></i>
-					 </span>  -->
 					</a>
 				  </li>
-				   <li class="nav-item" id="complaintdashboardlink">
-				    <a class="nav-link" id="pills-complaintdashboardlink-tab" data-toggle="pill" href="" role="tab"
-				      aria-controls="pills-home" aria-selected="true" ui-sref="admin.complaintdashboard">
-				      <i class="fa fa-users"></i>&nbsp;&nbsp;Complaint Summary&nbsp;&nbsp;
-				      <!-- <span class="badge badge-danger badge-pill pull-right">{{QUICKCOMPLAINTS.length}}
-							<i class="fa fa-arrow-down ml-1"></i>
-					 </span>  -->
-					</a>
-				  </li>
-				   <li class="nav-item" id="mycomplaintslink">
+				   
+				   <li class="nav-item" id="mycomplaintslink"   ng-show="hasRole('SO')">
 				    <a class="nav-link" id="pills-mycomplaintslink-tab" data-toggle="pill" href="" role="tab"
 				      aria-controls="pills-home" aria-selected="true" ui-sref="admin.mycomplaints">
 				      <i class="fa fa-users"></i>&nbsp;&nbsp;My Complaints&nbsp;&nbsp;
-				      <!-- <span class="badge badge-danger badge-pill pull-right">{{QUICKCOMPLAINTS.length}}
-							<i class="fa fa-arrow-down ml-1"></i>
-					 </span>  -->
 					</a>
 				  </li>
 				   <li class="nav-item" id="searchdocketlink">
 				    <a class="nav-link" id="pills-searchdocketlink-tab" data-toggle="pill" href="" role="tab"
 				      aria-controls="pills-home" aria-selected="true" ui-sref="admin.searchdocket">
 				      <i class="fa fa-users"></i>&nbsp;&nbsp;Search Docket&nbsp;&nbsp;
-				      <!-- <span class="badge badge-danger badge-pill pull-right">{{QUICKCOMPLAINTS.length}}
-							<i class="fa fa-arrow-down ml-1"></i>
-					 </span>  -->
 					</a>
 				  </li>
-  				   <li class="nav-item" id="interruptionslink">
+  				   <li class="nav-item" id="interruptionslink"   ng-show="hasRole('SO')">
 				    <a class="nav-link" id="pills-interruptionslink-tab" data-toggle="pill" href="" role="tab"
 				      aria-controls="pills-home" aria-selected="true" ui-sref="admin.interruptions">
 				      <i class="fa fa-users"></i>&nbsp;&nbsp;Interruptions&nbsp;&nbsp;
-				      <!-- <span class="badge badge-danger badge-pill pull-right">{{QUICKCOMPLAINTS.length}}
-							<i class="fa fa-arrow-down ml-1"></i>
-					 </span>  -->
 					</a>
 				  </li>
 				    <li class="nav-item" id="viewinterruptionslink">
 				    <a class="nav-link" id="pills-viewinterruptionslink-tab" data-toggle="pill" href="" role="tab"
 				      aria-controls="pills-home" aria-selected="true" ui-sref="admin.viewinterruptions">
 				      <i class="fa fa-users"></i>&nbsp;&nbsp;View Interruptions&nbsp;&nbsp;
-				      <!-- <span class="badge badge-danger badge-pill pull-right">{{QUICKCOMPLAINTS.length}}
-							<i class="fa fa-arrow-down ml-1"></i>
-					 </span>  -->
 					</a>
 				  </li>
 				</ul>

@@ -103,9 +103,14 @@ angular
     					  				$scope.error = false;
     					  			  store.set('userinfo',data.data[0]);
    		                             
-      					    		  $rootScope.getquickcomplaints();
+      					    		  //$rootScope.getquickcomplaints();
       					    		  //$state.go('dashboard');
-      					    		$state.go('admin.quickcomplaint');
+      					    		  
+      					    		  if(data.data[0].role_code === 'ADM'){
+      					    			$state.go('config.department');
+      					    		  }else{
+      					    			  $state.go('admin.complaintdashboard');
+      					    		  }
       					    		  
     					  			}else{
     					  				console.log("User information not found !!!");
