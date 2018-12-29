@@ -3,11 +3,13 @@ angular.module('CCCapp',['ngRoute','ngResource','ui.router','ngCookies','angular
 'CCCapp.services','angular-storage','ngToast','oc.lazyLoad','ng-appcache','ngTableToCsv',
 'ngCsv','ui.bootstrap','google.places','angucomplete-alt','ngDomToPdf','http-auth-interceptor','ngC3Export'])
 
-.constant('UURL','http://localhost:8084/ccc-oauth2')
+//.constant('UURL','http://localhost:8084/ccc-oauth2')
 
 //.constant('RSURL','http://localhost:8084/ccc-oauth2')
 
-.constant('RSURL','http://localhost:8085/ccc-res')
+//.constant('RSURL','http://localhost:8085/ccc-res')
+.constant('UURL','http://192.168.15.5:8084/ccc-oauth2')
+.constant('RSURL','http://192.168.15.5:8085/ccc-res')
 
 
 

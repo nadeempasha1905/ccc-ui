@@ -21,6 +21,8 @@ angular
 						   $state.go('login');
 					   }
                 	
+                	var USERINFO= store.get("userinfo");
+                	
                 	$scope.updatedocket = {};
 
                 	if($stateParams != null){
@@ -114,11 +116,11 @@ angular
                		  var statusid 					= p_statusid;//$scope.updatedocket.selected_complaintupdates.statusid;
                		  var statusname 				= p_statusname;//$scope.updatedocket.selected_complaintupdates.statusname;	
                		  var relpath 					= '';
-               		  var firstname 				= 'Firstname test';
+               		  var firstname 				= USERINFO.user_name;
                		  var middlename 				= '';
                		  var lastname					= '';
-		    		  var userid					= 1;//$rootScope.username;
-		    		  var user_name					= 'Administrator';
+		    		  var userid					= USERINFO.id;//$rootScope.username;
+		    		  var user_name					= USERINFO.user_name;
 		    		  var updatesid					= ($scope.updatedocket.selected_complaintupdates === undefined || $scope.updatedocket.selected_complaintupdates === null ? '' : $scope.updatedocket.selected_complaintupdates.cu_pkid) ;
 		    		  var updatesname				= ($scope.updatedocket.selected_complaintupdates === undefined || $scope.updatedocket.selected_complaintupdates === null ? '' : $scope.updatedocket.selected_complaintupdates.cu_name) ;
 		    		  
