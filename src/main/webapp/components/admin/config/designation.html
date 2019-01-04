@@ -26,7 +26,7 @@ table tbody tr td {
   <div class="row">
 		<div class="col-md-4">
 			<button class="btn btn-primary btn-md waves-effect waves-light text-center" type="button" ng-click = "addDesignation()">
-		  		<i class="fa fa-plus"></i> &nbsp;&nbsp;&nbsp;Add Designation
+		  		<i class="fa fa-plus"></i> &nbsp;&nbsp;&nbsp;Add Department
 			</button>
 		</div>  
   </div>
@@ -54,7 +54,7 @@ table tbody tr td {
   <tbody>	
   		<tr ng-repeat="d in DesignationList | orderBy:'dsgName'">
   			<td>{{$index+1}}</td>
-  			<td><a href="" ng-click="editDesignation(d);" class="text-primary">{{d.dsgName}}</u></a></td>
+  			<td><a href="" ng-click="editDesignation(d);" class="text-primary"><u>{{d.dsgName}}</u></a></td>
 			<td>{{d.dsgDepartmentName}}</td>
 			<td>{{d.dsgCadreName}}</td>
 			<td>{{d.dsgCreatedBy}}</td>

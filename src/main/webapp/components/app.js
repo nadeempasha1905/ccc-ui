@@ -489,7 +489,7 @@ angular.module('CCCapp',['ngRoute','ngResource','ui.router','ngCookies','angular
             views:{
             	  "config": {  
             		 controller:'feederCtrl',  
-		    		 templateUrl: 'components/admin/config/cadre.html'		    		 
+		    		 templateUrl: 'components/admin/config/feeder.html'		    		 
 		           }		           
             },
             resolve: {

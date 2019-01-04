@@ -76,6 +76,20 @@ factory('CADRE',['$resource','RSURL',function($resource,RSURL) {
        }        
 	 });	 
 }])
+.factory('STATION',['$resource','RSURL',function($resource,RSURL) {
+	 return $resource(RSURL+'/stationMasters/:id',{id:'@_id'},{
+	     update: {
+        method: 'PUT' // this method issues a PUT request
+       }        
+	 });	 
+}])
+.factory('FEEDER',['$resource','RSURL',function($resource,RSURL) {
+	 return $resource(RSURL+'/feederMasters/:id',{id:'@_id'},{
+	     update: {
+        method: 'PUT' // this method issues a PUT request
+       }        
+	 });	 
+}])
 
 
 

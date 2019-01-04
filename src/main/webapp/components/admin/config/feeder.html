@@ -19,25 +19,59 @@ table tbody tr td {
 </style>
 
 <div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <div class="table-responsive"  style="height: 500px;overflow: scroll;">
-		<table class="table table-sm table-striped table-condensed" >
-		<thead class="black white-text">
-			<tr>
-				<th>Designation</th>
-				<th>Cadre Name</th>
-				<th>Created By</th>
-				<th>Created On</th>
-			</tr>
-		</thead>
-		<tr ng-repeat="d in DesignationList | orderBy:'dsgName'">
-			<td><span> <b><u><a href="" ng-click="editDesignation(d);" class="text-primary">{{d.dsgName}}</u></a></b>
-			</span></td>
-			<td>{{d.dsgCadreName}}</td>
-			<td>{{d.dsgCreatedBy}}</td>
-			<td>{{d.dsgCreatedOn}}</td>
-		</tr>
-	</table>
-</div>
+    <div class="row">
+		<div class="col-md-4">
+			<button class="btn btn-info btn-md waves-effect waves-light text-center" type="button" ng-click = "addFeeder()">
+		  		<i class="fa fa-plus"></i> &nbsp;&nbsp;&nbsp;Add Feeder
+			</button>
+		</div>  
+  </div>
+  <div class="row">
+  	<div class="col-md-12">
+  	  <table id="dtBasicExample" class="table table-striped table-bordered table-sm text-center" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+   	  <th class="th-sm font-weight-bold default-color-dark text-white" >#</th>
+      <th class="th-sm font-weight-bold default-color-dark text-white" >Location Name
+        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+      </th>
+      <th class="th-sm font-weight-bold default-color-dark text-white" >Station Name
+        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+      </th>
+      <th class="th-sm font-weight-bold default-color-dark text-white" >Feeder Code
+        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+      </th>
+       <th class="th-sm font-weight-bold default-color-dark text-white" >Feeder Name
+        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+      </th>
+       <th class="th-sm font-weight-bold default-color-dark text-white" >Created By
+        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+      </th>
+      <th class="th-sm font-weight-bold default-color-dark text-white" >Created On
+        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+      </th>
+      <th class="th-sm font-weight-bold default-color-dark text-white" >Updated By
+        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+      </th>
+      <th class="th-sm font-weight-bold default-color-dark text-white" >Updated On
+        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+      </th>
+    </tr>
+  </thead>
+  <tbody>	
+  		<tr ng-repeat="d in FeederList">
+  			<td>{{$index+1}}</td>
+  			<td>{{d.fmLocationName}}</td>
+  			<td>{{d.fmStationName}}</td>
+  			<td>{{d.fmFeederCode}}</td>
+  			<td><a href="" ng-click="editFeeder(d);" class="text-primary"><u>{{d.fmFeederName}}</u></a></td>
+  			<td>{{d.fmCreatedBy}}</td>
+  			<td>{{d.fmCreatedOn}}</td>
+  			<td>{{d.fmUpdatedBy}}</td>
+  			<td>{{d.fmUpdatedOn}}</td>
+  		</tr>
+  </tbody>
+</table>
+  	</div>
   </div>
 </div>

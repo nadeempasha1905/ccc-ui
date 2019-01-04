@@ -42,10 +42,10 @@ table tbody tr td {
     </tr>
   </thead>
   <tbody>	
-  		<tr ng-repeat="d in DepartmentList | orderBy:'departmentname'">
+  		<tr ng-repeat="d in DepartmentList">
   			<td>{{$index+1}}</td>
   			<td>{{d.departmentid}}</td>
-  			<td><a href="" ng-click="editDepartment(d);" class="text-primary">{{d.departmentname}}</u></a></td>
+  			<td><a href="" ng-click="editDepartment(d);" class="text-primary"><u>{{d.departmentname}}</u></a></td>
   		</tr>
   </tbody>
 </table>
@@ -54,3 +54,61 @@ table tbody tr td {
 
  <!--  </div> -->
 </div>
+
+<div class="modal fade" id="addeditdepartmentmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"  data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title w-100 font-weight-bold" id="myModalLabel">Add/Edit Department</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+			<form role="form" name="frm" class="">
+				<div class="form-row">
+					<div class="col-md-12">
+						<p class="h6 font-weight-bold"><u>{{modaltitle}}</u></p>
+					</div>  
+					<div class="col-md-12">
+						<div class="alert alert-success waves-effect waves-light text-center" role="alert" ng-show="message.length > 0 && !error">
+							  {{message}}
+						</div>
+						<div class="alert alert-danger waves-effect waves-light text-center" role="alert" ng-show="message.length > 0 && error">
+							  {{message}}
+						</div>
+					</div>
+				</div>		
+				     <div class="form-row">
+					     <div class="col-md-6 mb-3">
+					      <label for="validationCustom01" class="font-weight-bold">Department Name</label>
+					      <input type="text" class="form-control" id="departmentname" placeholder="Department Name" value="" 
+					      		ng-model="departmentrecord.departmentname"	required>
+					      <div class="invalid-feedback">
+					        Please provide Department!
+					      </div>	
+					    </div>
+					    
+					    <div class="col-md-6 mb-3">
+						      <label for="validationCustom02" class="font-weight-bold">Organization</label>
+						      <select class="custom-select browser-default" 
+						      ng-options="org.organizationname for org in OrganizationList | orderBy:'organizationname'" 
+						      ng-model="selectedorganization" ng-disabled="true" required>
+							      <option value="">Select Organization</option>
+							    </select>
+						      <div class="invalid-feedback">
+						        Please choose organization!
+						      </div>
+						    </div>
+				    </div>
+				  <button class="btn btn-success" type="submit" ng-click="save()" 
+				  		ng-disabled="frm.$invalid">{{(editrecord == true ? 'Update' : 'Save')}}
+				 </button>
+				 <button class="btn btn-info" type="button" data-dismiss="modal" 
+				 		ng-click="getDepartmentList()">Close
+				 </button>
+			</form>
+        </div>
+      </div>
+    </div>
+  </div>

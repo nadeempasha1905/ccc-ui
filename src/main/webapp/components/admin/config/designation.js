@@ -29,10 +29,10 @@ angular
 						  
                 	
                 	$scope.DesignationList = [];
-                    var url1=RSURL+"/designations?page=0&size=1000";
+                    var url1=RSURL+"/designations/search/findAllByOrderByDsgId";
                 	//var url1=RSURL+"/designations/search/getDesignationList";
-                    var url2=RSURL+"/cadres?page=0&size=1000";
-                    var url3=RSURL+"/departments?page=0&size=1000";
+                    var url2=RSURL+"/cadres/search/findAllByOrderByCdrId";
+                    var url3=RSURL+"/departments/search/findAllByOrderByDepartmentid";
                    // var url2=RSURL + '/query/getusersbyroles?roles=ROLE_USER,ROLE_ADMIN,ROLE_MANAGEMENT'
                     //var url3=RSURL + '/jlrRoomTypes'     
                     
@@ -114,7 +114,7 @@ angular
                     	$scope.departmentrecord =  new DESIGNATION();
                     	
                     	$scope.editrecord = false;
-                    	$scope.modaltitle="Adding New Department"
+                    	$scope.modaltitle="Adding New Designation"
                     	
                     	$scope.selecteddepartment=undefined;
                     	$scope.selectedcadre=undefined;   

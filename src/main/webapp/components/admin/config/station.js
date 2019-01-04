@@ -4,7 +4,7 @@ angular
                 "stationCtrl",
                 function ($scope, $rootScope, $http, $filter, $compile, $state,           
                 $cookies, $httpParamSerializer, jwtHelper, $window,
-                        RSURL,UURL,$controller, $timeout, $window,store,ngToast,authService,$q,DESIGNATION) {
+                        RSURL,UURL,$controller, $timeout, $window,store,ngToast,authService,$q,STATION) {
                 	
                 	console.log("stationCtrl Page initiated !!!");
                 	$scope.heading = "stationCtrl Page";
@@ -21,6 +21,24 @@ angular
 						   $rootScope.IsLogin=false;
 						   $state.go('login');
 					   }
+                	
+                	$scope.StationList = [];
+                    var url1=RSURL+"/stationMasters/search/findAllByOrderBySmStationId";
+                    
+                    $scope.getStationMasterList=function(){                	  
+                        $http.get(url1)   
+                          .then(function(results) {
+                        	 console.log("results",results);
+                        	 $scope.StationList 		= results.data._embedded.stationMasters;
+                        	 
+                         	 $timeout(function(){         
+                         		 $('#dtBasicExample').DataTable();
+                            	  	 $('.dataTables_length').addClass('bs-select');
+      		            	},1000);
+                         	 
+                          });                	
+                        }
+                        $scope.getStationMasterList();
                 	
                 	
                 });

@@ -4,7 +4,7 @@ angular
                 "feederCtrl",
                 function ($scope, $rootScope, $http, $filter, $compile, $state,           
                 $cookies, $httpParamSerializer, jwtHelper, $window,
-                        RSURL,UURL,$controller, $timeout, $window,store,ngToast,authService,$q,DESIGNATION) {
+                        RSURL,UURL,$controller, $timeout, $window,store,ngToast,authService,$q,FEEDER) {
                 	
                 	console.log("feederCtrl Page initiated !!!");
                 	$scope.heading = "feederCtrl Page";
@@ -21,6 +21,24 @@ angular
 						   $rootScope.IsLogin=false;
 						   $state.go('login');
 					   }
+                	
+                	$scope.FeederList = [];
+                    var url1=RSURL+"/feederMasters/search/findAllByOrderByFmFeederId";
+                    
+                    $scope.getFeederMasterList=function(){                	  
+                        $http.get(url1)   
+                          .then(function(results) {
+                        	 console.log("results",results);
+                        	 $scope.FeederList 		= results.data._embedded.feederMasters;
+                        	 
+                         	 $timeout(function(){         
+                         		 $('#dtBasicExample').DataTable();
+                            	  	 $('.dataTables_length').addClass('bs-select');
+      		            	},1000);
+                         	 
+                          });                	
+                        }
+                        $scope.getFeederMasterList();
                 	
                 	
                 });
