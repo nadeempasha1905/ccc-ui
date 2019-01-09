@@ -3,7 +3,7 @@ angular
         .controller(
                 "designationCtrl",
                 function ($scope, $rootScope, $http, $filter, $compile, $state,           
-                $cookies, $httpParamSerializer, jwtHelper, $window,
+                $cookies, $httpParamSerializer, jwtHelper, 
                         RSURL,UURL,$controller, $timeout, $window,store,ngToast,authService,$q,notify,DESIGNATION) {
                 	
                 	console.log("Designation Page initiated !!!");

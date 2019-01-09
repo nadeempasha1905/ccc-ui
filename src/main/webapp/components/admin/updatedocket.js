@@ -3,7 +3,7 @@ angular
         .controller(
                 "updatedocketCtrl",
                 function ($scope, $rootScope, $http, $filter, $compile, $state,           
-                $cookies, $httpParamSerializer, jwtHelper, $window,
+                $cookies, $httpParamSerializer, jwtHelper,  
                         RSURL,$controller, $timeout, $window,store,ngToast,authService,$q,$stateParams) {
                 	
                 	if($cookies.get("access_token")) {
@@ -144,6 +144,19 @@ angular
   				  			if(data.data[0].sts === "success"){
   				  			  $scope.message = "Comment Updated Successfully. \n Docket No : "+data.data[0].docketno ;
  			    			  $scope.warning = false;
+ 			    			  
+ 			    			  //Sendsms for Resolved and Rejected
+ 			    			  if(statusid == 7 || statusid == 3){
+ 			    				  
+	 			    			  $http.get(RSURL+"/query/sendsmsandemail?" +
+	 					    		  		"docketnumber="+data.data[0].docketno+"&statusid="+statusid
+	 					    		  	)
+	 			  				  		.then(function (data){
+	 			  				  			console.log(data);
+	 			  				  		},function(error){
+	 			  				  			console.log(error);
+	 			  				  		});
+ 			    			  }
  			    			  
  			    			 $scope.updatecomplaintform.consumerdescription = null ;
  			    			 $scope.updatedocket.selected_complaintupdates = undefined;

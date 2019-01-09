@@ -5,7 +5,6 @@
 
 	<groupId>com.n2r</groupId>
 	<artifactId>ccc-ui</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
 	<name>ccc-ui</name>
@@ -93,6 +92,13 @@
 	</dependencies>
 
 	<build>
+		<finalName>ccc-ui</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources> 
 		<plugins>
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
@@ -109,7 +115,35 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>               
             </plugin> 
-			
+            <plugin>
+				<groupId>com.samaxes.maven</groupId>
+				<artifactId>minify-maven-plugin</artifactId>
+				<version>1.7.4</version>
+				<executions>
+					<execution>
+						<id>app-minify</id>
+						<configuration>
+							<charset>utf-8</charset>
+							<jsEngine>YUI</jsEngine>
+							<webappTargetDir>
+								${basedir}/src/main/webapp
+							</webappTargetDir>
+							<skipMerge>true</skipMerge>
+							<nosuffix>false</nosuffix>
+							<jsSourceDir>components</jsSourceDir>
+							 <jsSourceIncludes>
+								<jsSourceInclude>**/*.js</jsSourceInclude>
+							</jsSourceIncludes>
+							<jsSourceExcludes>
+							<jsSourceExclude>**/*.min.js</jsSourceExclude>
+							</jsSourceExcludes> 
+						</configuration>
+						<goals>
+							<goal>minify</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>   
 		</plugins>
 	</build>
 

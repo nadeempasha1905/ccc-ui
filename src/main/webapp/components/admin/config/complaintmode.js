@@ -3,7 +3,7 @@ angular
         .controller(
                 "complaintmodeCtrl",
                 function ($scope, $rootScope, $http, $filter, $compile, $state,           
-                $cookies, $httpParamSerializer, jwtHelper, $window,
+                $cookies, $httpParamSerializer, jwtHelper,  
                         RSURL,UURL,$controller, $timeout, $window,store,ngToast,authService,$q,COMPLAINTMODE) {
                 	
                 	console.log("complaintmodeCtrl Page initiated !!!");

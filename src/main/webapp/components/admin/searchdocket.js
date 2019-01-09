@@ -3,7 +3,7 @@ angular
         .controller(
                 "searchdocketCtrl",
                 function ($scope, $rootScope, $http, $filter, $compile, $state,           
-                $cookies, $httpParamSerializer, jwtHelper, $window,
+                $cookies, $httpParamSerializer, jwtHelper, 
                         RSURL,$controller, $timeout, $window,store,ngToast,authService,$q,$stateParams) {
                 	
                 	console.log("summarylistCtrl initiated !!!");

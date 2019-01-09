@@ -3,7 +3,7 @@ angular
         .controller(
                 "complaintdashboardCtrl",
                 function ($scope, $rootScope, $http, $filter, $compile, $state,           
-                $cookies, $httpParamSerializer, jwtHelper, $window,
+                $cookies, $httpParamSerializer, jwtHelper, 
                         RSURL,$controller, $timeout, $window,store,ngToast,authService,$q) {
                 	
                 	console.log("complaintdashboardCtrl initiated !!!");
@@ -63,7 +63,14 @@ angular
                   	 
                 	
                 	$scope.gotosummarylist = function(statusname,categoryid,statusid,modeid){
-                		$state.go('admin.summarylist',{location:$scope.complaintdashboard.location,categoryid:categoryid,statusid:statusid,modeid:modeid,statusname:statusname});
+                		$state.go('admin.summarylist',{location:$scope.complaintdashboard.location,
+                										categoryid:categoryid,
+                										statusid:statusid,
+                										modeid:modeid,
+                										statusname:statusname,
+                										fromdate:$scope.complaintdashboard.fromdate,
+                										todate:$scope.complaintdashboard.todate,
+                										department_id:(USERINFO.department_id == null ? 0 : USERINFO.department_id)});
                 	};
                 	
                 	$scope.loadcomplaintmodes();

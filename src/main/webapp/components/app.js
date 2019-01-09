@@ -1,15 +1,16 @@
+//var jsmin='.min';
+var jsmin='';
+
 'use strict';
 angular.module('CCCapp',['ngRoute','ngResource','ui.router','ngCookies','angular-jwt',
 'CCCapp.services','angular-storage','ngToast','oc.lazyLoad','ng-appcache','ngTableToCsv',
 'ngCsv','ui.bootstrap','google.places','angucomplete-alt','ngDomToPdf','http-auth-interceptor','ngC3Export'])
 
-//.constant('UURL','http://localhost:8084/ccc-oauth2')
+.constant('UURL','http://localhost:8084/ccc-oauth2')
+.constant('RSURL','http://localhost:8085/ccc-res')
 
-//.constant('RSURL','http://localhost:8084/ccc-oauth2')
-
-//.constant('RSURL','http://localhost:8085/ccc-res')
-.constant('UURL','http://192.168.15.5:8084/ccc-oauth2')
-.constant('RSURL','http://192.168.15.5:8085/ccc-res')
+//.constant('UURL','http://192.168.15.2:8084/ccc-oauth2')
+//.constant('RSURL','http://192.168.15.2:8085/ccc-res')
 
 
 
@@ -20,103 +21,103 @@ angular.module('CCCapp',['ngRoute','ngResource','ui.router','ngCookies','angular
         'events':false, //For Event 'true/false' 
         'modules': [{
             name : 'login', 
-            files: ['components/login.js'+'?v='+CACHEBUST_VERSION]
+            files: ['components/login'+jsmin+'.js'+'?v='+CACHEBUST_VERSION]
         },
         {
             name : 'home', 
-            files: ['components/help/home.js'+'?v='+CACHEBUST_VERSION]
+            files: ['components/help/home'+jsmin+'.js'+'?v='+CACHEBUST_VERSION]
         },
         {
             name : 'dashboard', 
-            files: ['components/admin/dashboard.js'+'?v='+CACHEBUST_VERSION]    
+            files: ['components/admin/dashboard'+jsmin+'.js'+'?v='+CACHEBUST_VERSION]    
         },
         {
             name : 'reports', 
-            files: ['components/admin/reports.js'+'?v='+CACHEBUST_VERSION]    
+            files: ['components/admin/reports'+jsmin+'.js'+'?v='+CACHEBUST_VERSION]    
         },
         {
             name : 'trackcomplaint', 
-            files: ['components/admin/trackcomplaint.js'+'?v='+CACHEBUST_VERSION]    
+            files: ['components/admin/trackcomplaint'+jsmin+'.js'+'?v='+CACHEBUST_VERSION]    
         },
         /*{
             name : 'dashboardmdb', 
-            files: ['components/admin/dashboardmdb.js'+'?v='+CACHEBUST_VERSION]    
+            files: ['components/admin/dashboardmdb'+jsmin+'.js'+'?v='+CACHEBUST_VERSION]    
         },*/
         {
             name : 'dashboardmdb', 
-            files: ['components/admin/dashboardmdb.js'+'?v='+CACHEBUST_VERSION]    
+            files: ['components/admin/dashboardmdb'+jsmin+'.js'+'?v='+CACHEBUST_VERSION]    
         },
         {
             name : 'quickcomplaint', 
-            files: ['components/admin/quickcomplaint.js'+'?v='+CACHEBUST_VERSION]    
+            files: ['components/admin/quickcomplaint'+jsmin+'.js'+'?v='+CACHEBUST_VERSION]    
         },
         {
             name : 'registercomplaint', 
-            files: ['components/admin/registercomplaint.js'+'?v='+CACHEBUST_VERSION]    
+            files: ['components/admin/registercomplaint'+jsmin+'.js'+'?v='+CACHEBUST_VERSION]    
         },
         {
             name : 'updatedocket', 
-            files: ['components/admin/updatedocket.js'+'?v='+CACHEBUST_VERSION]    
+            files: ['components/admin/updatedocket'+jsmin+'.js'+'?v='+CACHEBUST_VERSION]    
         },
         {
             name : 'searchdocket', 
-            files: ['components/admin/searchdocket.js'+'?v='+CACHEBUST_VERSION]    
+            files: ['components/admin/searchdocket'+jsmin+'.js'+'?v='+CACHEBUST_VERSION]    
         },
         {
             name : 'summarylist', 
-            files: ['components/admin/summarylist.js'+'?v='+CACHEBUST_VERSION]    
+            files: ['components/admin/summarylist'+jsmin+'.js'+'?v='+CACHEBUST_VERSION]    
         },
         {
             name : 'complaintdashboard', 
-            files: ['components/admin/complaintdashboard.js'+'?v='+CACHEBUST_VERSION]    
+            files: ['components/admin/complaintdashboard'+jsmin+'.js'+'?v='+CACHEBUST_VERSION]    
         },
         {
             name : 'mycomplaints', 
-            files: ['components/admin/mycomplaints.js'+'?v='+CACHEBUST_VERSION]    
+            files: ['components/admin/mycomplaints'+jsmin+'.js'+'?v='+CACHEBUST_VERSION]    
         },
         {
             name : 'interruptions', 
-            files: ['components/admin/interruptions.js'+'?v='+CACHEBUST_VERSION]    
+            files: ['components/admin/interruptions'+jsmin+'.js'+'?v='+CACHEBUST_VERSION]    
         },
         {
             name : 'viewinterruptions', 
-            files: ['components/admin/viewinterruptions.js'+'?v='+CACHEBUST_VERSION]    
+            files: ['components/admin/viewinterruptions'+jsmin+'.js'+'?v='+CACHEBUST_VERSION]    
         },
         {
             name : 'designation', 
-            files: ['components/admin/config/designation.js'+'?v='+CACHEBUST_VERSION]
+            files: ['components/admin/config/designation'+jsmin+'.js'+'?v='+CACHEBUST_VERSION]
         },       
         {
             name : 'department', 
-            files: ['components/admin/config/department.js'+'?v='+CACHEBUST_VERSION]
+            files: ['components/admin/config/department'+jsmin+'.js'+'?v='+CACHEBUST_VERSION]
         },       
         {
             name : 'cadre', 
-            files: ['components/admin/config/cadre.js'+'?v='+CACHEBUST_VERSION]
+            files: ['components/admin/config/cadre'+jsmin+'.js'+'?v='+CACHEBUST_VERSION]
         },       
         {
             name : 'category', 
-            files: ['components/admin/config/category.js'+'?v='+CACHEBUST_VERSION]
+            files: ['components/admin/config/category'+jsmin+'.js'+'?v='+CACHEBUST_VERSION]
         },       
         {
             name : 'complaintmode', 
-            files: ['components/admin/config/complaintmode.js'+'?v='+CACHEBUST_VERSION]
+            files: ['components/admin/config/complaintmode'+jsmin+'.js'+'?v='+CACHEBUST_VERSION]
         },       
         {
             name : 'feeder', 
-            files: ['components/admin/config/feeder.js'+'?v='+CACHEBUST_VERSION]
+            files: ['components/admin/config/feeder'+jsmin+'.js'+'?v='+CACHEBUST_VERSION]
         },       
         {
             name : 'station', 
-            files: ['components/admin/config/station.js'+'?v='+CACHEBUST_VERSION]
+            files: ['components/admin/config/station'+jsmin+'.js'+'?v='+CACHEBUST_VERSION]
         },       
         {
             name : 'subcategory', 
-            files: ['components/admin/config/subcategory.js'+'?v='+CACHEBUST_VERSION]
+            files: ['components/admin/config/subcategory'+jsmin+'.js'+'?v='+CACHEBUST_VERSION]
         },       
         {
             name : 'users', 
-            files: ['components/admin/config/users.js'+'?v='+CACHEBUST_VERSION]
+            files: ['components/admin/config/users'+jsmin+'.js'+'?v='+CACHEBUST_VERSION]
         }    
         ]
     });   
@@ -333,7 +334,10 @@ angular.module('CCCapp',['ngRoute','ngResource','ui.router','ngCookies','angular
             	categoryid:null,
             	statusid:null,
             	modeid:null,
-            	statusname:null
+            	statusname:null,
+            	fromdate:null,
+            	todate:null,
+            	department_id:null
             },
             views:{
           	  "admin": {  
@@ -929,10 +933,11 @@ angular.module('CCCapp',['ngRoute','ngResource','ui.router','ngCookies','angular
     	
     	if((USERINFO.location_code).length === 1 
     			&& (USERINFO.role_code === "EC" 
-    				|| USERINFO.role_code === "CRE" 
-    					|| USERINFO.role_code === "DT" 
-    						|| USERINFO.role_code === "MD" 
-    							|| USERINFO.role_code === "FA")){
+    				|| USERINFO.role_code === "ADM" 
+    					|| USERINFO.role_code === "CRE" 
+    						|| USERINFO.role_code === "DT" 
+    							|| USERINFO.role_code === "MD" 
+    								|| USERINFO.role_code === "FA")){
     		$rootScope.COMPANY_USER = true;
     		$rootScope.ZONE_USER = false;
     		$rootScope.CIRCLE_USER = false;

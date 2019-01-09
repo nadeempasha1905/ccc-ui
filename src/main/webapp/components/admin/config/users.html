@@ -1,5 +1,9 @@
 <style type="text/css">
 
+.modal-lg {
+    max-width: 75%;
+}
+
 .jumbotron {
     padding: 1rem;
 }
@@ -19,7 +23,6 @@ table tbody tr td {
 </style>
 
 <div class="jumbotron jumbotron-fluid">
-   <!--   <div class="container"> -->
     <div class="row">
 		<div class="col-md-4">
 			<button class="btn btn-info btn-md waves-effect waves-light text-center" type="button" ng-click = "addUser()">
@@ -63,6 +66,250 @@ table tbody tr td {
 </table>
   	</div>
   </div>
-
-<!--   </div> -->
 </div>
+
+<div class="modal fade" id="addeditusermodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"  
+			data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title w-100 font-weight-bold" id="myModalLabel">Add/Edit Users</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+			<form role="form" name="frm" class="">
+				<div class="form-row">
+					<div class="col-md-12">
+						<p class="h6 font-weight-bold"><u>{{modaltitle}}</u></p>
+					</div>  
+					<div class="col-md-12">
+						<div class="alert alert-success waves-effect waves-light text-center" role="alert" ng-show="message.length > 0 && !error">
+							  {{message}}
+						</div>
+						<div class="alert alert-danger waves-effect waves-light text-center" role="alert" ng-show="message.length > 0 && error">
+							  {{message}}
+						</div>
+					</div>
+				</div>		
+				     <div class="form-row" >
+				      <div class="col-md-4">
+					     <small><strong>
+						     <label>Company</label>
+							<select class="custom-select browser-default"
+							ng-model="userdetails.company" 
+							ng-change="getzonelist()"
+							ng-options="c.ld_name for c in COMPANYLIST" 
+							ng-disabled="true" 
+							>
+							  <option value="">---------SELECT---------</option>
+							</select>
+							</strong></small>
+							
+					 	</div>
+					     <div class="col-md-4">
+					     <small><strong>
+						     <label>Zone</label>
+							<select class="custom-select browser-default"
+							ng-model="userdetails.zone" 
+							ng-change="getcirclelist()"
+							ng-options="c.ld_name for c in ZONELIST" 
+							ng-disabled="CIRCLE_USER || DIVISION_USER || SUBDIVISION_USER || OMSECTION_USER">
+							  <option value="">---------SELECT---------</option>
+							</select>
+							</strong></small>
+							
+					 	</div>
+					 	<div class="col-md-4">
+					 		<!--Blue select-->
+					 		<small><strong>
+					 		<label>Circle</label>
+							<select class="custom-select browser-default"
+							ng-model="userdetails.circle" 
+							ng-change="getdivisionlist()"
+							ng-options="c.ld_name for c in CIRCLELIST" 
+							ng-disabled="DIVISION_USER || SUBDIVISION_USER || OMSECTION_USER">
+							 <option value="">---------SELECT---------</option>
+							</select>
+							</strong></small>
+							<!--/Blue select-->
+					 	</div>
+					 	</div>	
+					 
+						 <div class="form-row mt-2">
+					 	<div class="col-md-4">
+					 		<!--Blue select-->
+					 		<small><strong>
+					 		<label>Division</label>
+							<select class="custom-select browser-default"
+							ng-model="userdetails.division" 
+							ng-change="getsubdivisionlist()"
+							ng-options="c.ld_name for c in DIVISIONLIST" 
+							ng-disabled="SUBDIVISION_USER || OMSECTION_USER">
+							  <option value="">---------SELECT---------</option>
+							</select>
+							</strong></small>
+							<!--/Blue select-->
+					 	</div>
+					 
+					 	<div class="col-md-4">
+					 		<!--Blue select-->
+					 		<small><strong>
+					 		<label>Sub Division</label>
+							<select class="custom-select browser-default" 
+							ng-model="userdetails.subdivision" 
+							ng-change="getomsectionlist()"
+							ng-options="c.ld_name for c in SUBDIVISIONLIST" 
+							ng-disabled="OMSECTION_USER">
+							  <option value="">---------SELECT---------</option>
+							</select>
+							</strong></small>
+							<!--/Blue select-->
+					 	</div>
+					 	<div class="col-md-4">
+					 		<!--Blue select-->
+					 		<small><strong>
+					 		<label>O&M Section</label>
+							<select class="custom-select browser-default" 
+							ng-model="userdetails.omsection" 
+							ng-options="c.ld_name for c in OMSECTIONLIST" 
+							ng-disabled="OMSECTION_USER">
+							  <option value="">---------SELECT---------</option>
+							</select>
+							</strong></small>
+							<!--/Blue select-->
+					 	</div>
+				    </div>
+				    <div class="form-row mt-2">
+						<div class="col-md-4 mb-2"><small><strong>
+							<label for="username">UserId<span style="color: red;">*</span></label></strong> <input
+								type="text" class="form-control" id="userid"
+								placeholder="" value=""
+								ng-model="userdetails.userid"
+								 required></small>
+						</div>
+						<div class="col-md-4 mb-2"><small><strong>
+							<label for="username">Password<span style="color: red;">*</span></label></strong> <input
+								type="password" class="form-control" id="password"
+								placeholder="" value=""
+								ng-model="userdetails.password"
+								 required></small>
+						</div>
+						<div class="col-md-4 mb-2"><small><strong>
+							<label for="username">Retype Password<span style="color: red;">*</span></label></strong> <input
+								type="password" class="form-control" id="retypepassword"
+								placeholder="" value=""
+								ng-model="userdetails.retypepassword"
+								 required></small>
+						</div>
+						</div>	
+					 
+					 <div class="form-row mt-2">
+						
+						<div class="col-md-4 mb-2"><small><strong>
+							<label for="username">Username<span style="color: red;">*</span></label></strong> <input
+								type="text" class="form-control" id="username"
+								placeholder="" value=""
+								ng-model="userdetails.username"
+								 required></small>
+						</div>
+						
+						<div class="col-md-4">
+					 		<!--Blue select-->
+					 		<small><strong>
+						 		<label>Role</label>
+								<select class="custom-select browser-default"
+								ng-model="userdetails.userrole" 
+								ng-options="c.ur_role_name for c in USERROLES" 
+								>
+								  <option value="">---------SELECT---------</option>
+								</select>
+							</strong></small>
+					 	</div>
+					 	
+					<div class="col-md-4">
+					 		<!--Blue select-->
+					 		<small><strong>
+						 		<label>Department</label>
+								<select class="custom-select browser-default"
+									ng-model="userdetails.department" 
+									ng-options="dep.departmentname for dep in DepartmentList | orderBy:'departmentname'" 
+								>
+								  <option value="">---------SELECT---------</option>
+								</select>
+							</strong></small>
+					 	</div>
+				    </div>
+				    <div class="form-row mt-2">
+				    	<div class="col-md-4 mb-2"><small><strong>
+							<label for="username">Email<span style="color: red;">*</span></label></strong> <input
+								type="text" class="form-control" id="email"
+								placeholder="" value=""
+								ng-model="userdetails.email"
+								 required></small>
+						</div>
+						<div class="col-md-4 mb-2"><small><strong>
+							<label for="username">Phone<span style="color: red;">*</span></label></strong> <input
+								type="text" class="form-control" id="phone"
+								placeholder="" value=""
+								ng-model="userdetails.phone"
+								 required></small>
+						</div>
+						<div class="col-md-4 mb-2">
+							<small><strong>
+								<div class="custom-control custom-checkbox"  style="margin-top: 36px;padding-left: 25%;">
+								      <input type="checkbox" class="custom-control-input" id="enabled" 
+								      	ng-model="userdetails.enabled" required>
+								      <label class="custom-control-label" for="enabled">Enabled</label>
+								     
+					    		</div>
+							</strong></small>
+						</div>
+				    </div>
+				    
+				    <div class="row mb-2">
+				 		<div class="col-md-4">
+							<small>
+								<strong>
+									<label for="date-picker-example">From Date</label>
+								</strong>
+						  		<input placeholder="Selected from date" type="text" id="fromdate" 
+						  		class="form-control datepicker" ng-model="userdetails.fromdate" >
+						  	</small>
+						</div>
+						<div class="col-md-4">
+							<small>
+								<strong>
+									<label for="date-picker-example">To Date</label>
+								</strong>
+						  		<input placeholder="Selected to date" type="text" id="todate" 
+						  		 class="form-control datepicker" ng-model="userdetails.todate" >
+						  	</small>
+						</div>
+				 </div>
+				 
+				  <button class="btn btn-success" type="submit" ng-click="save()" 
+				  		ng-disabled="frm.$invalid">{{(editrecord == true ? 'Update' : 'Save')}}
+				 </button>
+				 <button class="btn btn-info" type="button" data-dismiss="modal" 
+				 		ng-click="getDepartmentList()">Close
+				 </button>
+			</form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+   <script type="text/javascript">
+//Material Select Initialization
+ $(document).ready(function() {
+  $('.mdb-select').materialSelect();
+ });
+ 
+//Data Picker Initialization
+$('.datepicker').pickadate({
+	format: 'dd/mm/yyyy',
+	formatSubmit: 'dd/mm/yyyy'
+});
+ </script>

@@ -3,7 +3,7 @@ angular
         .controller(
                 "registercomplaintCtrl",
                 function ($scope, $rootScope, $http, $filter, $compile, $state, $stateParams,           
-                $cookies, $httpParamSerializer, jwtHelper, $window,
+                $cookies, $httpParamSerializer, jwtHelper,  
                         RSURL,$controller, $timeout, $window,store,ngToast,authService,$q,REQUEST) {
                 	
                 	console.log("registercomplaintCtrl initiated !!!");
@@ -287,6 +287,17 @@ angular
 	 			    			  
 	 			    			  $scope.consumerinfo = {} ;
 	 			    			  $scope.current_record = {};
+	 			    			  
+	 			    			  $http.get(RSURL+"/query/sendsmsandemail?" +
+	 					    		  		"docketnumber="+data.data[0].docketno
+	 					    		  	)
+	 			  				  		.then(function (data){
+	 			  				  			console.log(data);
+	 			  				  		},function(error){
+	 			  				  			console.log(error);
+	 			  				  		});
+	 			    				  
+	 			    			  
 	 			    			  
 	  				  			}else{
 	   			    			  $scope.message = "Error occured while saving a complaint !!!";

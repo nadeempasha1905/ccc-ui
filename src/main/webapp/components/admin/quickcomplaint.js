@@ -3,7 +3,7 @@ angular
         .controller(
                 "quickcomplaintCtrl",
                 function ($scope, $rootScope, $http, $filter, $compile, $state,           
-                $cookies, $httpParamSerializer, jwtHelper, $window,
+                $cookies, $httpParamSerializer, jwtHelper, 
                         RSURL,$controller, $timeout, $window,store,ngToast,authService,$q,REQUEST) {
                 	
                 	console.log("quickcomplaintCtrl initiated !!!");

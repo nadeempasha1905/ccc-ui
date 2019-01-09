@@ -119,41 +119,47 @@
 													required> </textarea></small>
 											</div>
 											<div class="row">
-												<div class="col-md-4" ng-repeat = "c in COMPLAINTSTATUSMAPPINGLIST" ng-show="c.statusid === 2">
+												<div class="col-md-6" ng-repeat = "c in COMPLAINTSTATUSMAPPINGLIST" ng-show="c.statusid === 2">
 													<button type="button" class="btn btn-outline-primary btn-rounded waves-effect" 
 													 ng-click="logcomment(2,'Assigned',false)">Assign</button>
 												</div>
 												
-												<div class="col-md-4" ng-repeat = "c in COMPLAINTSTATUSMAPPINGLIST" ng-show="c.statusid === 3">
+												<div class="col-md-6" ng-repeat = "c in COMPLAINTSTATUSMAPPINGLIST" ng-show="c.statusid === 3">
 													<button type="button" class="btn btn-outline-danger btn-rounded waves-effect" 
 													 ng-click="logcomment(3,'Rejected',false)">Reject</button>
 												</div>
 												
-												<div class="col-md-4" ng-repeat = "c in COMPLAINTSTATUSMAPPINGLIST" ng-show="c.statusid === 4">
+												<div class="col-md-6" ng-repeat = "c in COMPLAINTSTATUSMAPPINGLIST" ng-show="c.statusid === 4">
 													<button type="button" class="btn btn-outline-success btn-rounded waves-effect" 
 													 ng-click="logcomment(4,'In Progress',false)">In Progress</button>
 												</div>
 												
-												<div class="col-md-4" ng-repeat = "c in COMPLAINTSTATUSMAPPINGLIST" ng-show="c.statusid === 5">
+												<div class="col-md-6" ng-repeat = "c in COMPLAINTSTATUSMAPPINGLIST" ng-show="c.statusid === 5">
 													<button type="button" class="btn btn-outline-warning btn-rounded waves-effect" 
 													 ng-click="logcomment(5,'Close',false)">Close</button>
 												</div>
 												
-												<div class="col-md-4" ng-repeat = "c in COMPLAINTSTATUSMAPPINGLIST" ng-show="c.statusid === 6">
+												<div class="col-md-6" ng-repeat = "c in COMPLAINTSTATUSMAPPINGLIST" ng-show="c.statusid === 6">
 													<button type="button" class="btn btn-outline-secondary btn-rounded waves-effect" 
 													 ng-click="logcomment(6,'Re-Opened',false)">Re-Open</button>
 												</div>
 												
-												<div class="col-md-4" ng-repeat = "c in COMPLAINTSTATUSMAPPINGLIST" ng-show="c.statusid === 7">
+												<div class="col-md-6" ng-repeat = "c in COMPLAINTSTATUSMAPPINGLIST" ng-show="c.statusid === 7">
 													<button type="button" class="btn btn-outline-default btn-rounded waves-effect" 
 													 ng-click="logcomment(7,'Resolved',false)">Resolved</button>
 												</div>
 												
-												<div class="col-md-4" ng-repeat = "c in COMPLAINTSTATUSMAPPINGLIST" ng-show="c.statusid === 8">
+												<div class="col-md-6" ng-repeat = "c in COMPLAINTSTATUSMAPPINGLIST" ng-show="c.statusid === 8">
 													<button type="button" class="btn btn-outline-info btn-rounded waves-effect" 
 													 ng-click="logcomment(8,'Escalate',false)">Escalate</button>
 												</div>
 												
+											</div>
+											<div class="row">
+												<div class="col-md-4 mb-2">
+													<a class="btn btn-primary btn-md waves-effect waves-light" 
+														type="submit" ui-sref="admin.complaintdashboard">Back</a>
+													</div>
 											</div>
 											<!-- <div class="row">
 												<div class="col-md-4">

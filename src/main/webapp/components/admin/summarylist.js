@@ -3,7 +3,7 @@ angular
         .controller(
                 "summarylistCtrl",
                 function ($scope, $rootScope, $http, $filter, $compile, $state,           
-                $cookies, $httpParamSerializer, jwtHelper, $window,
+                $cookies, $httpParamSerializer, jwtHelper,  
                         RSURL,$controller, $timeout, $window,store,ngToast,authService,$q,$stateParams) {
                 	
                 	console.log("summarylistCtrl initiated !!!");
@@ -48,6 +48,18 @@ angular
 	                		$scope.summarylist.statusname = $stateParams.statusname;
 	                	}
 	                	
+	                	if($stateParams.fromdate != null){
+	                		$scope.summarylist.fromdate = $stateParams.fromdate;
+	                	}
+	                	
+	                	if($stateParams.todate != null){
+	                		$scope.summarylist.todate = $stateParams.todate;
+	                	}
+	                	
+	                	if($stateParams.department_id != null){
+	                		$scope.summarylist.department_id = $stateParams.department_id;
+	                	}
+	                	
                 	}else{
                 		$state.go('admin.complaintdashboard');
                 	}
@@ -59,6 +71,9 @@ angular
                     	 		"location="+$scope.summarylist.location+"&" +
                     	 		"categoryid="+$scope.summarylist.categoryid+"&" +
                     	 		"statusid="+$scope.summarylist.statusid+"&"+
+                    	 		"fromdate="+$scope.summarylist.fromdate+"&"+
+                    	 		"todate="+$scope.summarylist.todate+"&"+
+                    	 		"department_id="+$scope.summarylist.department_id+"&"+
                     	 		"modeid="+$scope.summarylist.modeid)
    				  		.then(function (data){
    				    		  console.log(data);	

@@ -3,8 +3,7 @@ angular
         .controller(
                 "cadreCtrl",
                 function ($scope, $rootScope, $http, $filter, $compile, $state,           
-                $cookies, $httpParamSerializer, jwtHelper, $window,
-                        RSURL,UURL,$controller, $timeout, $window,store,ngToast,authService,$q,CADRE) {
+                $cookies, $httpParamSerializer, jwtHelper,               RSURL,UURL,$controller, $timeout, $window,store,ngToast,authService,$q,CADRE) {
                 	
                 	console.log("cadreCtrl Page initiated !!!");
                 	$scope.heading = "cadreCtrl Page";

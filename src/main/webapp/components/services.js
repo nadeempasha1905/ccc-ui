@@ -6,6 +6,13 @@ angular.module('CCCapp.services',[])
          }        
     }); 
 }]).
+factory('UserMaster',['$resource','RSURL',function($resource,RSURL) {
+	 return $resource(RSURL+'/userMasters/:id',{id:'@_id'},{
+	     update: {
+         method: 'PUT' // this method issues a PUT request
+        }        
+   }); 
+}]).
 factory('Authorities',['$resource','RSURL',function($resource,RSURL) {
 	 return $resource(RSURL+'/authorities/:id',{id:'@_id'},{
  	     update: {
